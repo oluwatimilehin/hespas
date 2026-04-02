@@ -1,0 +1,16 @@
+{
+    "split_strategy": "linear_split",
+    "perf_estimator": {
+        "method": "iree",
+        "hardware": {
+            "compile": {
+                "device": "local-task",
+                "target-backends": "llvm-cpu",
+                "extra-args": [
+                    "--iree-llvmcpu-target-cpu=host"
+                ]
+            }
+        },
+        "in_memory_only_cache": true
+    }
+}

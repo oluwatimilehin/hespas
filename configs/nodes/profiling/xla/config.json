@@ -1,0 +1,12 @@
+{
+    "split_strategy": "linear_split",
+    "perf_estimator": {
+        "method": "xla",
+        "hardware": {
+            "translate": {
+                "target_backend": "cuda"
+            }
+        },
+        "in_memory_only_cache": true
+    }
+}
