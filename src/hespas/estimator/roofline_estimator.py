@@ -38,18 +38,6 @@ class RooflineEstimator(ComputeEstimator):
     warn_on_unknown_type = ConfigOption(conv_bool, description="Warn if the datatype for the operation is not specified in per_datatype_flops", default=None, optional=True)
     error_on_unknown_type = ConfigOption(conv_bool, description="Error if the datatype for the operation is not specified in per_datatype_flops", default=False)
 
-    def __post_init__(self):
-        self.has_per_datatype_flops = True
-        if self.per_datatype_flops is None or len(self.per_datatype_flops) == 0:
-            if self.error_on_unknown_type:
-                raise InvalidConfigOptionError("error_on_unknown_type specified but per_datatype_flops is empty")
-            elif self.warn_on_unknown_type:
-                raise log.warning("warn_on_unknown_type specified but per_datatype_flops is empty")
-            self.has_per_datatype_flops = False
-
-        if self.warn_on_unknown_type is None:
-            self.warn_on_unknown_type = self.has_per_datatype_flops
-
     @lru_cache
     def __get_datatype_str(self, datatype):
         datatype_str = str(datatype)
@@ -120,6 +108,19 @@ class RooflineEstimator(ComputeEstimator):
         stats_tree.add_member("avg_mem_bw", ValueStatistic("Average Memory Bandwidth", unit="B/s", normalise_unit=True), check_exists=True)
         if self.tdp_W != 0 and self.hbm_power_ratio != 0:
             stats_tree.add_member("total_energy", ValueStatistic("Total energy", unit="J"), check_exists=True)
+
+    @register_init_hook
+    def __setup_per_datatype_flops(self):
+        self.has_per_datatype_flops = True
+        if self.per_datatype_flops is None or len(self.per_datatype_flops) == 0:
+            if self.error_on_unknown_type:
+                raise InvalidConfigOptionError("error_on_unknown_type specified but per_datatype_flops is empty")
+            elif self.warn_on_unknown_type:
+                raise log.warning("warn_on_unknown_type specified but per_datatype_flops is empty")
+            self.has_per_datatype_flops = False
+
+        if self.warn_on_unknown_type is None:
+            self.warn_on_unknown_type = self.has_per_datatype_flops
 
     @register_init_hook
     def __setup_roofline_stats(self):

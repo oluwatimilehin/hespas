@@ -22,7 +22,6 @@ class CocossimEstimator(RooflineEstimator):
     conditions = check_programs("cocossim", [{"cocossim_path": ["which", cocossim_path.default]}])
 
     def __post_init__(self):
-        super().__post_init__()
         self.cocossim_dir = os.path.dirname(shutil.which(self.cocossim_path))
 
     def stablehlo_to_cocossim_dot_general(self, op_info, layer_id: int = 0) -> List[str]:

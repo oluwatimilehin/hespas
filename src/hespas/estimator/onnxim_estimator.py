@@ -428,7 +428,6 @@ class ONNXIMEstimator(RooflineEstimator):
     model_list_path = ConfigOption(str, description="Path to model list JSON output file; overrides output_dir if set", optional=True)
 
     def __post_init__(self):
-        super().__post_init__()
         # Resolve binary: prefer an explicit file path first, then search PATH.
         if os.path.isfile(self.binary_path):
             self.onnxim_binary = os.path.abspath(self.binary_path)

@@ -142,7 +142,6 @@ class ZigzagONNXEstimator(RooflineEstimator):
         )
 
     def __post_init__(self):
-        super().__post_init__()
         self.mapping = self._normalize_mapping_for_onnx(self.mapping)
 
     @staticmethod
