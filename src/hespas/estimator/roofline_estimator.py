@@ -37,6 +37,7 @@ class RooflineEstimator(Estimator):
     per_datatype_flops = ConfigOption(PositiveFloatDict, description="Peak FLOPS/s dict for each datatype", optional=True)
     warn_on_unknown_type = ConfigOption(conv_bool, description="Warn if the datatype for the operation is not specified in per_datatype_flops", default=None, optional=True)
     error_on_unknown_type = ConfigOption(conv_bool, description="Error if the datatype for the operation is not specified in per_datatype_flops", default=False)
+    kernel_launch_overhead_s = ConfigOption(float, description="Per-kernel launch overhead in seconds, added once per module. Architecture-dependent.", default=0)
 
     @lru_cache
     def __get_datatype_str(self, datatype):
@@ -209,6 +210,11 @@ class RooflineEstimator(Estimator):
         for op_stats_tree in self.cur_module_stats_tree.get_member("per_op").values():
             self.__merge_lower_stats_tree(self.cur_module_stats_tree, op_stats_tree)
         self.__get_bytes_flops(self.cur_module_stats_tree)
+
+    @register_post_run_hook
+    def __add_kernel_launch_overhead(self, module, result):
+        if result.runtime_estimate is not None:
+            result.runtime_estimate += self.kernel_launch_overhead_s
 
     @register_post_estimate_hook
     def __get_total_bytes_flops(self, module, result):
