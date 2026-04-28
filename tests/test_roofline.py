@@ -90,6 +90,19 @@ def test_roofline_noflop_ops():
     assert runtime == bytes / hw_config['memory_bandwidth']
 
 
+def test_roofline_bitcast_is_free():
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    estimator = RooflineEstimator(hw_config)
+    op_info = OpInfo(
+        op_name='mhlo.bitcast',
+        input_types=[((4,3,2,1), 'f16')],
+        output_types=[((1,2,3,4), 'f16')]
+    )
+    result = estimator._Estimator__get_op_estimate(op_info)
+    assert result.runtime_estimate == 0.0
+    assert result.metadata['bytes_accessed'] == 0.0
+
+
 def test_roofline_unary_ops():
     hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
     estimator = RooflineEstimator(hw_config)
