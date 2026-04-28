@@ -33,7 +33,7 @@ def test_op_info_bytes_conversion_2():
 
 # Test get_op_run_time_estimate for an elementwise binary op
 def test_roofline_elementwise_runtime():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     # op: add, shape (10, 10), dtype f32
     op_info = OpInfo(
@@ -46,9 +46,23 @@ def test_roofline_elementwise_runtime():
     assert runtime == 24
 
 
+def test_roofline_compute_memory_overlap():
+    # With parallelism=0.95, runtime = compute + mem - 0.95*min(compute, mem)
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 0.95}
+    estimator = RooflineEstimator(hw_config)
+    op_info = OpInfo(
+        op_name='stablehlo.add',
+        input_types=[((10, 10), 'f32'), ((10, 10), 'f32')],
+        output_types=[((10, 10), 'f32')]
+    )
+    runtime = estimator._Estimator__get_op_estimate(op_info).runtime_estimate
+    # compute_time=100/100=1, mem_time=1200/50=24, overlap=1+24-0.95*1=24.05
+    assert runtime == pytest.approx(24.05)
+
+
 # Test get_op_run_time_estimate for a free op (constant)
 def test_roofline_free_op_runtime():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.constant',
@@ -60,7 +74,7 @@ def test_roofline_free_op_runtime():
 
 
 def test_roofline_reduce():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 5.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 5.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.reduce',
@@ -78,7 +92,7 @@ def test_roofline_reduce():
 
 
 def test_roofline_noflop_ops():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 2.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 2.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.transpose',
@@ -91,7 +105,7 @@ def test_roofline_noflop_ops():
 
 
 def test_roofline_bitcast_is_free():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='mhlo.bitcast',
@@ -104,7 +118,7 @@ def test_roofline_bitcast_is_free():
 
 
 def test_roofline_unary_ops():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.negate',
@@ -119,7 +133,7 @@ def test_roofline_unary_ops():
 
 
 def test_roofline_select():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.select',
@@ -134,7 +148,7 @@ def test_roofline_select():
 
 
 def test_roofline_dot_general_1():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.dot_general',
@@ -153,7 +167,7 @@ def test_roofline_dot_general_1():
 
 
 def test_roofline_dot_general_2():  # with batch
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.dot_general',
@@ -178,7 +192,7 @@ def test_roofline_dot_general_2():  # with batch
 
 
 def test_roofline_concatenate():
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.concatenate',
@@ -225,9 +239,9 @@ def test_roofline_mlir_convolution():
         assert obs_runtime == exp_runtime
 
     # compute bound
-    roofline_mlir_convolution({'peak_flops': 1.0, 'memory_bandwidth': 1000.0, 'in_memory_only_cache': True})
+    roofline_mlir_convolution({'peak_flops': 1.0, 'memory_bandwidth': 1000.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0})
     #mem bound
-    roofline_mlir_convolution({'peak_flops': 1000.0, 'memory_bandwidth': 1.0, 'in_memory_only_cache': True})
+    roofline_mlir_convolution({'peak_flops': 1000.0, 'memory_bandwidth': 1.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0})
 
 
 def test_roofline_mlir_abs():
@@ -238,7 +252,7 @@ def test_roofline_mlir_abs():
 """
     mlir_module = MLIRModule(mlir_string=mlir_content, parent_module="inline")
 
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
 
     obs_runtime = estimator.get_estimate(mlir_module).runtime_estimate
@@ -267,7 +281,7 @@ def test_roofline_mlir_dot_general():
 """
     mlir_module = MLIRModule(mlir_string=mlir_content, parent_module="inline")
 
-    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 50.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
 
     obs_runtime = estimator.get_estimate(mlir_module).runtime_estimate
@@ -317,7 +331,8 @@ def test_roofline_mlir_dot_general_multiprec_basic():
             'bf16': 200.0
         },
         'memory_bandwidth': 50.0,
-        'in_memory_only_cache': True
+        'in_memory_only_cache': True,
+        'memory_compute_parallelism': 1.0
     }
     estimator = RooflineEstimator(hw_config)
 
@@ -375,7 +390,8 @@ def test_roofline_mlir_dot_general_multiprec_error():
         },
         'memory_bandwidth': 50.0,
         'in_memory_only_cache': True,
-        'error_on_unknown_type': True
+        'error_on_unknown_type': True,
+        'memory_compute_parallelism': 1.0
     }
     estimator = RooflineEstimator(hw_config)
 
@@ -450,7 +466,8 @@ def test_roofline_mlir_dot_general_multiprec():
         'per_datatype_flops': dtypes,
         'memory_bandwidth': 50.0,
         'in_memory_only_cache': True,
-        'error_on_unknown_type': True
+        'error_on_unknown_type': True,
+        'memory_compute_parallelism': 1.0
     }
     estimator = RooflineEstimator(hw_config)
 

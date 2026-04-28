@@ -154,7 +154,7 @@ def test_private_function_tree():
 
 def test_private_function_tree_roofline():
 
-    hw_config = {'peak_flops': 100, 'memory_bandwidth': 12, 'in_memory_only_cache': True}
+    hw_config = {'peak_flops': 100, 'memory_bandwidth': 12, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     runtime = estimator.get_estimate(MLIRModule(mlir_string=mlir_str_nested_funcs)).runtime_estimate
     assert runtime == 6 # 6s in us

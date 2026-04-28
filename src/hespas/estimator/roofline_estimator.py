@@ -40,6 +40,7 @@ class RooflineEstimator(Estimator):
     error_on_unknown_type = ConfigOption(conv_bool, description="Error if the datatype for the operation is not specified in per_datatype_flops", default=False)
     kernel_launch_overhead_s = ConfigOption(s_to_float, description="Per-kernel launch overhead in seconds, added once per module. Architecture-dependent.", default=0)
     flops_per_element = ConfigOption(dict, description="Per-op FLOP cost multipliers. Keys are op names, values are FLOPs per element.", optional=True)
+    memory_compute_parallelism = ConfigOption(float, description="Overlap factor for compute and memory (0=no overlap/sum, 1=full overlap/max).", default=0.95)
 
     # Per-op FLOP cost multipliers derived from XLA's HloOpProfiles
     # (xla/service/gpu/model/hlo_op_profiles.h). Transcendental ops like
@@ -128,7 +129,16 @@ class RooflineEstimator(Estimator):
         datatype_str = self.__get_datatype_str_by_op(op_info)
         compute_time = flops / self.__get_flops(op_info) if int(flops) != 0 else 0.0
         mem_time = bytes_accessed / self.memory_bandwidth if int(bytes_accessed) != 0 else 0.0
-        return OpResult(success=True, op_info=op_info, runtime_estimate=max(compute_time, mem_time), metadata={"flops": flops, "bytes_accessed": bytes_accessed, "datatype": datatype_str})
+        if self.memory_compute_parallelism >= 1.0:
+            runtime_estimate = max(compute_time, mem_time)
+        else:
+            # Models GPU's ability to overlap compute with memory prefetching.
+            # XLA (xla/service/gpu/model/gpu_performance_model_base.cc) uses 0.95,
+            # meaning 95% of the shorter phase is hidden behind the longer one,
+            # with 5% serialisation for synchronisation overhead.
+            runtime_estimate = (compute_time + mem_time
+                                - min(compute_time, mem_time) * self.memory_compute_parallelism)
+        return OpResult(success=True, op_info=op_info, runtime_estimate=runtime_estimate, metadata={"flops": flops, "bytes_accessed": bytes_accessed, "datatype": datatype_str})
 
     def __add_roofline_stats(self, stats_tree):
         stats_tree.add_member("flops", SummingStatistic("Total FLOPS", value_type=int), check_exists=True)
