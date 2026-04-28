@@ -39,6 +39,32 @@ class RooflineEstimator(Estimator):
     warn_on_unknown_type = ConfigOption(conv_bool, description="Warn if the datatype for the operation is not specified in per_datatype_flops", default=None, optional=True)
     error_on_unknown_type = ConfigOption(conv_bool, description="Error if the datatype for the operation is not specified in per_datatype_flops", default=False)
     kernel_launch_overhead_s = ConfigOption(s_to_float, description="Per-kernel launch overhead in seconds, added once per module. Architecture-dependent.", default=0)
+    flops_per_element = ConfigOption(dict, description="Per-op FLOP cost multipliers. Keys are op names, values are FLOPs per element.", optional=True)
+
+    # Per-op FLOP cost multipliers derived from XLA's HloOpProfiles
+    # (xla/service/gpu/model/hlo_op_profiles.h). Transcendental ops like
+    # exp, log, and tanh require many more hardware instructions than simple
+    # arithmetic; these weights reflect that.
+    DEFAULT_FLOPS_PER_ELEMENT = {
+        "stablehlo.add": 1, "stablehlo.subtract": 1, "stablehlo.multiply": 1,
+        "stablehlo.maximum": 1, "stablehlo.minimum": 1,
+        "stablehlo.compare": 1, "stablehlo.select": 1, "stablehlo.clamp": 1,
+        "stablehlo.and": 1, "stablehlo.or": 1, "stablehlo.xor": 1, "stablehlo.not": 1,
+        "stablehlo.abs": 1, "stablehlo.negate": 1, "stablehlo.sign": 1,
+        "stablehlo.convert": 1, "stablehlo.is_finite": 1,
+        "stablehlo.round_nearest_even": 1,
+        "stablehlo.divide": 4,
+        "stablehlo.sqrt": 4, "stablehlo.rsqrt": 4,
+        "stablehlo.exponential": 50, "stablehlo.log": 50,
+        "stablehlo.tanh": 50, "stablehlo.logistic": 50,
+        "stablehlo.sine": 50, "stablehlo.cosine": 50,
+        "stablehlo.power": 50,
+    }
+
+    # Ops eligible for tensor core acceleration (matmul/conv use tensor cores on GPU)
+    TENSOR_CORE_OPS = ("stablehlo.dot_general", "stablehlo.convolution")
+    # Datatype promotions applied by tensor cores (e.g. f32 matmul runs at TF32 speed)
+    TENSOR_CORE_PROMOTIONS = {"f32": "tf32"}
 
     @lru_cache
     def __get_datatype_str(self, datatype):
@@ -49,7 +75,12 @@ class RooflineEstimator(Estimator):
 
     @lru_cache
     def __get_datatype_str_by_op(self, op_info):
-        return self.__get_datatype_str(op_info.get_largest_type())
+        datatype_str = self.__get_datatype_str(op_info.get_largest_type())
+        if op_info.op_name in self.TENSOR_CORE_OPS and self.per_datatype_flops:
+            new_datatype_str = self.TENSOR_CORE_PROMOTIONS.get(datatype_str, datatype_str)
+            if new_datatype_str in self.per_datatype_flops:
+                datatype_str = new_datatype_str
+        return datatype_str
 
     @lru_cache
     def __get_flops_by_datatype_str(self, datatype_str):
@@ -63,21 +94,12 @@ class RooflineEstimator(Estimator):
             return self.peak_flops
         return self.__get_flops_by_datatype_str(self.__get_datatype_str(datatype))
 
-    # Ops eligible for tensor core acceleration (matmul/conv use tensor cores on GPU)
-    TENSOR_CORE_OPS = frozenset({"stablehlo.dot_general", "stablehlo.convolution"})
-    # Datatype promotions applied by tensor cores (e.g. f32 matmul runs at TF32 speed)
-    TENSOR_CORE_PROMOTIONS = {"f32": "tf32"}
-
     @lru_cache
     def __get_flops_by_op(self, op_info):
         if self.has_per_datatype_flops is False:
             return self.peak_flops
         datatype_str = self.__get_datatype_str_by_op(op_info)
-        # Tensor core ops may run at a promoted rate (e.g. f32 → tf32)
-        if op_info.op_name in self.TENSOR_CORE_OPS and datatype_str in self.TENSOR_CORE_PROMOTIONS:
-            promoted = self.TENSOR_CORE_PROMOTIONS[datatype_str]
-            if promoted in self.per_datatype_flops:
-                return self.__get_flops_by_datatype_str(promoted)
+
         if datatype_str not in self.per_datatype_flops:
             info_str = "Datatype {} not found in per_datatype_flops ({}) for op: {}".format(str(datatype_str), self.per_datatype_flops, op_info)
             if self.error_on_unknown_type:
@@ -92,8 +114,16 @@ class RooflineEstimator(Estimator):
             return self.peak_flops
         return self.__get_flops_by_op(op_info)
 
+    @lru_cache
+    def __get_opname_flops_mult(self, op_name):
+        return self._flops_per_element_map.get(op_name, 1)
+
+    @lru_cache
+    def __get_total_flops_by_opname(self, op_name, flops):
+        return float(flops) * self.__get_opname_flops_mult(op_name)
+
     def compute_runtime(self, op_info, flops, bytes_accessed):
-        flops = float(flops)
+        flops = self.__get_total_flops_by_opname(op_info.op_name, flops)
         bytes_accessed = float(bytes_accessed)
         datatype_str = self.__get_datatype_str_by_op(op_info)
         compute_time = flops / self.__get_flops(op_info) if int(flops) != 0 else 0.0
@@ -133,6 +163,10 @@ class RooflineEstimator(Estimator):
         self.default_stats_filter.insert(self.default_stats_filter.index("avg_flopss")+1, "avg_mem_bw")
         if self.stats_tree.has_member("total_energy"):
             self.default_stats_filter.insert(-2, "total_energy")
+
+    @register_init_hook
+    def __setup_flops_per_element_map(self):
+        self._flops_per_element_map = {**self.DEFAULT_FLOPS_PER_ELEMENT, **(self.flops_per_element or {})}
 
     @register_pre_estimate_hook
     def __setup_module_roofline_stats(self, module):
