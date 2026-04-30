@@ -195,11 +195,17 @@ class MLIRParser:
             op_info.lhs_dims = operation.lhs.type.shape
             op_info.rhs_dims = operation.rhs.type.shape
         elif 'stablehlo.dot' in name:
-            if operation.lhs.type.shape[1] != operation.rhs.type.shape[0] or len(operation.lhs.type.shape) != len(operation.rhs.type.shape) or len(operation.lhs.type.shape) != 2:
+            lhs_num_dims = len(operation.lhs.type.shape)
+            rhs_num_dims = len(operation.rhs.type.shape)
+            if lhs_num_dims < 1 or lhs_num_dims > 2 or rhs_num_dims < 1 or rhs_num_dims > 2:
                 raise ValueError("Assumption of [M, K] . [K, N] = [M, N] is invalid - {}".format(operation))
-            op_info.dims = {'lhs': [1]}
-            op_info.lhs_dims = operation.lhs.type.shape
-            op_info.rhs_dims = operation.rhs.type.shape
+            lhs_dims = (operation.lhs.type.shape[0] if lhs_num_dims == 2 else 1, operation.lhs.type.shape[1] if lhs_num_dims == 2 else operation.lhs.type.shape[0])
+            rhs_dims = (operation.rhs.type.shape[0], operation.rhs.type.shape[1] if rhs_num_dims == 2 else 1)
+            if lhs_dims[1] != rhs_dims[0]:
+                raise ValueError("Assumption of [M, K] . [K, N] = [M, N] is invalid - {}".format(operation))
+            op_info.dims = {'lhs': (1,)}
+            op_info.lhs_dims = lhs_dims
+            op_info.rhs_dims = rhs_dims
         elif 'stablehlo.convolution' in name:
             dim_numbers_match = self.conv_dim_number_re.search(str(operation.dimension_numbers))
             dim_map = None
