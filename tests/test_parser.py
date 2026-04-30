@@ -8,7 +8,7 @@ import pytest
 FIXTURES_DIR = os.path.join(os.path.dirname(__file__), "fixtures")
 MLIR_DIR = os.path.join(FIXTURES_DIR, "mlir")
 
-from src.hespas.mlir_parser import MLIRParser
+from src.hespas.mlir_parser.mlir_parser import MLIRParser
 from src.hespas.mlir_parser.mlir_splitter import (
     linear_split,
     SeparatorPolicy,

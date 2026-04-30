@@ -6,7 +6,7 @@ if __name__ == "__main__":
     import sys
     repo_path = os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
     sys.path.insert(0, repo_path)
-from src.hespas.mlir_parser import MLIRParser
+from src.hespas.mlir_parser.mlir_parser import MLIRParser
 from src.hespas.estimator.choice import get_estimator
 
 ZIGZAG_FIXTURES_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "fixtures", "zigzag"))
