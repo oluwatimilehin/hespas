@@ -1,31 +1,7 @@
 # Copyright (c) 2026 imec
 # SPDX-License-Identifier: MIT
 
-SI_PREFIXES = [
-    ("Q", 1e30),
-    ("R", 1e27),
-    ("Y", 1e24),
-    ("Z", 1e21),
-    ("E", 1e18),
-    ("P", 1e15),
-    ("T", 1e12),
-    ("G", 1e9),
-    ("M", 1e6),
-    ("k", 1e3),
-    ("", 1),
-    ("m", 1e-3),
-    ("u", 1e-6),
-    ("n", 1e-9),
-    ("p", 1e-12),
-    ("f", 1e-15),
-    ("a", 1e-18),
-    ("z", 1e-21),
-    ("y", 1e-24),
-    ("r", 1e-27),
-    ("q", 1e-30)
-]
-
-SI_PREFIXES_MAP = {k: v for k, v in SI_PREFIXES}
+from ..utils.units import SI_PREFIXES, SI_PREFIXES_MAP
 
 class Statistic:
     def __init__(self, print_name, unit=None, prefix="", value_type=float, value_mult=None, rounding_decimals=3, default_sampled=False, normalise_unit=False):

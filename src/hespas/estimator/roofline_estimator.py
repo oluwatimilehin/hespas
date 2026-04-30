@@ -19,6 +19,7 @@ from .config_option import ConfigOption, InvalidConfigOptionError
 from ..utils.num_tools import pos_int, conv_bool
 from ..utils.dt_sizes import get_bit_width
 from ..utils.dict_tools import PositiveFloatDict
+from ..utils.units import s_to_float
 from ..statistics import SummingStatistic, ValueStatistic, RatioStatistic, ContainerStatistic
 
 log = logging.getLogger(__name__)
@@ -37,7 +38,7 @@ class RooflineEstimator(Estimator):
     per_datatype_flops = ConfigOption(PositiveFloatDict, description="Peak FLOPS/s dict for each datatype", optional=True)
     warn_on_unknown_type = ConfigOption(conv_bool, description="Warn if the datatype for the operation is not specified in per_datatype_flops", default=None, optional=True)
     error_on_unknown_type = ConfigOption(conv_bool, description="Error if the datatype for the operation is not specified in per_datatype_flops", default=False)
-    kernel_launch_overhead_s = ConfigOption(float, description="Per-kernel launch overhead in seconds, added once per module. Architecture-dependent.", default=0)
+    kernel_launch_overhead_s = ConfigOption(s_to_float, description="Per-kernel launch overhead in seconds, added once per module. Architecture-dependent.", default=0)
 
     @lru_cache
     def __get_datatype_str(self, datatype):
