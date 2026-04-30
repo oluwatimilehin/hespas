@@ -7,14 +7,14 @@ import json
 import logging
 
 from ..utils.iree import get_iree_input_string
-from .compute_estimator import ComputeEstimator
+from .estimator import Estimator
 from .check_available import check_programs
 from .config_option import ConfigOption
 from .result import ModuleResult
 
 log = logging.getLogger(__name__)
 
-class IREEEstimator(ComputeEstimator):
+class IREEEstimator(Estimator):
 
     iree_compile = ConfigOption(str, description="Path to the iree-compile binary", default=shutil.which("iree-compile"))
     iree_benchmark = ConfigOption(str, description="Path to the iree-benchmark-module binary", default=shutil.which("iree-benchmark-module"))

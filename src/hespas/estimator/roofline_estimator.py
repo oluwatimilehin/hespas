@@ -4,7 +4,7 @@ import logging
 from functools import lru_cache
 import math
 
-from .compute_estimator import ComputeEstimator
+from .estimator import Estimator
 from .estimator import (
     register_op_handler,
     register_post_run_hook,
@@ -26,7 +26,7 @@ log = logging.getLogger(__name__)
 class RooflineMissingDatatypeError(Exception):
     pass
 
-class RooflineEstimator(ComputeEstimator):
+class RooflineEstimator(Estimator):
 
     allow_multiprocess = True
 

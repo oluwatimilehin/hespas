@@ -8,14 +8,14 @@ import statistics
 import logging
 
 from .config_option import ConfigOption
-from .compute_estimator import ComputeEstimator
+from .estimator import Estimator
 from .check_available import check_programs
 from .result import ModuleResult
 from ..utils.logging import get_str_divider
 
 log = logging.getLogger(__name__)
 
-class XLAEstimator(ComputeEstimator):
+class XLAEstimator(Estimator):
     xla_translate_path = ConfigOption(str, description="Path to the xla-translate binary", default="xla-translate")
     hlo_runner_main_path = ConfigOption(str, description="Path to the hlo_runner_main binary", default="hlo_runner_main")
     sample = ConfigOption(bool, default=False, optional=True)
