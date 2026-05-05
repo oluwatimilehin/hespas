@@ -12,6 +12,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
+    "grpcio-tools>1.30.0",
     "chakra @ git+https://github.com/imec-int/chakra.git",
     "graphviz",
     "jax",
