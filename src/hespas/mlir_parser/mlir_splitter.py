@@ -352,7 +352,7 @@ def create_digraph(operation_blocks):
             dependency_graph.add_edge(i, i-1)
     return dependency_graph
 
-def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_threads=-1, write_private_funcs=False, *split_args, **split_kw_args):
+def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_threads=-1, write_private_funcs=False, write_dot=False, *split_args, **split_kw_args):
     """
     Parses the StableHLO MLIR file and uses the provided `split_fn` to split the module.
     Returns a list of modules and metadata for each split.
@@ -377,10 +377,11 @@ def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_thre
     if dep_graph is None:
         raise MLIRSplittingError(f"{split_fn} did not product dependency graph")
 
-    # Save the dependency graph as DOT file
-    dep_graph_path = os.path.join(output_path, "dependency_graph.dot")
-    nx.drawing.nx_pydot.write_dot(dep_graph, dep_graph_path)
-    log.info(f"Dependency graph saved to {dep_graph_path}")
+    if write_dot:
+        # Save the dependency graph as DOT file
+        dep_graph_path = os.path.join(output_path, "dependency_graph.dot")
+        nx.drawing.nx_pydot.write_dot(dep_graph, dep_graph_path)
+        log.info(f"Dependency graph saved to {dep_graph_path}")
 
     log.info(f"Number of splits: {len(operation_blocks)}")
     log.info("Creating new MLIR modules for each split:")
@@ -697,6 +698,7 @@ def main():
     parser.add_argument("--block_lim", type=int, default=1024, help="Block size limit for linear_split (default: 1024)")
     parser.add_argument("--print_meta", action="store_true", default=False, help="Print metadata for each split module")
     parser.add_argument("--write_private_funcs", action="store_true", help="Writeout an mlir module containing the private functions")
+    parser.add_argument("--write_dot", action="store_true", help="Writeout a dot file describing module dependencies")
     parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
     parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
     args = parser.parse_args()
@@ -720,7 +722,7 @@ def main():
     if args.split_fn == "linear_split":
         split_kwargs["block_lim"] = args.block_lim
 
-    split_metadata = parse_and_split_mlir(mlir_file, output_path, split_fn, args.write_private_funcs, **split_kwargs)
+    split_metadata = parse_and_split_mlir(mlir_file, output_path, split_fn=split_fn, write_private_funcs=args.write_private_funcs, write_dot=args.write_dot, **split_kwargs)
     if args.print_meta:
         for idx, module in enumerate(split_metadata):
             print(f"Module {idx} metadata:")

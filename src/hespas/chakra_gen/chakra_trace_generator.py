@@ -40,6 +40,7 @@ class ChakraTraceGen:
         self.compute_estimator = self.config.estimator(**self.estimator_config.to_hw_config())
         self.num_devices = self.config.num_devices
         self.write_private_funcs = self.config.write_private_funcs
+        self.write_dot = self.config.write_dot
         self.module_dep_graph = loaded_dep_graph
         if self.module_dep_graph is None:
             self.module_dep_graph = self.get_modules_dep_graph()
@@ -234,7 +235,9 @@ class ChakraTraceGen:
 
         if modules_dep_graph is None:
             log.info("Dependency graph not loaded. Generating a new one.")
-            modules_dep_graph = parse_and_split_mlir(self.mlir_file, self.output_dir, self.split_fn, num_threads=self.num_threads, write_private_funcs=self.write_private_funcs, **self.config.additional_kwargs)
+            modules_dep_graph = parse_and_split_mlir(self.mlir_file, self.output_dir,
+                split_fn=self.split_fn, num_threads=self.num_threads, write_private_funcs=self.write_private_funcs, write_dot=self.write_dot,
+                **self.config.additional_kwargs)
 
         if modules_dep_graph is None or len(modules_dep_graph.nodes) <= 0:
             raise ValueError(f"No modules found in the dependency graph for {self.config.mlir_file}")
@@ -260,14 +263,16 @@ def setup_output_dir(output_dir, clean=True):
 
 def create_chakra_traces(config_path, output_dir=None, mlir_file=None, num_threads=-1,
                          clean=False, stats_print_filter=None, stats_out_filter=None, num_npus=None,
-                         split_fn=None, block_lim=None, merge=None, write_private_funcs=None):
+                         split_fn=None, block_lim=None, merge=None, write_private_funcs=None, write_dot=None):
     # Clean output directory including caching
     split_kwargs = {}
     if block_lim is not None:
         split_kwargs["block_lim"] = block_lim
     if merge is not None:
         split_kwargs["merge"] = merge
-    config = ChakraGenConfig(config_path, output_dir=output_dir, mlir_file=mlir_file, clean=clean, num_threads=num_threads, num_npus=num_npus, split_choice=split_fn, write_private_funcs=write_private_funcs, split_kwargs=split_kwargs)
+    config = ChakraGenConfig(config_path, output_dir=output_dir, mlir_file=mlir_file, clean=clean,
+        num_threads=num_threads, num_npus=num_npus, split_choice=split_fn,
+        write_private_funcs=write_private_funcs, write_dot=write_dot, split_kwargs=split_kwargs)
     setup_output_dir(config.output_dir, clean=config.clean)
 
     # estimate perf and create the chakra traces
@@ -292,6 +297,7 @@ def get_arg_parser():
     parser.add_argument("--output", type=str, help="Override output directory in config")
     parser.add_argument("--threads", default=-1, type=int, help="Amount of threads to use for splitting. 0 means single-threaded, -1 means the default chosen by ThreadPoolExecutor.")
     parser.add_argument("--write_private_funcs", action="store_true", help="Writeout an mlir module containing the private functions")
+    parser.add_argument("--write_dot", action="store_true", help="Writeout a dot file describing module dependencies")
     parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
     parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
     return parser
@@ -301,7 +307,8 @@ def main(args=None):
     logger_basic_config(filename=args.log_path, level=args.log_level)
     indv_merge = None if not (args.merge or args.no_merge) else (True if args.merge and not args.no_merge else False)
     create_chakra_traces(args.config, output_dir=args.output, mlir_file=args.mlir_file, num_threads=args.threads,
-                         clean=args.clean, num_npus=args.num_npus, split_fn=args.split_fn, block_lim=args.block_lim, merge=indv_merge, write_private_funcs=args.write_private_funcs)
+                         clean=args.clean, num_npus=args.num_npus, split_fn=args.split_fn, block_lim=args.block_lim,
+                         merge=indv_merge, write_private_funcs=args.write_private_funcs, write_dot=args.write_dot)
 
 if __name__ == '__main__':
     main()

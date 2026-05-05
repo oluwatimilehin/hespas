@@ -11,7 +11,7 @@ class ChakraGenConfig:
     def __init__(self, input, output_dir=None, mlir_file=None, clean=None,
                               disable_cache=None, cache_dir=None, num_threads=-1,
                               num_npus=None, split_choice=None, write_private_funcs=None,
-                              split_kwargs=None):
+                              write_dot=None, split_kwargs=None):
         self.config = None
         if isinstance(input, str) or isinstance(input, Path):
             with open(input) as f:
@@ -28,6 +28,7 @@ class ChakraGenConfig:
             self.estimator_kwargs['disable_cache'] = self.disable_cache
         self.num_threads = int(self.config.get('num_threads', num_threads))
         self.write_private_funcs = bool(self.config.get('write_private_funcs', write_private_funcs))
+        self.write_dot = bool(self.config.get('write_dot', write_dot))
 
         if output_dir is not None:
             self.config['output_dir'] = output_dir
