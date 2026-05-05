@@ -352,7 +352,7 @@ def create_digraph(operation_blocks):
             dependency_graph.add_edge(i, i-1)
     return dependency_graph
 
-def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_threads=-1, *split_args, **split_kw_args):
+def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_threads=-1, write_private_funcs=False, *split_args, **split_kw_args):
     """
     Parses the StableHLO MLIR file and uses the provided `split_fn` to split the module.
     Returns a list of modules and metadata for each split.
@@ -391,7 +391,8 @@ def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_thre
     if ctx is None:
         raise MLIRSplittingError("Context is empty")
     root_funcs = mlir_parser.private_functions
-    store_private_functions(root_funcs, output_path, context=ctx)
+    if write_private_funcs:
+        store_private_functions(root_funcs, output_path, context=ctx)
     G, name_to_func = mlir_parser.get_private_functions_nx_tree(root_funcs)
 
     ctx.allow_unregistered_dialects = True
@@ -695,6 +696,7 @@ def main():
     parser.add_argument("--split_fn", type=str, choices=list(dispatch_split_fn.keys()), default="linear_split", help="Split function to use (default: linear_split)")
     parser.add_argument("--block_lim", type=int, default=1024, help="Block size limit for linear_split (default: 1024)")
     parser.add_argument("--print_meta", action="store_true", default=False, help="Print metadata for each split module")
+    parser.add_argument("--write_private_funcs", action="store_true", help="Writeout an mlir module containing the private functions")
     parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
     parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
     args = parser.parse_args()
@@ -718,7 +720,7 @@ def main():
     if args.split_fn == "linear_split":
         split_kwargs["block_lim"] = args.block_lim
 
-    split_metadata = parse_and_split_mlir(mlir_file, output_path, split_fn, **split_kwargs)
+    split_metadata = parse_and_split_mlir(mlir_file, output_path, split_fn, args.write_private_funcs, **split_kwargs)
     if args.print_meta:
         for idx, module in enumerate(split_metadata):
             print(f"Module {idx} metadata:")
