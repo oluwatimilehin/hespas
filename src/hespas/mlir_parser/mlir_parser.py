@@ -8,9 +8,8 @@ from .mlir_common import get_dot_general_dimensions
 import networkx as nx
 import logging
 import re
-from functools import cached_property
+from functools import cached_property, lru_cache
 log = logging.getLogger(__name__)
-
 
 class MLIRParser:
     """
@@ -155,17 +154,24 @@ class MLIRParser:
         function.operation.walk(visitor, walk_order=WalkOrder.PRE_ORDER)
         return ops
 
-    def parse_operation(self, operation):
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def type_to_str(t):
+        return str(t)
 
-        def get_type_list(op_type):
-            if "!mhlo.async_bundle" in str(op_type):
-                op_type = op_type.parse(str(op_type).replace("!mhlo.async_bundle", "tuple"), context=MLIRParser.get_ir_context())
-            ret_list = [op_type]
-            if hasattr(op_type, "num_types"):
-                ret_list = []
-                for i in range(op_type.num_types):
-                    ret_list.extend(get_type_list(op_type.get_type(i)))
-            return ret_list
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def get_type_list(op_type):
+        if "!mhlo.async_bundle" in MLIRParser.type_to_str(op_type):
+            op_type = op_type.parse(MLIRParser.type_to_str(op_type).replace("!mhlo.async_bundle", "tuple"), context=MLIRParser.get_ir_context())
+        ret_list = [op_type]
+        if hasattr(op_type, "num_types"):
+            ret_list = []
+            for i in range(op_type.num_types):
+                ret_list.extend(MLIRParser.get_type_list(op_type.get_type(i)))
+        return ret_list
+
+    def parse_operation(self, operation):
 
         operation = operation.opview
         name = str(operation.name)
@@ -176,11 +182,11 @@ class MLIRParser:
         result_ids = []
         for arg in operation.operands:
             operand_ids.append("%{}".format(hash(arg)))
-            for arg_type in get_type_list(arg.type):
+            for arg_type in MLIRParser.get_type_list(arg.type):
                 inputs.append((tuple(arg_type.shape), arg_type.element_type))
         for res in operation.results:
             result_ids.append("%{}".format(hash(res)))
-            for res_type in get_type_list(res.type):
+            for res_type in MLIRParser.get_type_list(res.type):
                 outputs.append((tuple(res_type.shape), res_type.element_type))
 
         # NOTE: attributes are ignored at the moment
