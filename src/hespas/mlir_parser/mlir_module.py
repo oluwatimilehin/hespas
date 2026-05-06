@@ -316,13 +316,11 @@ class MLIRModule:
 
         self._module_path, json_path = self.get_paths(output_dir, base_name=base_name)
 
-        self.ensure_dir(output_dir)
         self.save_mlir(self._module_path)
         self.save_json(json_path)
         return str(self.module_path), str(json_path)
 
     def get_output_files(self, output_dir, base_name=None):
-        self.ensure_dir(output_dir)
         self._module_path, json_path = self.get_paths(output_dir, base_name=base_name)
         ret_dict = {self._module_path: self.mlir_string, json_path: self.get_json_metadata()}
         return ret_dict
