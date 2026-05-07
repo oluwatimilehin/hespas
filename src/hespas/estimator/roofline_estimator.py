@@ -305,7 +305,8 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler('stablehlo.gather')
     def handle_gather(self, op_info):
-        assert len(op_info.output_types) == 1
+        if len(op_info.output_types) != 1:
+            raise ValueError("Only one type allowed")
         data_bytes = op_info.get_input_bytes(0)              # operand
         index_bytes = op_info.get_input_bytes(1) if len(op_info.input_types) > 1 else 0  # start_indices
         out_bytes = op_info.get_output_bytes(0)
@@ -314,7 +315,8 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler('stablehlo.scatter')
     def handle_scatter(self, op_info):
-        assert len(op_info.output_types) == 1
+        if len(op_info.output_types) != 1:
+            raise ValueError("Only one type allowed")
         data_bytes = op_info.get_input_bytes(0)              # operand
         index_bytes = op_info.get_input_bytes(1) if len(op_info.output_types) > 1 else 0  # start_indices
         out_bytes = op_info.get_output_bytes(0)
@@ -344,7 +346,8 @@ class RooflineEstimator(Estimator):
                                     'stablehlo.sign', 'stablehlo.log', 'stablehlo.negate', 'stablehlo.power', 'stablehlo.cosine', 'stablehlo.rsqrt',
                                     'stablehlo.sqrt', 'stablehlo.logistic', 'stablehlo.sine', 'stablehlo.round_nearest_even', 'stablehlo.not'])
     def handle_unary_elemwise(self, op_info):
-        assert len(op_info.output_types)==1
+        if len(op_info.output_types) != 1:
+            raise ValueError("Only one type allowed")
         flops = math.prod(op_info.output_types[0][0])
         total_bytes = op_info.get_input_bytes(0) + op_info.get_output_bytes(0)
         return self.compute_runtime(op_info, flops, total_bytes)
