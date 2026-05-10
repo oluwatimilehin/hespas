@@ -12,6 +12,7 @@ from collections import OrderedDict
 
 from .chakra_config import ChakraGenConfig
 from ..mlir_parser.mlir_splitter import parse_and_split_mlir, load_dependency_graph, LoadDependencyException
+from ..mlir_parser.mlir_common import NodeType
 os.environ["TEMPORARILY_DISABLE_PROTOBUF_VERSION_CHECK"] = "true" # Hack to force Protobuf to not be as picky
 import chakra.src.generator.generator as chakra
 from ..utils.logging import get_str_divider, get_log_levels, logger_basic_config
@@ -96,28 +97,52 @@ class ChakraTraceGen:
             block_type_value = module.block_type.value
 
             if module.is_communication_block:
-                dev_to_gid = {}
-                if module.replica_groups is not None:
-                    if needs_per_device is False and len(module.replica_groups) > 1:
-                        needs_per_device = True
-                    for key in [tuple(x) for x in module.replica_groups]:
-                        gid = comm_group_registry.get(key)
-                        if gid is None:
-                            gid = next_group_id
-                            comm_group_registry[key] = gid
-                            next_group_id += 1
-                        for dev_id in key:
-                            dev_to_gid[dev_id] = gid
+                # Singleton replica groups (e.g. [[0],[1],[2],...]) mean each
+                # device is alone in its group — the collective is a no-op.
+                # See StableHLO spec §all_reduce: the reduction is performed
+                # within each replica group independently; a group of size 1
+                # produces an identity (output == input).
+                # Ref: https://openxla.org/stablehlo/spec#all_reduce
+                # Emit these as zero-duration compute nodes so ASTRA-sim
+                # doesn't try to simulate a pointless collective.
+                is_singleton = (
+                    module.replica_groups is not None
+                    and all(len(g) == 1 for g in module.replica_groups)
+                )
 
-                results[node] = {
-                    "type": "comm",
-                    "block_type": block_type,
-                    "block_type_value": block_type_value,
-                    "predecessors": predecessors,
-                    "comm_size_bytes": module.comm_bytes,
-                    "comm_type": self.collective_to_chakra_collective(module.collective),
-                    "dev_to_gid": dev_to_gid
-                }
+                if is_singleton:
+                    log.info(f"Skipping singleton-group collective {module.collective} "
+                             f"(replica_groups all size 1) — emitting as zero-duration compute node.")
+                    results[node] = {
+                        "type": "comp",
+                        "block_type": "COMP_NODE",
+                        "block_type_value": NodeType.COMP_NODE.value,
+                        "predecessors": predecessors,
+                        "runtime_estimate": 0
+                    }
+                else:
+                    dev_to_gid = {}
+                    if module.replica_groups is not None:
+                        if needs_per_device is False and len(module.replica_groups) > 1:
+                            needs_per_device = True
+                        for key in [tuple(x) for x in module.replica_groups]:
+                            gid = comm_group_registry.get(key)
+                            if gid is None:
+                                gid = next_group_id
+                                comm_group_registry[key] = gid
+                                next_group_id += 1
+                            for dev_id in key:
+                                dev_to_gid[dev_id] = gid
+
+                    results[node] = {
+                        "type": "comm",
+                        "block_type": block_type,
+                        "block_type_value": block_type_value,
+                        "predecessors": predecessors,
+                        "comm_size_bytes": module.comm_bytes,
+                        "comm_type": self.collective_to_chakra_collective(module.collective),
+                        "dev_to_gid": dev_to_gid
+                    }
             elif module.is_computation_block:
                 results[node] = {
                     "type": "comp",
