@@ -5,10 +5,10 @@ import logging
 from functools import lru_cache
 from bisect import bisect
 
-logging.PROGRESS = logging.INFO + 1
+logging.PROGRESS = logging.INFO - 1
 logging.addLevelName(logging.PROGRESS, "PROGRESS")
 logging.progress = lambda msg, *args, **kwargs: logging.log(logging.PROGRESS, msg, *args, **kwargs)
-logging.RESULTS = logging.PROGRESS + 1
+logging.RESULTS = logging.INFO + 1
 logging.addLevelName(logging.RESULTS, "RESULTS")
 logging.results = lambda msg, *args, **kwargs: logging.log(logging.RESULTS, msg, *args, **kwargs)
 
@@ -17,6 +17,7 @@ class LogFormatter(logging.Formatter):
         super().__init__(**kwargs)
 
         non_verbose_formats = {
+            logging.PROGRESS: '%(message)s',
             logging.INFO: '[%(levelname)s] %(message)s',
             logging.RESULTS: '%(message)s',
             logging.WARNING: '[%(levelname)s] %(name)s: %(message)s',
@@ -24,8 +25,8 @@ class LogFormatter(logging.Formatter):
         }
 
         verbose_formats = {
-            logging.INFO: '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
             logging.PROGRESS: '%(asctime)s [%(levelname)s] %(message)s',
+            logging.INFO: '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
             logging.RESULTS: '%(asctime)s [%(levelname)s] %(message)s',
             logging.WARNING: '%(asctime)s [%(levelname)s] %(name)s: %(message)s',
             logging.DEBUG: '%(asctime)s [%(levelname)s] %(name)s: %(message)s'

@@ -89,6 +89,7 @@ class ChakraTraceGen:
         comm_group_registry = {}  # tuple(device_ids) -> group_id
         needs_per_device = False
         next_group_id = 1
+        collectives_skipped = {}
 
         for node in nx.topological_sort(self.module_dep_graph):
             module = self.module_dep_graph.nodes[node]['mlir_module']
@@ -111,8 +112,14 @@ class ChakraTraceGen:
                 )
 
                 if is_singleton:
-                    log.info(f"Skipping singleton-group collective {module.collective} "
-                             f"(replica_groups all size 1) — emitting as zero-duration compute node.")
+                    collective = str(module.collective)
+                    if log.getEffectiveLevel() > logging.PROGRESS:
+                        if collective not in collectives_skipped:
+                            collectives_skipped[collective] = 0
+                        collectives_skipped[collective] += 1
+                    else:
+                        log.info(f"Skipping singleton-group collective {collective} "
+                                 f"(replica_groups all size 1) — emitting as zero-duration compute node.")
                     results[node] = {
                         "type": "comp",
                         "block_type": "COMP_NODE",
@@ -153,6 +160,10 @@ class ChakraTraceGen:
                 }
             else:
                 raise ValueError("Module is neither communication nor computation")
+
+        if log.getEffectiveLevel() > logging.PROGRESS and collectives_skipped:
+            collectives_skipped_str = ", ".join(["{} {} times".format(x, y) for x, y in collectives_skipped.items()])
+            log.info(f"Skipped singleton-group collectives {collectives_skipped_str} (replica_groups all size 1) — emitted as zero-duration compute nodes.")
 
         # Determine which devices need their own trace file.
         # When traces are identical (no split groups) we generate once and hardlink.
@@ -306,7 +317,7 @@ def create_chakra_traces(config_path, output_dir=None, mlir_file=None, num_threa
     trace_gen.create_chakra_traces(stats_print_filter=stats_print_filter, stats_out_filter=stats_out_filter)
     end_time = time.perf_counter()
     log.progress(get_str_divider())
-    log.progress(f"Done. Output directory: {str(config.output_dir)}")
+    log.results(f"Done. Output directory: {str(config.output_dir)}")
     log.results("Took {}s".format(round(end_time - start_time, 3)))
 
 def get_arg_parser():
@@ -324,7 +335,7 @@ def get_arg_parser():
     parser.add_argument("--write_private_funcs", action="store_true", help="Writeout an mlir module containing the private functions")
     parser.add_argument("--write_dot", action="store_true", help="Writeout a dot file describing module dependencies")
     parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
-    parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
+    parser.add_argument("--log-level", default='progress', type=str, choices=get_log_levels(), help="Set log level")
     return parser
 
 def main(args=None):

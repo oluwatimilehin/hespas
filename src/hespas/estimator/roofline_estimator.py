@@ -102,11 +102,20 @@ class RooflineEstimator(Estimator):
         datatype_str = self.__get_datatype_str_by_op(op_info)
 
         if datatype_str not in self.per_datatype_flops:
-            info_str = "Datatype {} not found in per_datatype_flops ({}) for op: {}".format(str(datatype_str), self.per_datatype_flops, op_info)
+            datatype_str = str(datatype_str)
+            info_str = "Datatype {} not found in per_datatype_flops ({})".format(datatype_str, self.per_datatype_flops if log.getEffectiveLevel() <= logging.PROGRESS else ", ".join(self.per_datatype_flops.keys()))
+            if log.getEffectiveLevel() <= logging.PROGRESS:
+                info_str = "{} for op: {}".format(info_str, op_info)
             if self.error_on_unknown_type:
                 raise RooflineMissingDatatypeError(info_str)
             elif self.warn_on_unknown_type:
-                log.warning(info_str + " - using fallback flops rate {}".format(self.peak_flops))
+                if log.getEffectiveLevel() > logging.PROGRESS:
+                    if datatype_str not in self.unknown_per_datatype_flops_seen:
+                        self.unknown_per_datatype_flops_seen[datatype_str] = 0
+                        log.warning(info_str + " - using fallback flops rate")
+                    self.unknown_per_datatype_flops_seen[datatype_str] += 1
+                else:
+                    log.warning(info_str + " - using fallback flops rate {}".format(self.peak_flops))
             return self.peak_flops
         return self.__get_flops_by_datatype_str(datatype_str)
 
@@ -154,6 +163,7 @@ class RooflineEstimator(Estimator):
     @register_init_hook
     def __setup_per_datatype_flops(self):
         self.has_per_datatype_flops = True
+        self.unknown_per_datatype_flops_seen = {}
         if self.per_datatype_flops is None or len(self.per_datatype_flops) == 0:
             if self.error_on_unknown_type:
                 raise InvalidConfigOptionError("error_on_unknown_type specified but per_datatype_flops is empty")
@@ -177,6 +187,10 @@ class RooflineEstimator(Estimator):
     @register_init_hook
     def __setup_flops_per_element_map(self):
         self._flops_per_element_map = {**self.DEFAULT_FLOPS_PER_ELEMENT, **(self.flops_per_element or {})}
+
+    @register_init_hook
+    def __setup_seen_unknown_custom_kernel(self):
+        self.unknown_custom_call_kernels = {}
 
     @register_pre_estimate_hook
     def __setup_module_roofline_stats(self, module):
@@ -552,7 +566,10 @@ class RooflineEstimator(Estimator):
             output_bytes = sum(op_info.get_output_bytes(i) for i in range(len(op_info.output_types)))
             total_bytes = input_bytes + output_bytes
             return self.compute_runtime(op_info, 0, total_bytes)
-        log.warning("Warning: Unknown custom_call kernel '{}'".format(op_info.kernel_name))
+        if log.getEffectiveLevel() < logging.PROGRESS or op_info.kernel_name not in self.unknown_custom_call_kernels:
+            self.unknown_custom_call_kernels[op_info.kernel_name] = 0
+            log.warning("Warning: Unknown custom_call kernel '{}'".format(op_info.kernel_name))
+        self.unknown_custom_call_kernels[op_info.kernel_name] += 1
         return self.compute_runtime(op_info, 0, 0)
 
 if __name__ == '__main__':
