@@ -4,7 +4,7 @@
         "method": "roofline",
         "hardware": {
             "peak_flops": 2600e12,
-            "memory_bandwidth": 25804e9
+            "memory_bandwidth": 5324e9
         }
     }
 }
