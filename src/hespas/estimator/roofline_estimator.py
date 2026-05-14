@@ -322,7 +322,12 @@ class RooflineEstimator(Estimator):
             all_in_longer = all([shorter_dims[j] == longer_dims[i+j] for j in range(shorter_len)])
             new_outer_changed_dims += longer_dims[i+shorter_len if all_in_longer else 0:]
 
-            if outer_changed_dims is None or len(new_outer_changed_dims) < len(outer_changed_dims):
+            # case 1: obvious
+            # case 2: as we slide the smaller array the smallest outer changed dims will mean the longest amount of equal elements in order
+            # case 3: if the amount of equal elements in order is equal, we want to look for the case of maximum 1s
+            #    - since 1 is the minimum, the sum of the outer elements of all 1s must be the lowest sum if the number of elements are equal
+            # This does feel a little ugly but I haven't thought of an obviously cleaner way atm
+            if outer_changed_dims is None or len(new_outer_changed_dims) < len(outer_changed_dims) or (len(new_outer_changed_dims) == len(outer_changed_dims) and sum(new_outer_changed_dims) < sum(outer_changed_dims)):
                 outer_changed_dims = new_outer_changed_dims
 
         if not outer_changed_dims or all([x == 1 for x in outer_changed_dims]):
