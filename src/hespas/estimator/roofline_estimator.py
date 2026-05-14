@@ -301,8 +301,40 @@ class RooflineEstimator(Estimator):
     def handle_free_ops(self, op_info):
         return self.compute_runtime(op_info, 0, 0)
 
+    @register_op_handler(['stablehlo.reshape'])
+    def handle_reshape(self, op_info):
+        # Look for the longest common subsequence between input and output and then collect
+        # the elements either side to see if then can be free
+        # e.g.: for [2, 3, 1] and [2, 3] -> [1] or [2, 5, 6] and [2, 2, 5, 6, 1] -> [2, 1]
+        # if all the elements that are either side of the subsequence are all 1 - assume it is free
+        # this means we have a change like 1x2x16 -> 2x16 or 4096 -> 4096x1 which we are assuming
+        # doesn't require memory traffic
+
+        input_dims = op_info.input_types[0][0]
+        output_dims = op_info.output_types[0][0]
+        input_dim_len = len(input_dims)
+        output_dim_len = len(output_dims)
+        longer_dims, longer_len, shorter_dims, shorter_len = (input_dims, input_dim_len, output_dims, output_dim_len) if input_dim_len > output_dim_len else (output_dims, output_dim_len, input_dims, input_dim_len)
+        outer_changed_dims = None
+
+        for i in range(longer_len-shorter_len+1):
+            new_outer_changed_dims = longer_dims[:i]
+            all_in_longer = all([shorter_dims[j] == longer_dims[i+j] for j in range(shorter_len)])
+            new_outer_changed_dims += longer_dims[i+shorter_len if all_in_longer else 0:]
+
+            if outer_changed_dims is None or len(new_outer_changed_dims) < len(outer_changed_dims):
+                outer_changed_dims = new_outer_changed_dims
+
+        if not outer_changed_dims or all([x == 1 for x in outer_changed_dims]):
+            return self.compute_runtime(op_info, 0, 0)
+
+        # otherwise assume you need to do a proper reorganisation of the data
+
+        total_bytes = op_info.get_input_bytes(0) + op_info.get_output_bytes(0)
+        return self.compute_runtime(op_info, 0, total_bytes)
+
     # TODO: transpose/broadcast_in_dim also takes indices for transpose. how to make it better? technically free
-    @register_op_handler(['stablehlo.transpose', 'stablehlo.reshape', 'stablehlo.broadcast_in_dim', \
+    @register_op_handler(['stablehlo.transpose', 'stablehlo.broadcast_in_dim', \
                                     'stablehlo.pad', 'stablehlo.reverse', 'stablehlo.reduce_precision', 'mhlo.copy'])
     def handle_noflop_ops(self, op_info):
         total_bytes = op_info.get_input_bytes(0) + op_info.get_output_bytes(0)
