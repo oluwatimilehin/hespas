@@ -79,40 +79,30 @@ class MLIRParser:
         """
         return self.main_function.regions[0].blocks[0].operations
 
-
     @cached_property
     def main_function(self):
         """
         Returns the main function in the MLIR module.
         """
-        return self.module.body.operations[self.main_index]
-
+        main_funcs_candidates = [x for x in self.functions if MLIRParser.str_attr_str(x.name) == "main"]
+        if len(main_funcs_candidates) != 1:
+            raise ValueError("Cannot determine main function from candidates {}".format(main_funcs_candidates))
+        return main_funcs_candidates[0]
 
     @cached_property
-    def main_index(self) -> int:
-        """
-        Returns the index of the main function in the MLIR module.
-        Raises an error if the main function is not found.
-        """
-        for i, op in enumerate(self.module.body.operations):
-            op_name = op.name
-            if hasattr(op_name, "value"):
-                op_name = op_name.value
-            if op_name == "main":
-                return i
-        raise ValueError("Main function not found in the MLIR module.")
+    def functions(self):
+        return [x for x in self.module.body.operations if x.OPERATION_NAME == 'func.func']
 
+    @cached_property
+    def attributes(self):
+        return [x for x in self.module.body.operations if x.OPERATION_NAME != 'func.func']
 
-    @property
+    @cached_property
     def private_functions(self) -> list[mlir.ir.Operation]:
         """
         Returns a list of private functions in the MLIR module.
         """
-        if not hasattr(self, "_private_functions"):
-            self._private_functions = list(self.module.body.operations)[:self.main_index] + \
-                                       list(self.module.body.operations)[self.main_index + 1:]
-        return self._private_functions
-
+        return [x for x in self.functions if MLIRParser.str_attr_str(x.name) != "main"]
 
     def get_private_functions_map(self, funcs = None) -> dict:
         if funcs is None:
@@ -122,7 +112,6 @@ class MLIRParser:
             for f in funcs
             if "sym_name" in f.attributes
         }
-
 
     def get_private_functions_nx_tree(self, functions):
         name_to_op = self.get_private_functions_map(functions)
@@ -142,7 +131,6 @@ class MLIRParser:
             f.operation.walk(collect_visitor, walk_order=WalkOrder.PRE_ORDER)
         return G, name_to_op
 
-
     def get_private_functions_ops(self, function):
         """ Returns a list of operations in a private function, including nested calls. """
         ops = []
@@ -153,6 +141,13 @@ class MLIRParser:
             return WalkResult.ADVANCE
         function.operation.walk(visitor, walk_order=WalkOrder.PRE_ORDER)
         return ops
+
+    @staticmethod
+    @lru_cache(maxsize=None)
+    def str_attr_str(s):
+        if hasattr(s, "value"):
+            s = s.value
+        return str(s)
 
     @staticmethod
     @lru_cache(maxsize=None)
@@ -331,7 +326,6 @@ class MLIRParser:
             log.warning("Function does not have operands.")
         return op_list
 
-
     def get_mlir_function_inputs(self):
         """Reads an MLIR file and returns a list of function input types."""
 
@@ -344,7 +338,6 @@ class MLIRParser:
         if inputs == []:
             log.warning("Function does not have inputs")
         return inputs
-
 
     def get_mlir_function_outputs(self):
         """Reads an MLIR file and returns a list of function output types."""
