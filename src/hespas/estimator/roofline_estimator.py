@@ -132,12 +132,7 @@ class RooflineEstimator(Estimator):
     def __get_total_flops_by_opname(self, op_name, flops):
         return float(flops) * self.__get_opname_flops_mult(op_name)
 
-    def compute_runtime(self, op_info, flops, bytes_accessed):
-        flops = self.__get_total_flops_by_opname(op_info.op_name, flops)
-        bytes_accessed = float(bytes_accessed)
-        datatype_str = self.__get_datatype_str_by_op(op_info)
-        compute_time = flops / self.__get_flops(op_info) if int(flops) != 0 else 0.0
-        mem_time = bytes_accessed / self.memory_bandwidth if int(bytes_accessed) != 0 else 0.0
+    def generate_op_result(self, op_info, compute_time, mem_time, flops, bytes_accessed, datatype_str):
         if self.memory_compute_parallelism >= 1.0:
             runtime_estimate = max(compute_time, mem_time)
         else:
@@ -147,7 +142,15 @@ class RooflineEstimator(Estimator):
             # with 5% serialisation for synchronisation overhead.
             runtime_estimate = (compute_time + mem_time
                                 - min(compute_time, mem_time) * self.memory_compute_parallelism)
-        return OpResult(success=True, op_info=op_info, runtime_estimate=runtime_estimate, metadata={"flops": flops, "bytes_accessed": bytes_accessed, "datatype": datatype_str})
+        return OpResult(success=True, op_info=op_info, runtime_estimate=runtime_estimate, metadata={"flops": flops, "bytes_accessed": bytes_accessed, "datatype": datatype_str, "compute_time": compute_time})
+
+    def compute_runtime(self, op_info, flops, bytes_accessed):
+        flops = self.__get_total_flops_by_opname(op_info.op_name, flops)
+        bytes_accessed = float(bytes_accessed)
+        datatype_str = self.__get_datatype_str_by_op(op_info)
+        compute_time = flops / self.__get_flops(op_info) if int(flops) != 0 else 0.0
+        mem_time = bytes_accessed / self.memory_bandwidth if int(bytes_accessed) != 0 else 0.0
+        return self.generate_op_result(op_info, compute_time, mem_time, flops, bytes_accessed, datatype_str)
 
     def __add_roofline_stats(self, stats_tree):
         stats_tree.add_member("flops", SummingStatistic("Total FLOPS", value_type=int), check_exists=True)
@@ -586,8 +589,11 @@ class RooflineEstimator(Estimator):
     @register_op_handler(["mhlo.fusion"])
     def handle_fusion(self, op_info):
         total_bytes_accessed = sum([op_info.get_input_bytes(i) for i in range(len(op_info.input_types))]) + sum([op_info.get_output_bytes(i) for i in range(len(op_info.output_types))])
-        total_flops = sum(x.metadata["flops"] for x in self._Estimator__get_op_estimates(op_info.fused_ops))
-        return self.compute_runtime(op_info, total_flops, total_bytes_accessed)
+        mem_time = total_bytes_accessed / self.memory_bandwidth if int(total_bytes_accessed) != 0 else 0.0
+        inner_results = self._Estimator__get_op_estimates(op_info.fused_ops)
+        total_flops = sum(x.metadata["flops"] for x in inner_results)
+        compute_time = sum(x.metadata["compute_time"] for x in inner_results)
+        return self.generate_op_result(op_info, compute_time, mem_time, total_flops, total_bytes_accessed, self.__get_datatype_str_by_op(op_info))
 
     @register_op_handler(["stablehlo.custom_call"])
     def handle_custom_call(self, op_info):
