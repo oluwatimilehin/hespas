@@ -481,22 +481,36 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler(['stablehlo.sort'])
     def handle_sort(self, op_info):
-        """
-        Roofline model of an operator that,
-        sorts 1-dimensional slices of inputs along a dimension together.
-        """
-        flops = 0 # assume negligible this op is memory bound
-        radix_bits_per_pass = 8 # common for gpus (assumption)
-        # the op support multiple inputs but they are sorted along 1 dim together
-        number_of_inputs = op_info.get_number_of_inputs()
-        dtype_bits = get_bit_width(op_info.input_types[0][1])
-        input_bytes = number_of_inputs * op_info.get_input_bytes(0)
-        output_bytes = input_bytes
-        # implementing ceiling divition by radix_bits to calculate passes.
-        # each pass will correspond to a memory write for bucketisation.
-        passes = max(1, (dtype_bits + radix_bits_per_pass - 1) // radix_bits_per_pass)
-        total_bytes = (input_bytes + output_bytes) * passes
-        return self.compute_runtime(op_info, flops, total_bytes)
+        # I don't understand the semantics of this sort. The example from the spec is:
+        # // %input0 = [[1, 2, 3], [3, 2, 1]]
+        # // %input1 = [[3, 2, 1], [1, 2, 3]]
+        # %result0, %result1 = "stablehlo.sort"(%input0, %input1) ({
+        #    ^bb0(%arg0: tensor<i64>, %arg1: tensor<i64>, %arg2: tensor<i64>, %arg3: tensor<i64>):
+        #    %predicate = "stablehlo.compare"(%arg0, %arg1) {
+        #      comparison_direction = #stablehlo<comparison_direction GT>
+        #    } : (tensor<i64>, tensor<i64>) -> tensor<i1>
+        #    "stablehlo.return"(%predicate) : (tensor<i1>) -> ()
+        #    }) {
+        #  dimension = 0 : i64,
+        #  is_stable = true
+        # } : (tensor<2x3xi64>, tensor<2x3xi64>) -> (tensor<2x3xi64>, tensor<2x3xi64>)
+        # // %result0 = [[3, 2, 3], [1, 2, 1]]
+        # // %result1 = [[1, 2, 1], [3, 2, 3]]
+        # But I think the resultant operations is still on the order of NlogN where N
+        # is the total number of elements from both arguments
+
+        elements = sum(op_info.input_types[0][0]) + sum(op_info.input_types[1][0])
+        comparisons = int(elements * math.log2(elements)) # Rough average case estimate for an optimal comparison sort
+
+        # Per comparison, read 2 numbers, write 2 numbers - pessimistic
+        total_bytes_accessed = 4 * (op_info.get_input_bytes(0) + op_info.get_input_bytes(1)) * comparisons
+        mem_time = total_bytes_accessed / self.memory_bandwidth if int(total_bytes_accessed) != 0 else 0.0
+
+        inner_results = self._Estimator__get_op_estimates(op_info.comparator_ops)
+        total_flops = sum(x.metadata["flops"] for x in inner_results) * comparisons
+        compute_time = sum(x.metadata["compute_time"] for x in inner_results) * comparisons
+
+        return self.generate_op_result(op_info, compute_time, mem_time, total_flops, total_bytes_accessed, self.__get_datatype_str_by_op(op_info))
 
     @register_op_handler(['stablehlo.dot_general', 'stablehlo.dot'])
     def handle_dot_general(self, op_info):

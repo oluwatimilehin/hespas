@@ -311,6 +311,10 @@ class MLIRParser:
         elif "stablehlo.reduce_precision" in name:
             op_info.exponent_bits = int(operation.exponent_bits) if hasattr(operation, "exponent_bits") else None
             op_info.mantissa_bits = int(operation.mantissa_bits) if hasattr(operation, "mantissa_bits") else None
+        elif "stablehlo.sort" in name:
+            if len(operation.comparator.blocks) != 1:
+                ValueError("Sort doesn't have a single block for comparison {}".format(operation))
+            op_info.comparator_ops = [self.parse_operation(comp_op) for comp_op in operation.comparator.blocks[0].operations if comp_op.name != "stablehlo.return"]
         return op_info
 
     @cached_property
