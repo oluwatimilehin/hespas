@@ -78,10 +78,17 @@ def test_roofline_reduce():
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
         op_name='stablehlo.reduce',
-        input_types=[((2, 3, 4 ), 'f32')],
+        input_types=[((2, 3, 4 ), 'f32'), (tuple(), 'f32')],
         output_types=[((2, 3), 'f32')]
     )
     op_info.dimensions = [2]
+    op_info.reducer_ops = [
+        OpInfo(
+            op_name='stablehlo.add',
+            input_types=[(tuple(), 'f32'), (tuple(), 'f32')],
+            output_types=[(tuple(), 'f32')]
+        )
+    ]
 
     flops = (4 - 1) * 2 * 3
     bytes = 4 * 2 * 3 * 4 + 4 * 2 * 3

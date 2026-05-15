@@ -193,6 +193,9 @@ class MLIRParser:
         op_info = OpInfo(name, inputs, outputs, operands=operand_ids, results=result_ids, opview=operation)
         if 'stablehlo.reduce' == name:
             op_info.dimensions = [i for i in operation.attributes["dimensions"]]
+            if len(operation.body.blocks) != 1:
+                raise ValueError("Reduce doesn't have a single block for comparison {}".format(operation))
+            op_info.reducer_ops = [self.parse_operation(reduce_op) for reduce_op in operation.body.blocks[0].operations if reduce_op.name != "stablehlo.return"]
         if 'stablehlo.transpose' == name:
             op_info.attributes["permutation"] = [i for i in operation.attributes["permutation"]]
         elif 'stablehlo.dot_general' in name:

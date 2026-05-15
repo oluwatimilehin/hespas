@@ -414,22 +414,39 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler('stablehlo.reduce')
     def handle_reduce(self, op_info):
+        op_input_num = op_info.get_number_of_inputs()
+        if not op_input_num or op_input_num % 2 != 0:
+            raise ValueError("Reduce must have an even number of args")
+        input_tensor_num = op_info.get_number_of_inputs() // 2
+
         # Calculate tensor statistics
+        # Even though there are possibly N inputs
+        # They must have equal size
         input_shape = op_info.input_types[0][0]
         output_shape = op_info.output_types[0][0]
         dimensions = op_info.dimensions
         reduced_size = math.prod([input_shape[d] for d in dimensions])
         output_elements = math.prod(output_shape)
+        operations = (reduced_size - 1) * output_elements
 
-        # Calculate FLOPs: (n-1) reductions per output element
-        flops = (reduced_size - 1) * output_elements
+        # Run the reducer for each reduction operation (this
+        # does seem to apply to all vector inputs at the
+        # same time, so the total number of operations
+        # does not increase with more inputs)
+        inner_results = self._Estimator__get_op_estimates(op_info.reducer_ops)
+        total_flops = sum(x.metadata["flops"] for x in inner_results) * operations
+        compute_time = sum(x.metadata["compute_time"] for x in inner_results) * operations
 
         # Calculate memory access (input + output)
-        input_bytes = op_info.get_input_bytes(0)
+        # The variadic amount of input tensors should be
+        # the first n // 2 elements
+        input_bytes = sum([op_info.get_input_bytes(i) for i in range(input_tensor_num)])
         output_bytes = op_info.get_output_bytes(0)
 
         total_bytes = input_bytes + output_bytes
-        return self.compute_runtime(op_info, flops, total_bytes)
+        mem_time = total_bytes / self.memory_bandwidth if int(total_bytes) != 0 else 0.0
+
+        return self.generate_op_result(op_info, compute_time, mem_time, total_flops, total_bytes, self.__get_datatype_str_by_op(op_info))
 
     @register_op_handler('stablehlo.reduce_window')
     def handle_reduce_window(self, op_info):
