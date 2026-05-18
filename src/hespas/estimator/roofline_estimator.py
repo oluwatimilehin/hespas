@@ -300,12 +300,12 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler(['stablehlo.constant', 'func.return', 'func.call', 'stablehlo.iota', 'stablehlo.partition_id',
             'stablehlo.replica_id', 'stablehlo.get_tuple_element', 'stablehlo.optimization_barrier', 'stablehlo.return', 'mhlo.return',
-            'stablehlo.real', 'stablehlo.imag', 'stablehlo.complex', 'mhlo.bitcast', 'stablehlo.reshape'])
+            'stablehlo.real', 'stablehlo.imag', 'stablehlo.complex', 'mhlo.bitcast', 'stablehlo.reshape', 'stablehlo.transpose'])
     def handle_free_ops(self, op_info):
         return self.compute_runtime(op_info, 0, 0)
 
     # TODO: transpose/broadcast_in_dim also takes indices for transpose. how to make it better? technically free
-    @register_op_handler(['stablehlo.transpose', 'stablehlo.broadcast_in_dim', \
+    @register_op_handler(['stablehlo.broadcast_in_dim', \
                                     'stablehlo.pad', 'stablehlo.reverse', 'stablehlo.reduce_precision', 'mhlo.copy'])
     def handle_noflop_ops(self, op_info):
         total_bytes = op_info.get_input_bytes(0) + op_info.get_output_bytes(0)

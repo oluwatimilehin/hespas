@@ -102,7 +102,7 @@ def test_roofline_noflop_ops():
     hw_config = {'peak_flops': 100.0, 'memory_bandwidth': 2.0, 'in_memory_only_cache': True, 'memory_compute_parallelism': 1.0}
     estimator = RooflineEstimator(hw_config)
     op_info = OpInfo(
-        op_name='stablehlo.transpose',
+        op_name='stablehlo.pad',
         input_types=[((4,3,2,1), 'f16')],
         output_types=[((1,2,3,4), 'f16')]
     )
