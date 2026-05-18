@@ -63,7 +63,7 @@ class RooflineEstimator(Estimator):
     }
 
     # Ops eligible for tensor core acceleration (matmul/conv use tensor cores on GPU)
-    TENSOR_CORE_OPS = ("stablehlo.dot_general", "stablehlo.convolution")
+    TENSOR_CORE_OPS = ("stablehlo.dot", "stablehlo.dot_general", "stablehlo.convolution")
     # Datatype promotions applied by tensor cores (e.g. f32 matmul runs at TF32 speed)
     TENSOR_CORE_PROMOTIONS = {"f32": "tf32"}
 
