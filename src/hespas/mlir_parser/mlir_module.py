@@ -125,9 +125,16 @@ class MLIRModule:
 
     @cached_property
     def comm_bytes(self):
-        if len(self.output_dims_mlir) > 0:
-            return sum([compute_tensor_size(ret, context=MLIRAnalyzer.get_ir_context()) for ret in self.output_dims_mlir])
-        return 0
+        # FIXME: Is this correct for all collectives?
+
+        input_bytes = sum([compute_tensor_size(ret, context=MLIRAnalyzer.get_ir_context()) for ret in self.input_dims_mlir])
+        output_bytes = sum([compute_tensor_size(ret, context=MLIRAnalyzer.get_ir_context()) for ret in self.output_dims_mlir])
+        if self.collective == "stablehlo.reduce_scatter":
+            return input_bytes
+        elif self.collective in ["stablehlo.all_to_all", "stablehlo.all_reduce", "stablehlo.all_gather", "ragged_all_to_all"]:
+            return output_bytes
+        else:
+            return max(input_bytes, output_bytes)
 
     @property
     def mlir_string(self) -> str:
