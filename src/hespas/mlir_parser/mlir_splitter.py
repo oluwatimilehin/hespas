@@ -486,10 +486,9 @@ def parse_and_split_mlir(file_path, output_path, split_fn=linear_split, num_thre
             parent_module=file_path
         )
 
-        if not mini_module.is_communication_block:
-            for output_path, output_body in mini_module.get_output_files(output_path).items():
-                with open(output_path, "w") as f:
-                    f.write(output_body)
+        for output_path, output_body in mini_module.get_output_files(output_path).items():
+            with open(output_path, "w") as f:
+                f.write(output_body)
 
         return idx, mini_module
 

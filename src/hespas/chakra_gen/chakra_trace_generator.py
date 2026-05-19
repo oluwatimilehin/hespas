@@ -121,6 +121,7 @@ class ChakraTraceGen:
                         log.info(f"Skipping singleton-group collective {collective} "
                                  f"(replica_groups all size 1) — emitting as zero-duration compute node.")
                     results[node] = {
+                        "name": module.module_file,
                         "type": "comp",
                         "block_type": "COMP_NODE",
                         "block_type_value": NodeType.COMP_NODE.value,
@@ -142,6 +143,7 @@ class ChakraTraceGen:
                                 dev_to_gid[dev_id] = gid
 
                     results[node] = {
+                        "name": module.module_file,
                         "type": "comm",
                         "block_type": block_type,
                         "block_type_value": block_type_value,
@@ -152,6 +154,7 @@ class ChakraTraceGen:
                     }
             elif module.is_computation_block:
                 results[node] = {
+                    "name": module.module_file,
                     "type": "comp",
                     "block_type": block_type,
                     "block_type_value": block_type_value,
@@ -189,6 +192,7 @@ class ChakraTraceGen:
                 for node, result in results.items():
                     child_node = chakra.get_node(result["block_type"], result["block_type_value"])
                     child_node.attr.append(chakra.ChakraAttr(name="is_cpu_op", bool_val=False))
+                    child_node.name = result["name"]
 
                     if result["type"] == "comp":
                         runtime = result["runtime_estimate"]
