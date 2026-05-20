@@ -17,11 +17,15 @@ DISABLED_PASSES=
 NON_SPMD_DISABLED_PASSES="async-collective-conversion"
 SPMD_DISABLED_PASSES="${NON_SPMD_DISABLED_PASSES},gpu-reduce-scatter-combiner,spmd-partitioning,spmd-partitioner,spmd_partitioner"
 IS_SPMD=""
+DEBUG="no"
+DUMP_DIR=
+DEFAULT_DUMP_SUBDIR="passes_dump"
+DUMP_PASS_RE=".*"
 
 usage()
 {
     echo "$0: XLA optimiser script"
-    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker] [--xla-translate XLA_TRANSLATE_PATH] [--hlo-opt HLO_OPT_PATH]"
+    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker] [--xla-translate XLA_TRANSLATE_PATH] [--hlo-opt HLO_OPT_PATH] [--debug] [--dump-dir DUMP_DIR] [--dump-pass-re DUMP_PASS_RE]"
     echo "-i|--input-file: Input StableHLO MLIR file (required)"
     echo "-o|--output-file: Output optimised StableHLO MLIR file (required)"
     echo "-g|--spec-file: GPU spec file from the XLA repository to use (required if no --no-spec)"
@@ -34,6 +38,9 @@ usage()
     echo "--no-spmd: Don't use SPMD disabled passes (the default) (optional)"
     echo "--xla-translate: Path to xla-translate binary (optional, currently '$(which xla-translate 2> /dev/null || echo "Not found")')"
     echo "--hlo-opt: Path to hlo-opt binary (optional, currently '$(which hlo-opt 2> /dev/null || echo "Not found")')"
+    echo "--debug: Enable debug HLO pass dumping (optional)"
+    echo "--dump-dir: Directory to dump debug HLO passes too (optional, defaults to '${DEFAULT_DUMP_SUBDIR}' in the directory of the output file)"
+    echo "--dump-pass-re: Pass regex for dumping (optional, defaults to '${DUMP_PASS_RE}'"
 }
 
 check_param()
@@ -125,6 +132,17 @@ process_args()
                 shift
                 HLO_OPT="$1"
                 ;;
+            --debug)
+                DEBUG="yes"
+                ;;
+            --dump-dir)
+                shift
+                DUMP_DIR="$1"
+                ;;
+            --dump-pass-re)
+                shift
+                DUMP_PASS_RE="$1"
+                ;;
             *)
                 echo "Unknown argument '$1'"
                 echo ""
@@ -161,6 +179,11 @@ process_args()
     then
         check_filepath "-g" "GPU_SPEC_FILE" "${GPU_SPEC}"
     fi
+
+    if [ -n "${DEBUG}" ] && [ -z "${DUMP_DIR}" ]
+    then
+        DUMP_DIR="$(dirname "${OUTPUT_FILE}")/${DEFAULT_DUMP_SUBDIR}"
+    fi
 }
 
 run_opt()
@@ -189,6 +212,23 @@ run_opt()
         DISABLED_PASSES="$1"
     fi
     shift
+    DEBUG=
+    if [ "$1" = "yes" ]
+    then
+        DEBUG="yes"
+    fi
+    shift
+    DUMP_DIR=
+    if [ -n "${DEBUG}" ]
+    then
+        DUMP_DIR="$(realpath -m "$1")"
+    fi
+    shift
+    DUMP_PASS_RE=
+    if [ -n "${DEBUG}" ]
+    then
+        DUMP_PASS_RE="$1"
+    fi
 
     USE_LATENCY_HIDING_SCHED=
     if [ -n "${GPU_SPEC}" ] || [ -n "${DISABLED_PASSES}" ]
@@ -212,6 +252,10 @@ run_opt()
     OP_HLO_TEMP="${INPUT_FILE}.op.hlo"
 
     rm -f "${UNOP_HLO_TEMP}" "${OP_HLO_TEMP}"
+    if [ -n "${DEBUG}" ]
+    then
+        mkdir -p "${DUMP_DIR}"
+    fi
 
     "${XLA_TRANSLATE}" \
         --stablehlo-to-hlo-text \
@@ -225,6 +269,8 @@ run_opt()
         ${DISABLED_PASSES:+--xla_gpu_disable_async_collectives="ALLCOLLECTIVES"} \
         ${USE_LATENCY_HIDING_SCHED:+--xla_gpu_enable_latency_hiding_scheduler=false} \
         ${GPU_SPEC:+--xla_gpu_autotune_level=0} \
+        ${DEBUG:+--xla_dump_to="${DUMP_DIR}"} \
+        ${DEBUG:+--xla_dump_hlo_pass_re="${DUMP_PASS_RE}"} \
         --o="${OP_HLO_TEMP}" \
         "${UNOP_HLO_TEMP}"
 
@@ -243,4 +289,4 @@ run_opt()
 process_args "$@"
 set -e
 
-run_opt "${XLA_TRANSLATE}" "${HLO_OPT}" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}"
+run_opt "${XLA_TRANSLATE}" "${HLO_OPT}" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}" "${DEBUG}" "${DUMP_DIR}" "${DUMP_PASS_RE}"
