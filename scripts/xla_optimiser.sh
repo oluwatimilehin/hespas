@@ -21,11 +21,12 @@ DEBUG="no"
 DUMP_DIR=
 DEFAULT_DUMP_SUBDIR="passes_dump"
 DUMP_PASS_RE=".*"
+KEEP_HLO="no"
 
 usage()
 {
     echo "$0: XLA optimiser script"
-    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker] [--xla-translate XLA_TRANSLATE_PATH] [--hlo-opt HLO_OPT_PATH] [--debug] [--dump-dir DUMP_DIR] [--dump-pass-re DUMP_PASS_RE]"
+    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker] [--xla-translate XLA_TRANSLATE_PATH] [--hlo-opt HLO_OPT_PATH] [--debug] [--dump-dir DUMP_DIR] [--dump-pass-re DUMP_PASS_RE] [--keep-hlo]"
     echo "-i|--input-file: Input StableHLO MLIR file (required)"
     echo "-o|--output-file: Output optimised StableHLO MLIR file (required)"
     echo "-g|--spec-file: GPU spec file from the XLA repository to use (required if no --no-spec)"
@@ -41,6 +42,7 @@ usage()
     echo "--debug: Enable debug HLO pass dumping (optional)"
     echo "--dump-dir: Directory to dump debug HLO passes too (optional, defaults to '${DEFAULT_DUMP_SUBDIR}' in the directory of the output file)"
     echo "--dump-pass-re: Pass regex for dumping (optional, defaults to '${DUMP_PASS_RE}'"
+    echo "--keep-hlo: Keep intermediate HLO (optional)"
 }
 
 check_param()
@@ -143,6 +145,9 @@ process_args()
                 shift
                 DUMP_PASS_RE="$1"
                 ;;
+            --keep-hlo)
+                KEEP_HLO="yes"
+                ;;
             *)
                 echo "Unknown argument '$1'"
                 echo ""
@@ -229,6 +234,8 @@ run_opt()
     then
         DUMP_PASS_RE="$1"
     fi
+    shift
+    KEEP_HLO="$1"
 
     USE_LATENCY_HIDING_SCHED=
     if [ -n "${GPU_SPEC}" ] || [ -n "${DISABLED_PASSES}" ]
@@ -289,10 +296,13 @@ run_opt()
         -o="${OUTPUT_FILE}" \
         "${OP_HLO_TEMP}"
 
-    rm "${UNOP_HLO_TEMP}" "${OP_HLO_TEMP}"
+    if [ "${KEEP_HLO}" = "yes" ]
+    then
+        rm "${UNOP_HLO_TEMP}" "${OP_HLO_TEMP}"
+    fi
 }
 
 process_args "$@"
 set -e
 
-run_opt "${XLA_TRANSLATE}" "${HLO_OPT}" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}" "${DEBUG}" "${DUMP_DIR}" "${DUMP_PASS_RE}"
+run_opt "${XLA_TRANSLATE}" "${HLO_OPT}" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}" "${DEBUG}" "${DUMP_DIR}" "${DUMP_PASS_RE}" "${KEEP_HLO}"
