@@ -4,23 +4,28 @@
 
 SCRIPT_PATH="$(realpath "$0")"
 SCRIPT_DIR="$(realpath "$(dirname "$0")")"
-if [ -f "${SCRIPT_DIR}/common.sh" ]
-then
-    . "${SCRIPT_DIR}/common.sh"
-fi
 
 INPUT_FILE=
 OUTPUT_FILE=
 GPU_SPEC=
 RUN_DOCKER="no"
-DISABLED_PASSES="async-collective-conversion"
+DISABLED_PASSES=
+NON_SPMD_DISABLED_PASSES="async-collective-conversion"
+SPMD_DISABLED_PASSES="${NON_SPMD_DISABLED_PASSES},gpu-reduce-scatter-combiner,spmd-partitioning,spmd-partitioner,spmd_partitioner"
+IS_SPMD="no"
 
 usage()
 {
     echo "$0: XLA optimiser script"
-    echo "Usage: $0 -i INPUT_FILE -o OUTPUT_FILE -g GPU_SPEC_FILE [-d DISABLED_PASSES_LIST] [--docker]"
-    echo "-d: Command seperated list of disabled passes. By default: '${DISABLED_PASSES}'"
-    echo "--docker: Run the opt in the docker"
+    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE [-g|--spec-file] GPU_SPEC_FILE [-d|--disabled-passes DISABLED_PASSES_LIST] [--spmd|--no-spmd] [--docker]"
+    echo "-i|--input-file: Input StableHLO MLIR file (required)"
+    echo "-o|--output-file: Output optimised StableHLO MLIR file (required)"
+    echo "-g|--spec-file: GPU spec file from the XLA repository to use (required)"
+    echo "-d|--disabled-passes: Command seperated list of disabled passes. (optional)"
+    echo "                      By default: '${NON_SPMD_DISABLED_PASSES}' if not spmd or '${SPMD_DISABLED_PASSES}' if spmd"
+    echo "--docker: Run the opt in the docker (optional)"
+    echo "--spmd: Use SPMD disabled passes (optional)"
+    echo "--no-spmd: Don't use SPMD disabled passes (the default) (optional)"
 }
 
 check_param()
@@ -68,7 +73,7 @@ process_args()
 {
     while [ "$#" -gt 0 ]
     do
-        case "$1" in 
+        case "$1" in
             -h|--help)
                 usage
                 exit 0
@@ -85,9 +90,15 @@ process_args()
                 shift
                 GPU_SPEC="$1"
                 ;;
-            -d)
+            -d|--disabled-passes)
                 shift
                 DISABLED_PASSES="$1"
+                ;;
+            --spmd)
+                IS_SPMD="yes"
+                ;;
+            --no-spmd)
+                IS_SPMD="no"
                 ;;
             --docker)
                 RUN_DOCKER="yes"
@@ -101,6 +112,16 @@ process_args()
         esac
         shift
     done
+
+    if [ -z "${DISABLED_PASSES}" ]
+    then
+        if [ "${IS_SPMD}" = "yes" ]
+        then
+            DISABLED_PASSES="${SPMD_DISABLED_PASSES}"
+        else
+            DISABLED_PASSES="${NON_SPMD_DISABLED_PASSES}"
+        fi
+    fi
 
     check_filepath "-i" "INPUT_FILE" "${INPUT_FILE}"
     check_filepath "-o" "OUTPUT_FILE" "${OUTPUT_FILE}" "output"
@@ -136,10 +157,10 @@ run_opt()
         --platform=gpu \
         --xla_gpu_target_config_filename="${GPU_SPEC}" \
         --xla_disable_hlo_passes="${DISABLED_PASSES}" \
-    	--xla_gpu_disable_async_collectives="ALLCOLLECTIVES" \
-    	--xla_gpu_enable_latency_hiding_scheduler=false \
+        --xla_gpu_disable_async_collectives="ALLCOLLECTIVES" \
+        --xla_gpu_enable_latency_hiding_scheduler=false \
         --xla_gpu_autotune_level=0 \
-    	--o="${OP_HLO_TEMP}" \
+        --o="${OP_HLO_TEMP}" \
         "${UNOP_HLO_TEMP}"
 
     "${XLA_TRANSLATE}" \
