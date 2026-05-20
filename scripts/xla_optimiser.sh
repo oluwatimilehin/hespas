@@ -7,6 +7,8 @@ SCRIPT_DIR="$(realpath "$(dirname "$0")")"
 
 INPUT_FILE=
 OUTPUT_FILE=
+XLA_TRANSLATE=
+HLO_OPT=
 USE_SPEC="yes"
 GPU_SPEC=
 RUN_DOCKER="no"
@@ -19,7 +21,7 @@ IS_SPMD=""
 usage()
 {
     echo "$0: XLA optimiser script"
-    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker]"
+    echo "Usage: $0 [-i|--input-file] INPUT_FILE [-o|--output-file] OUTPUT_FILE ([-g|--spec-file] GPU_SPEC_FILE|--no-spec) ([-d|--disabled-passes DISABLED_PASSES_LIST]|--no-disabled-passes) [--spmd|--no-spmd] [--docker] [--xla-translate XLA_TRANSLATE_PATH] [--hlo-opt HLO_OPT_PATH]"
     echo "-i|--input-file: Input StableHLO MLIR file (required)"
     echo "-o|--output-file: Output optimised StableHLO MLIR file (required)"
     echo "-g|--spec-file: GPU spec file from the XLA repository to use (required if no --no-spec)"
@@ -30,6 +32,8 @@ usage()
     echo "--docker: Run the opt in the docker (optional)"
     echo "--spmd: Use SPMD disabled passes (optional)"
     echo "--no-spmd: Don't use SPMD disabled passes (the default) (optional)"
+    echo "--xla-translate: Path to xla-translate binary (optional, currently '$(which xla-translate 2> /dev/null || echo "Not found")')"
+    echo "--hlo-opt: Path to hlo-opt binary (optional, currently '$(which hlo-opt 2> /dev/null || echo "Not found")')"
 }
 
 check_param()
@@ -113,6 +117,14 @@ process_args()
             --docker)
                 RUN_DOCKER="yes"
                 ;;
+            --xla-translate)
+                shift
+                XLA_TRANSLATE="$1"
+                ;;
+            --hlo-opt)
+                shift
+                HLO_OPT="$1"
+                ;;
             *)
                 echo "Unknown argument '$1'"
                 echo ""
@@ -122,6 +134,16 @@ process_args()
         esac
         shift
     done
+
+    if [ -z "${XLA_TRANSLATE}" ]
+    then
+        XLA_TRANSLATE="$(which xla-translate 2> /dev/null)"
+    fi
+
+    if [ -z "${HLO_OPT}" ]
+    then
+        HLO_OPT="$(which hlo-opt 2> /dev/null)"
+    fi
 
     if [ "${DISABLE_PASSES}" = "yes" ] && [ -z "${DISABLED_PASSES}" ]
     then
@@ -174,6 +196,18 @@ run_opt()
         USE_LATENCY_HIDING_SCHED="yes"
     fi
 
+    if [ ! -x "${XLA_TRANSLATE}" ]
+    then
+        echo "Cannot find xla-translate binary"
+        exit 1
+    fi
+
+    if [ ! -x "${HLO_OPT}" ]
+    then
+        echo "Cannot find hlo-opt binary"
+        exit 1
+    fi
+
     UNOP_HLO_TEMP="${INPUT_FILE}.unop.hlo"
     OP_HLO_TEMP="${INPUT_FILE}.op.hlo"
 
@@ -209,4 +243,4 @@ run_opt()
 process_args "$@"
 set -e
 
-run_opt "$(which xla-translate)" "$(which hlo-opt)" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}"
+run_opt "${XLA_TRANSLATE}" "${HLO_OPT}" "${INPUT_FILE}" "${OUTPUT_FILE}" "${USE_SPEC}" "${GPU_SPEC}" "${DISABLE_PASSES}" "${DISABLED_PASSES}"
