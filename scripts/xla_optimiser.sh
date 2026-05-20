@@ -257,6 +257,12 @@ run_opt()
         mkdir -p "${DUMP_DIR}"
     fi
 
+    OUTPUT_DIR="$(dirname "${OUTPUT_FILE}")"
+    if [ ! -d "${OUTPUT_DIR}" ]
+    then
+        mkdir -p "${OUTPUT_DIR}"
+    fi
+
     "${XLA_TRANSLATE}" \
         --stablehlo-to-hlo-text \
         -o="${UNOP_HLO_TEMP}" \
