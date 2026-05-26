@@ -296,7 +296,7 @@ run_opt()
         -o="${OUTPUT_FILE}" \
         "${OP_HLO_TEMP}"
 
-    if [ "${KEEP_HLO}" = "yes" ]
+    if [ "${KEEP_HLO}" != "yes" ]
     then
         rm "${UNOP_HLO_TEMP}" "${OP_HLO_TEMP}"
     fi
