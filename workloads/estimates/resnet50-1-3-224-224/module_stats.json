@@ -1,0 +1,120 @@
+{
+    "estimation_time": 0.10073259193450212,
+    "uncached_time": 0.09915952291339636,
+    "runtime": 0.0006521593391940985,
+    "modules_processed": 1,
+    "operators_processed": 1604,
+    "per_module": {
+        "mini_module_0.mlir": {
+            "runtime": 0.0006521593391940985,
+            "estimation_time": 0.10073193884454668,
+            "uncached_time": 0.09915952291339636,
+            "flops": 8304619688,
+            "per_datatype": {
+                "f32": {
+                    "flops": 8304619688,
+                    "runtime": 0.0006521593391940995,
+                    "flops_util": 0.06282207572892683
+                }
+            },
+            "mem_bytes": 533090888,
+            "flops_util": 0.06282207572892692,
+            "mem_bw_util": 0.9968588962135547,
+            "avg_flopss": 12734034750253.484,
+            "avg_mem_bw": 817424294895.1149,
+            "per_op": {
+                "mhlo.fusion": {
+                    "runtime": 0.000429502523463824,
+                    "count": 162,
+                    "flops": 130347176,
+                    "mem_bytes": 352165704,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 130347176,
+                            "runtime": 0.000429502523463824,
+                            "flops_util": null
+                        }
+                    }
+                },
+                "stablehlo.convolution": {
+                    "runtime": 0.00010076396513602948,
+                    "count": 20,
+                    "flops": 4551966720,
+                    "mem_bytes": 81705728,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 4551966720,
+                            "runtime": 0.00010076396513602948,
+                            "flops_util": null
+                        }
+                    }
+                },
+                "stablehlo.constant": {
+                    "runtime": 0.0,
+                    "count": 2,
+                    "flops": 0,
+                    "mem_bytes": 0,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 0,
+                            "runtime": 0.0,
+                            "flops_util": null
+                        }
+                    }
+                },
+                "mhlo.bitcast": {
+                    "runtime": 0.0,
+                    "count": 99,
+                    "flops": 0,
+                    "mem_bytes": 0,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 0,
+                            "runtime": 0.0,
+                            "flops_util": null
+                        }
+                    }
+                },
+                "stablehlo.dot": {
+                    "runtime": 0.00012189285059424602,
+                    "count": 33,
+                    "flops": 3622305792,
+                    "mem_bytes": 99219456,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 3622305792,
+                            "runtime": 0.00012189285059424602,
+                            "flops_util": null
+                        }
+                    }
+                },
+                "func.return": {
+                    "runtime": 0.0,
+                    "count": 1,
+                    "flops": 0,
+                    "mem_bytes": 0,
+                    "per_datatype": {
+                        "f32": {
+                            "flops": 0,
+                            "runtime": 0.0,
+                            "flops_util": null
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "flops": 8304619688,
+    "per_datatype": {
+        "f32": {
+            "flops": 8304619688,
+            "runtime": 0.0006521593391940995,
+            "flops_util": 0.06282207572892683
+        }
+    },
+    "mem_bytes": 533090888,
+    "flops_util": 0.06282207572892692,
+    "mem_bw_util": 0.9968588962135547,
+    "avg_flopss": 12734034750253.484,
+    "avg_mem_bw": 817424294895.1149
+}

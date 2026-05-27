@@ -1,0 +1,894 @@
+{
+    "hw_config": {
+        "peak_flops": 202700000000000.0,
+        "memory_bandwidth": 820000000000.0,
+        "num_npus": 1,
+        "cache_dir": "workloads/estimates/convnextv2-128-3-224-224/cache"
+    },
+    "result": {
+        "success": true,
+        "runtime_estimate": 0.06780512343900014,
+        "metadata": {},
+        "module_file": "mini_module_0.mlir",
+        "module_idx": 0,
+        "statistics": {
+            "type": "ContainerStatistic",
+            "print_name": "Statistics for module mini_module_0.mlir",
+            "unit": null,
+            "value_type": "float",
+            "value_mult": 1,
+            "rounding_decimals": 3,
+            "default_sampled": false,
+            "members": {
+                "runtime": {
+                    "type": "SummingStatistic",
+                    "print_name": "Compute Runtime Estimation",
+                    "unit": "s",
+                    "value_type": "float",
+                    "value_mult": 1e-06,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "value": 0.06780512343900014
+                },
+                "estimation_time": {
+                    "type": "IntervalStatistic",
+                    "print_name": "Module estimation time",
+                    "unit": "s",
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "start": 1126389.223656935,
+                    "end": null
+                },
+                "uncached_time": {
+                    "type": "IntervalStatistic",
+                    "print_name": "Uncached Estimation Time",
+                    "unit": "s",
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "start": 1126389.225214703,
+                    "end": 1126389.584353317
+                },
+                "flops": {
+                    "type": "SummingStatistic",
+                    "print_name": "Total FLOPS",
+                    "unit": null,
+                    "value_type": "int",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "value": 1285078536448
+                },
+                "per_datatype": {
+                    "type": "ContainerStatistic",
+                    "print_name": "Stats for each datatype",
+                    "unit": null,
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "members": {
+                        "f32": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Stats for datatype f32",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPS",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 1285078536448
+                                },
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total runtime",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.06780512343900007
+                                },
+                                "flops_util": {
+                                    "type": "RatioStatistic",
+                                    "print_name": "FLOPS/s utilisation",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "nom": 18952528529855.164,
+                                    "denom": 202700000000000,
+                                    "show_division": false,
+                                    "sub_from_one": false
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        }
+                    },
+                    "sort": false,
+                    "justify": true,
+                    "print_string": null
+                },
+                "mem_bytes": {
+                    "type": "SummingStatistic",
+                    "print_name": "Total memory traffic",
+                    "unit": "B",
+                    "value_type": "int",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "value": 55260764640
+                },
+                "flops_util": {
+                    "type": "RatioStatistic",
+                    "print_name": "FLOPS/s utilisation",
+                    "unit": null,
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "nom": 0.006339805310547606,
+                    "denom": 0.06780512343900014,
+                    "show_division": false,
+                    "sub_from_one": false
+                },
+                "mem_bw_util": {
+                    "type": "RatioStatistic",
+                    "print_name": "Memory bandwidth utilisation",
+                    "unit": null,
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "nom": 814993939059.9962,
+                    "denom": 820000000000,
+                    "show_division": false,
+                    "sub_from_one": false
+                },
+                "avg_flopss": {
+                    "type": "ValueStatistic",
+                    "print_name": "Average FLOPS/s",
+                    "unit": "FLOPS/s",
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "value": 18952528529855.15
+                },
+                "avg_mem_bw": {
+                    "type": "ValueStatistic",
+                    "print_name": "Average Memory Bandwidth",
+                    "unit": "B/s",
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "value": 814993939059.9962
+                },
+                "per_op": {
+                    "type": "ContainerStatistic",
+                    "print_name": "Per-operator statistics",
+                    "unit": null,
+                    "value_type": "float",
+                    "value_mult": 1,
+                    "rounding_decimals": 3,
+                    "default_sampled": false,
+                    "members": {
+                        "mhlo.fusion": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator mhlo.fusion",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.0504391780982745
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 333
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 144462532864
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 41330905696
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 144462532864
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.0504391780982745
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        },
+                        "stablehlo.convolution": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator stablehlo.convolution",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.003481725305249377
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 22
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 74999070720
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 2839844736
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 74999070720
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.003481725305249377
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        },
+                        "stablehlo.constant": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator stablehlo.constant",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.0
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 1
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.0
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        },
+                        "stablehlo.dot_general": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator stablehlo.dot_general",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.013884220035476185
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 37
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 1065616932864
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 11090014208
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 1065616932864
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.013884220035476185
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        },
+                        "mhlo.bitcast": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator mhlo.bitcast",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.0
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 6
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.0
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        },
+                        "func.return": {
+                            "type": "ContainerStatistic",
+                            "print_name": "Statistics for operator func.return",
+                            "unit": null,
+                            "value_type": "float",
+                            "value_mult": 1,
+                            "rounding_decimals": 3,
+                            "default_sampled": false,
+                            "members": {
+                                "runtime": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Compute Runtime Estimation",
+                                    "unit": "s",
+                                    "value_type": "float",
+                                    "value_mult": 1e-06,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0.0
+                                },
+                                "count": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Count of number of this type of operator",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 1
+                                },
+                                "flops": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total FLOPs",
+                                    "unit": null,
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "mem_bytes": {
+                                    "type": "SummingStatistic",
+                                    "print_name": "Total memory traffic",
+                                    "unit": "B",
+                                    "value_type": "int",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "value": 0
+                                },
+                                "per_datatype": {
+                                    "type": "ContainerStatistic",
+                                    "print_name": "Stats for each datatype",
+                                    "unit": null,
+                                    "value_type": "float",
+                                    "value_mult": 1,
+                                    "rounding_decimals": 3,
+                                    "default_sampled": false,
+                                    "members": {
+                                        "f32": {
+                                            "type": "ContainerStatistic",
+                                            "print_name": "Stats for datatype f32",
+                                            "unit": null,
+                                            "value_type": "float",
+                                            "value_mult": 1,
+                                            "rounding_decimals": 3,
+                                            "default_sampled": false,
+                                            "members": {
+                                                "flops": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total FLOPS",
+                                                    "unit": null,
+                                                    "value_type": "int",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0
+                                                },
+                                                "runtime": {
+                                                    "type": "SummingStatistic",
+                                                    "print_name": "Total runtime",
+                                                    "unit": "s",
+                                                    "value_type": "float",
+                                                    "value_mult": 1e-06,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "value": 0.0
+                                                },
+                                                "flops_util": {
+                                                    "type": "RatioStatistic",
+                                                    "print_name": "FLOPS/s utilisation",
+                                                    "unit": null,
+                                                    "value_type": "float",
+                                                    "value_mult": 1,
+                                                    "rounding_decimals": 3,
+                                                    "default_sampled": false,
+                                                    "nom": null,
+                                                    "denom": null,
+                                                    "show_division": false,
+                                                    "sub_from_one": false
+                                                }
+                                            },
+                                            "sort": false,
+                                            "justify": true,
+                                            "print_string": null
+                                        }
+                                    },
+                                    "sort": false,
+                                    "justify": true,
+                                    "print_string": null
+                                }
+                            },
+                            "sort": false,
+                            "justify": true,
+                            "print_string": null
+                        }
+                    },
+                    "sort": false,
+                    "justify": true,
+                    "print_string": null
+                }
+            },
+            "sort": false,
+            "justify": true,
+            "print_string": null
+        }
+    },
+    "estimator_name": "roofline",
+    "hash": "22447db767f53bcb5335774782e947846bf3fdf50e91e4743b3f14d763e8486a35f386a4b63a897c151822163d52bc9749bbd0d58696232f380ae9da6d878c08"
+}

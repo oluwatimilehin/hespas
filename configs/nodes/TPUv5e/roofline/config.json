@@ -1,0 +1,13 @@
+{
+    "perf_estimator": {
+        "method": "roofline",
+        "hardware": {
+            "peak_flops": 202.7e12,
+            "per_datatype_flops": {
+                "bf16": 1.97e14,
+                "i8": 1.84e15
+            },
+            "memory_bandwidth": 820e9
+        }
+    }
+}

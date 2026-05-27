@@ -1,0 +1,2098 @@
+module {
+  func.func @main(%arg0: tensor<2048xf32>, %arg1: tensor<512xf32>, %arg2: tensor<512xf32>, %arg3: tensor<2048xf32>, %arg4: tensor<512xf32>, %arg5: tensor<512xf32>, %arg6: tensor<2048xf32>, %arg7: tensor<1024xf32>, %arg8: tensor<256xf32>, %arg9: tensor<256xf32>, %arg10: tensor<1024xf32>, %arg11: tensor<256xf32>, %arg12: tensor<256xf32>, %arg13: tensor<1024xf32>, %arg14: tensor<256xf32>, %arg15: tensor<256xf32>, %arg16: tensor<1024xf32>, %arg17: tensor<256xf32>, %arg18: tensor<256xf32>, %arg19: tensor<1024xf32>, %arg20: tensor<256xf32>, %arg21: tensor<256xf32>, %arg22: tensor<1024xf32>, %arg23: tensor<512xf32>, %arg24: tensor<128xf32>, %arg25: tensor<128xf32>, %arg26: tensor<512xf32>, %arg27: tensor<128xf32>, %arg28: tensor<128xf32>, %arg29: tensor<512xf32>, %arg30: tensor<128xf32>, %arg31: tensor<128xf32>, %arg32: tensor<512xf32>, %arg33: tensor<256xf32>, %arg34: tensor<64xf32>, %arg35: tensor<64xf32>, %arg36: tensor<256xf32>, %arg37: tensor<64xf32>, %arg38: tensor<64xf32>, %arg39: tensor<256xf32>, %arg40: tensor<64xf32>, %arg41: tensor<1x3x224x224xf32>, %arg42: tensor<64x3x7x7xf32>, %arg43: tensor<64xf32>, %arg44: tensor<64xf32>, %arg45: tensor<64xf32>, %arg46: tensor<256x64x1x1xf32>, %arg47: tensor<256xf32>, %arg48: tensor<64xf32>, %arg49: tensor<64xf32>, %arg50: tensor<64x64x1x1xf32>, %arg51: tensor<64xf32>, %arg52: tensor<64xf32>, %arg53: tensor<64xf32>, %arg54: tensor<64x64x3x3xf32>, %arg55: tensor<64xf32>, %arg56: tensor<64xf32>, %arg57: tensor<64xf32>, %arg58: tensor<256x64x1x1xf32>, %arg59: tensor<256xf32>, %arg60: tensor<256xf32>, %arg61: tensor<256xf32>, %arg62: tensor<256xf32>, %arg63: tensor<256xf32>, %arg64: tensor<256xf32>, %arg65: tensor<64x256x1x1xf32>, %arg66: tensor<64xf32>, %arg67: tensor<64xf32>, %arg68: tensor<64xf32>, %arg69: tensor<64x64x3x3xf32>, %arg70: tensor<64xf32>, %arg71: tensor<64xf32>, %arg72: tensor<64xf32>, %arg73: tensor<256x64x1x1xf32>, %arg74: tensor<256xf32>, %arg75: tensor<256xf32>, %arg76: tensor<256xf32>, %arg77: tensor<64x256x1x1xf32>, %arg78: tensor<64xf32>, %arg79: tensor<64xf32>, %arg80: tensor<64xf32>, %arg81: tensor<64x64x3x3xf32>, %arg82: tensor<64xf32>, %arg83: tensor<64xf32>, %arg84: tensor<64xf32>, %arg85: tensor<256x64x1x1xf32>, %arg86: tensor<256xf32>, %arg87: tensor<256xf32>, %arg88: tensor<256xf32>, %arg89: tensor<512x256x1x1xf32>, %arg90: tensor<512xf32>, %arg91: tensor<128xf32>, %arg92: tensor<128xf32>, %arg93: tensor<128x256x1x1xf32>, %arg94: tensor<128xf32>, %arg95: tensor<128xf32>, %arg96: tensor<128xf32>, %arg97: tensor<128x128x3x3xf32>, %arg98: tensor<128xf32>, %arg99: tensor<128xf32>, %arg100: tensor<128xf32>, %arg101: tensor<512x128x1x1xf32>, %arg102: tensor<512xf32>, %arg103: tensor<512xf32>, %arg104: tensor<512xf32>, %arg105: tensor<512xf32>, %arg106: tensor<512xf32>, %arg107: tensor<512xf32>, %arg108: tensor<128x512x1x1xf32>, %arg109: tensor<128xf32>, %arg110: tensor<128xf32>, %arg111: tensor<128xf32>, %arg112: tensor<128x128x3x3xf32>, %arg113: tensor<128xf32>, %arg114: tensor<128xf32>, %arg115: tensor<128xf32>, %arg116: tensor<512x128x1x1xf32>, %arg117: tensor<512xf32>, %arg118: tensor<512xf32>, %arg119: tensor<512xf32>, %arg120: tensor<128x512x1x1xf32>, %arg121: tensor<128xf32>, %arg122: tensor<128xf32>, %arg123: tensor<128xf32>, %arg124: tensor<128x128x3x3xf32>, %arg125: tensor<128xf32>, %arg126: tensor<128xf32>, %arg127: tensor<128xf32>, %arg128: tensor<512x128x1x1xf32>, %arg129: tensor<512xf32>, %arg130: tensor<512xf32>, %arg131: tensor<512xf32>, %arg132: tensor<128x512x1x1xf32>, %arg133: tensor<128xf32>, %arg134: tensor<128xf32>, %arg135: tensor<128xf32>, %arg136: tensor<128x128x3x3xf32>, %arg137: tensor<128xf32>, %arg138: tensor<128xf32>, %arg139: tensor<128xf32>, %arg140: tensor<512x128x1x1xf32>, %arg141: tensor<512xf32>, %arg142: tensor<512xf32>, %arg143: tensor<512xf32>, %arg144: tensor<1024x512x1x1xf32>, %arg145: tensor<1024xf32>, %arg146: tensor<256xf32>, %arg147: tensor<256xf32>, %arg148: tensor<256x512x1x1xf32>, %arg149: tensor<256xf32>, %arg150: tensor<256xf32>, %arg151: tensor<256xf32>, %arg152: tensor<256x256x3x3xf32>, %arg153: tensor<256xf32>, %arg154: tensor<256xf32>, %arg155: tensor<256xf32>, %arg156: tensor<1024x256x1x1xf32>, %arg157: tensor<1024xf32>, %arg158: tensor<1024xf32>, %arg159: tensor<1024xf32>, %arg160: tensor<1024xf32>, %arg161: tensor<1024xf32>, %arg162: tensor<1024xf32>, %arg163: tensor<256x1024x1x1xf32>, %arg164: tensor<256xf32>, %arg165: tensor<256xf32>, %arg166: tensor<256xf32>, %arg167: tensor<256x256x3x3xf32>, %arg168: tensor<256xf32>, %arg169: tensor<256xf32>, %arg170: tensor<256xf32>, %arg171: tensor<1024x256x1x1xf32>, %arg172: tensor<1024xf32>, %arg173: tensor<1024xf32>, %arg174: tensor<1024xf32>, %arg175: tensor<256x1024x1x1xf32>, %arg176: tensor<256xf32>, %arg177: tensor<256xf32>, %arg178: tensor<256xf32>, %arg179: tensor<256x256x3x3xf32>, %arg180: tensor<256xf32>, %arg181: tensor<256xf32>, %arg182: tensor<256xf32>, %arg183: tensor<1024x256x1x1xf32>, %arg184: tensor<1024xf32>, %arg185: tensor<1024xf32>, %arg186: tensor<1024xf32>, %arg187: tensor<256x1024x1x1xf32>, %arg188: tensor<256xf32>, %arg189: tensor<256xf32>, %arg190: tensor<256xf32>, %arg191: tensor<256x256x3x3xf32>, %arg192: tensor<256xf32>, %arg193: tensor<256xf32>, %arg194: tensor<256xf32>, %arg195: tensor<1024x256x1x1xf32>, %arg196: tensor<1024xf32>, %arg197: tensor<1024xf32>, %arg198: tensor<1024xf32>, %arg199: tensor<256x1024x1x1xf32>, %arg200: tensor<256xf32>, %arg201: tensor<256xf32>, %arg202: tensor<256xf32>, %arg203: tensor<256x256x3x3xf32>, %arg204: tensor<256xf32>, %arg205: tensor<256xf32>, %arg206: tensor<256xf32>, %arg207: tensor<1024x256x1x1xf32>, %arg208: tensor<1024xf32>, %arg209: tensor<1024xf32>, %arg210: tensor<1024xf32>, %arg211: tensor<256x1024x1x1xf32>, %arg212: tensor<256xf32>, %arg213: tensor<256xf32>, %arg214: tensor<256xf32>, %arg215: tensor<256x256x3x3xf32>, %arg216: tensor<256xf32>, %arg217: tensor<256xf32>, %arg218: tensor<256xf32>, %arg219: tensor<1024x256x1x1xf32>, %arg220: tensor<1024xf32>, %arg221: tensor<1024xf32>, %arg222: tensor<1024xf32>, %arg223: tensor<2048x1024x1x1xf32>, %arg224: tensor<2048xf32>, %arg225: tensor<512xf32>, %arg226: tensor<512xf32>, %arg227: tensor<512x1024x1x1xf32>, %arg228: tensor<512xf32>, %arg229: tensor<512xf32>, %arg230: tensor<512xf32>, %arg231: tensor<512x512x3x3xf32>, %arg232: tensor<512xf32>, %arg233: tensor<512xf32>, %arg234: tensor<512xf32>, %arg235: tensor<2048x512x1x1xf32>, %arg236: tensor<2048xf32>, %arg237: tensor<2048xf32>, %arg238: tensor<2048xf32>, %arg239: tensor<2048xf32>, %arg240: tensor<2048xf32>, %arg241: tensor<2048xf32>, %arg242: tensor<512x2048x1x1xf32>, %arg243: tensor<512xf32>, %arg244: tensor<512xf32>, %arg245: tensor<512xf32>, %arg246: tensor<512x512x3x3xf32>, %arg247: tensor<512xf32>, %arg248: tensor<512xf32>, %arg249: tensor<512xf32>, %arg250: tensor<2048x512x1x1xf32>, %arg251: tensor<2048xf32>, %arg252: tensor<2048xf32>, %arg253: tensor<2048xf32>, %arg254: tensor<512x2048x1x1xf32>, %arg255: tensor<512xf32>, %arg256: tensor<512xf32>, %arg257: tensor<512xf32>, %arg258: tensor<512x512x3x3xf32>, %arg259: tensor<512xf32>, %arg260: tensor<512xf32>, %arg261: tensor<512xf32>, %arg262: tensor<2048x512x1x1xf32>, %arg263: tensor<2048xf32>, %arg264: tensor<2048xf32>, %arg265: tensor<2048xf32>, %arg266: tensor<1000x2048xf32>, %arg267: tensor<1000xf32>) -> tensor<1x1000xf32> {
+    %0 = "mhlo.fusion"(%arg0) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<2048xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<2048xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<2048xf32>
+      mhlo.return %316 : tensor<2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>) -> tensor<2048xf32>
+    %1 = "mhlo.fusion"(%arg1) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %2 = "mhlo.fusion"(%arg2) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %3 = "mhlo.fusion"(%arg3) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<2048xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<2048xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<2048xf32>
+      mhlo.return %316 : tensor<2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>) -> tensor<2048xf32>
+    %4 = "mhlo.fusion"(%arg4) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %5 = "mhlo.fusion"(%arg5) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %6 = "mhlo.fusion"(%arg6) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<2048xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<2048xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<2048xf32>
+      mhlo.return %316 : tensor<2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>) -> tensor<2048xf32>
+    %7 = "mhlo.fusion"(%arg7) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %8 = "mhlo.fusion"(%arg8) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %9 = "mhlo.fusion"(%arg9) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %10 = "mhlo.fusion"(%arg10) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %11 = "mhlo.fusion"(%arg11) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %12 = "mhlo.fusion"(%arg12) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %13 = "mhlo.fusion"(%arg13) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %14 = "mhlo.fusion"(%arg14) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %15 = "mhlo.fusion"(%arg15) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %16 = "mhlo.fusion"(%arg16) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %17 = "mhlo.fusion"(%arg17) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %18 = "mhlo.fusion"(%arg18) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %19 = "mhlo.fusion"(%arg19) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %20 = "mhlo.fusion"(%arg20) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %21 = "mhlo.fusion"(%arg21) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %22 = "mhlo.fusion"(%arg22) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %23 = "mhlo.fusion"(%arg23) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %24 = "mhlo.fusion"(%arg24) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %25 = "mhlo.fusion"(%arg25) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %26 = "mhlo.fusion"(%arg26) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %27 = "mhlo.fusion"(%arg27) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %28 = "mhlo.fusion"(%arg28) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %29 = "mhlo.fusion"(%arg29) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %30 = "mhlo.fusion"(%arg30) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %31 = "mhlo.fusion"(%arg31) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %32 = "mhlo.fusion"(%arg32) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %33 = "mhlo.fusion"(%arg33) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %34 = "mhlo.fusion"(%arg34) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %35 = "mhlo.fusion"(%arg35) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %36 = "mhlo.fusion"(%arg36) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %37 = "mhlo.fusion"(%arg37) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %38 = "mhlo.fusion"(%arg38) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %39 = "mhlo.fusion"(%arg39) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %40 = "mhlo.fusion"(%arg40) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %41 = "mhlo.fusion"(%arg41) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1x3x224x224xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [0, 2, 3, 1] {result_layout = dense<[2, 1, 3, 0]> : tensor<4xindex>, xla_shape = "f32[1,224,224,3]{2,1,3,0}"} : (tensor<1x3x224x224xf32>) -> tensor<1x224x224x3xf32>
+      %315 = mhlo.copy %314 : tensor<1x224x224x3xf32>
+      mhlo.return %315 : tensor<1x224x224x3xf32>
+    }) {output_operand_aliasing = []} : (tensor<1x3x224x224xf32>) -> tensor<1x224x224x3xf32>
+    %42 = "mhlo.fusion"(%arg42) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x3x7x7xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[7,7,3,64]{1,0,2,3}"} : (tensor<64x3x7x7xf32>) -> tensor<7x7x3x64xf32>
+      %315 = mhlo.copy %314 : tensor<7x7x3x64xf32>
+      mhlo.return %315 : tensor<7x7x3x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x3x7x7xf32>) -> tensor<7x7x3x64xf32>
+    %43 = stablehlo.convolution(%41, %42) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[3, 3], [3, 3]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x224x224x3xf32>, tensor<7x7x3x64xf32>) -> tensor<1x112x112x64xf32>
+    %44 = "mhlo.fusion"(%arg43, %arg44, %40, %43, %arg45) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x112x112x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x112x112x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x112x112x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x112x112x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x112x112x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x112x112x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x112x112x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x112x112x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x112x112x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x112x112x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x112x112x64xf32>
+      %324 = stablehlo.transpose %323, dims = [0, 3, 1, 2] {result_layout = dense<[1, 3, 2, 0]> : tensor<4xindex>, xla_shape = "f32[1,64,112,112]{1,3,2,0}"} : (tensor<1x112x112x64xf32>) -> tensor<1x64x112x112xf32>
+      %325 = mhlo.copy %324 : tensor<1x64x112x112xf32>
+      mhlo.return %325 : tensor<1x64x112x112xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x112x112x64xf32>, tensor<64xf32>) -> tensor<1x64x112x112xf32>
+    %cst = stablehlo.constant dense<0xFF800000> : tensor<f32>
+    %45 = "mhlo.fusion"(%44, %cst) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1x64x112x112xf32>, %arg269: tensor<f32>):
+      %314 = "stablehlo.reduce_window"(%arg268, %arg269) <{base_dilations = array<i64: 1, 1, 1, 1>, padding = dense<[[0, 0], [0, 0], [1, 1], [1, 1]]> : tensor<4x2xi64>, window_dilations = array<i64: 1, 1, 1, 1>, window_dimensions = array<i64: 1, 1, 3, 3>, window_strides = array<i64: 1, 1, 2, 2>}> ({
+      ^bb0(%arg270: tensor<f32>, %arg271: tensor<f32>):
+        %315 = stablehlo.maximum %arg270, %arg271 : tensor<f32>
+        stablehlo.return %315 : tensor<f32>
+      }) : (tensor<1x64x112x112xf32>, tensor<f32>) -> tensor<1x64x56x56xf32>
+      mhlo.return %314 : tensor<1x64x56x56xf32>
+    }) {output_operand_aliasing = []} : (tensor<1x64x112x112xf32>, tensor<f32>) -> tensor<1x64x56x56xf32>
+    %46 = "mhlo.fusion"(%45) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1x64x56x56xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [0, 2, 3, 1] {result_layout = dense<[2, 1, 3, 0]> : tensor<4xindex>, xla_shape = "f32[1,56,56,64]{2,1,3,0}"} : (tensor<1x64x56x56xf32>) -> tensor<1x56x56x64xf32>
+      %315 = mhlo.copy %314 : tensor<1x56x56x64xf32>
+      mhlo.return %315 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<1x64x56x56xf32>) -> tensor<1x56x56x64xf32>
+    %47 = mhlo.bitcast %46 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x64xf32>) -> tensor<3136x64xf32>
+    %48 = "mhlo.fusion"(%arg46) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x64x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,64,256]{1,0,2,3}"} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x64x256xf32>
+      mhlo.return %315 : tensor<1x1x64x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+    %49 = mhlo.bitcast %48 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x64x256xf32>) -> tensor<64x256xf32>
+    %50 = stablehlo.dot %47, %49, precision = [DEFAULT, DEFAULT] : (tensor<3136x64xf32>, tensor<64x256xf32>) -> tensor<3136x256xf32>
+    %51 = mhlo.bitcast %50 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x256xf32>) -> tensor<1x56x56x256xf32>
+    %52 = "mhlo.fusion"(%arg47) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %53 = "mhlo.fusion"(%arg48) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %54 = "mhlo.fusion"(%arg49) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<64xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<64xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<64xf32>
+      mhlo.return %316 : tensor<64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>) -> tensor<64xf32>
+    %55 = "mhlo.fusion"(%arg50) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x64x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,64,64]{1,0,2,3}"} : (tensor<64x64x1x1xf32>) -> tensor<1x1x64x64xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x64x64xf32>
+      mhlo.return %315 : tensor<1x1x64x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x64x1x1xf32>) -> tensor<1x1x64x64xf32>
+    %56 = mhlo.bitcast %55 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x64x64xf32>) -> tensor<64x64xf32>
+    %57 = stablehlo.dot %47, %56, precision = [DEFAULT, DEFAULT] : (tensor<3136x64xf32>, tensor<64x64xf32>) -> tensor<3136x64xf32>
+    %58 = mhlo.bitcast %57 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x64xf32>) -> tensor<1x56x56x64xf32>
+    %59 = "mhlo.fusion"(%arg51, %arg52, %54, %58, %arg53) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %60 = "mhlo.fusion"(%arg54) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x64x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,64,64]{1,0,2,3}"} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x64x64xf32>
+      mhlo.return %315 : tensor<3x3x64x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+    %61 = stablehlo.convolution(%59, %60) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x56x56x64xf32>, tensor<3x3x64x64xf32>) -> tensor<1x56x56x64xf32>
+    %62 = "mhlo.fusion"(%arg55, %arg56, %53, %61, %arg57) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %63 = mhlo.bitcast %62 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x64xf32>) -> tensor<3136x64xf32>
+    %64 = "mhlo.fusion"(%arg58) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x64x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,64,256]{1,0,2,3}"} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x64x256xf32>
+      mhlo.return %315 : tensor<1x1x64x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+    %65 = mhlo.bitcast %64 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x64x256xf32>) -> tensor<64x256xf32>
+    %66 = stablehlo.dot %63, %65, precision = [DEFAULT, DEFAULT] : (tensor<3136x64xf32>, tensor<64x256xf32>) -> tensor<3136x256xf32>
+    %67 = mhlo.bitcast %66 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x256xf32>) -> tensor<1x56x56x256xf32>
+    %68 = "mhlo.fusion"(%arg59, %arg60, %39, %51, %arg61, %arg62, %arg63, %52, %67, %arg64) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x56x56x256xf32>, %arg272: tensor<256xf32>, %arg273: tensor<256xf32>, %arg274: tensor<256xf32>, %arg275: tensor<256xf32>, %arg276: tensor<1x56x56x256xf32>, %arg277: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %315 = stablehlo.subtract %arg276, %314 : tensor<1x56x56x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x256xf32>
+      %322 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %323 = stablehlo.subtract %arg271, %322 : tensor<1x56x56x256xf32>
+      %324 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x56x56x256xf32>
+      %326 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x56x56x256xf32>
+      %328 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x56x56x256xf32>
+      %330 = stablehlo.add %321, %329 : tensor<1x56x56x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %331 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x256xf32>
+      %332 = stablehlo.maximum %330, %331 : tensor<1x56x56x256xf32>
+      mhlo.return %332 : tensor<1x56x56x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>) -> tensor<1x56x56x256xf32>
+    %69 = mhlo.bitcast %68 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x256xf32>) -> tensor<3136x256xf32>
+    %70 = "mhlo.fusion"(%arg65) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,64]{1,0,2,3}"} : (tensor<64x256x1x1xf32>) -> tensor<1x1x256x64xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x64xf32>
+      mhlo.return %315 : tensor<1x1x256x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x256x1x1xf32>) -> tensor<1x1x256x64xf32>
+    %71 = mhlo.bitcast %70 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x64xf32>) -> tensor<256x64xf32>
+    %72 = stablehlo.dot %69, %71, precision = [DEFAULT, DEFAULT] : (tensor<3136x256xf32>, tensor<256x64xf32>) -> tensor<3136x64xf32>
+    %73 = mhlo.bitcast %72 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x64xf32>) -> tensor<1x56x56x64xf32>
+    %74 = "mhlo.fusion"(%arg66, %arg67, %38, %73, %arg68) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %75 = "mhlo.fusion"(%arg69) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x64x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,64,64]{1,0,2,3}"} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x64x64xf32>
+      mhlo.return %315 : tensor<3x3x64x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+    %76 = stablehlo.convolution(%74, %75) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x56x56x64xf32>, tensor<3x3x64x64xf32>) -> tensor<1x56x56x64xf32>
+    %77 = "mhlo.fusion"(%arg70, %arg71, %37, %76, %arg72) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %78 = mhlo.bitcast %77 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x64xf32>) -> tensor<3136x64xf32>
+    %79 = "mhlo.fusion"(%arg73) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x64x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,64,256]{1,0,2,3}"} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x64x256xf32>
+      mhlo.return %315 : tensor<1x1x64x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+    %80 = mhlo.bitcast %79 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x64x256xf32>) -> tensor<64x256xf32>
+    %81 = stablehlo.dot %78, %80, precision = [DEFAULT, DEFAULT] : (tensor<3136x64xf32>, tensor<64x256xf32>) -> tensor<3136x256xf32>
+    %82 = mhlo.bitcast %81 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x256xf32>) -> tensor<1x56x56x256xf32>
+    %83 = "mhlo.fusion"(%arg74, %arg75, %36, %82, %arg76, %arg59, %arg60, %39, %51, %arg61, %arg62, %arg63, %52, %67, %arg64) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x56x56x256xf32>, %arg272: tensor<256xf32>, %arg273: tensor<256xf32>, %arg274: tensor<256xf32>, %arg275: tensor<256xf32>, %arg276: tensor<1x56x56x256xf32>, %arg277: tensor<256xf32>, %arg278: tensor<256xf32>, %arg279: tensor<256xf32>, %arg280: tensor<256xf32>, %arg281: tensor<1x56x56x256xf32>, %arg282: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x256xf32>
+      %322 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %323 = stablehlo.subtract %arg281, %322 : tensor<1x56x56x256xf32>
+      %324 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x56x56x256xf32>
+      %326 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x56x56x256xf32>
+      %328 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x56x56x256xf32>
+      %330 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %331 = stablehlo.subtract %arg276, %330 : tensor<1x56x56x256xf32>
+      %332 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x56x56x256xf32>
+      %334 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x56x56x256xf32>
+      %336 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x56x56x256xf32>
+      %338 = stablehlo.add %329, %337 : tensor<1x56x56x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %339 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x256xf32>
+      %340 = stablehlo.maximum %338, %339 : tensor<1x56x56x256xf32>
+      %341 = stablehlo.add %321, %340 : tensor<1x56x56x256xf32>
+      %342 = stablehlo.maximum %341, %339 : tensor<1x56x56x256xf32>
+      mhlo.return %342 : tensor<1x56x56x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>) -> tensor<1x56x56x256xf32>
+    %84 = mhlo.bitcast %83 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x256xf32>) -> tensor<3136x256xf32>
+    %85 = "mhlo.fusion"(%arg77) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,64]{1,0,2,3}"} : (tensor<64x256x1x1xf32>) -> tensor<1x1x256x64xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x64xf32>
+      mhlo.return %315 : tensor<1x1x256x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x256x1x1xf32>) -> tensor<1x1x256x64xf32>
+    %86 = mhlo.bitcast %85 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x64xf32>) -> tensor<256x64xf32>
+    %87 = stablehlo.dot %84, %86, precision = [DEFAULT, DEFAULT] : (tensor<3136x256xf32>, tensor<256x64xf32>) -> tensor<3136x64xf32>
+    %88 = mhlo.bitcast %87 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x64xf32>) -> tensor<1x56x56x64xf32>
+    %89 = "mhlo.fusion"(%arg78, %arg79, %35, %88, %arg80) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %90 = "mhlo.fusion"(%arg81) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64x64x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,64,64]{1,0,2,3}"} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x64x64xf32>
+      mhlo.return %315 : tensor<3x3x64x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64x64x3x3xf32>) -> tensor<3x3x64x64xf32>
+    %91 = stablehlo.convolution(%89, %90) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x56x56x64xf32>, tensor<3x3x64x64xf32>) -> tensor<1x56x56x64xf32>
+    %92 = "mhlo.fusion"(%arg82, %arg83, %34, %91, %arg84) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<64xf32>, %arg269: tensor<64xf32>, %arg270: tensor<64xf32>, %arg271: tensor<1x56x56x64xf32>, %arg272: tensor<64xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x64xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x64xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x64xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<64xf32>) -> tensor<1x56x56x64xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x64xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x64xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x64xf32>
+      mhlo.return %323 : tensor<1x56x56x64xf32>
+    }) {output_operand_aliasing = []} : (tensor<64xf32>, tensor<64xf32>, tensor<64xf32>, tensor<1x56x56x64xf32>, tensor<64xf32>) -> tensor<1x56x56x64xf32>
+    %93 = mhlo.bitcast %92 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x64xf32>) -> tensor<3136x64xf32>
+    %94 = "mhlo.fusion"(%arg85) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x64x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,64,256]{1,0,2,3}"} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x64x256xf32>
+      mhlo.return %315 : tensor<1x1x64x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x64x1x1xf32>) -> tensor<1x1x64x256xf32>
+    %95 = mhlo.bitcast %94 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x64x256xf32>) -> tensor<64x256xf32>
+    %96 = stablehlo.dot %93, %95, precision = [DEFAULT, DEFAULT] : (tensor<3136x64xf32>, tensor<64x256xf32>) -> tensor<3136x256xf32>
+    %97 = mhlo.bitcast %96 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x256xf32>) -> tensor<1x56x56x256xf32>
+    %98 = "mhlo.fusion"(%arg86, %arg87, %33, %97, %arg88, %arg74, %arg75, %36, %82, %arg76, %arg59, %arg60, %39, %51, %arg61, %arg62, %arg63, %52, %67, %arg64) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x56x56x256xf32>, %arg272: tensor<256xf32>, %arg273: tensor<256xf32>, %arg274: tensor<256xf32>, %arg275: tensor<256xf32>, %arg276: tensor<1x56x56x256xf32>, %arg277: tensor<256xf32>, %arg278: tensor<256xf32>, %arg279: tensor<256xf32>, %arg280: tensor<256xf32>, %arg281: tensor<1x56x56x256xf32>, %arg282: tensor<256xf32>, %arg283: tensor<256xf32>, %arg284: tensor<256xf32>, %arg285: tensor<256xf32>, %arg286: tensor<1x56x56x256xf32>, %arg287: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x256xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x56x56x256xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x56x56x256xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x56x56x256xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x56x56x256xf32>
+      %330 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %331 = stablehlo.subtract %arg286, %330 : tensor<1x56x56x256xf32>
+      %332 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x56x56x256xf32>
+      %334 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x56x56x256xf32>
+      %336 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x56x56x256xf32>
+      %338 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %339 = stablehlo.subtract %arg281, %338 : tensor<1x56x56x256xf32>
+      %340 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x56x56x256xf32>
+      %342 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x56x56x256xf32>
+      %344 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<256xf32>) -> tensor<1x56x56x256xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x56x56x256xf32>
+      %346 = stablehlo.add %337, %345 : tensor<1x56x56x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %347 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x256xf32>
+      %348 = stablehlo.maximum %346, %347 : tensor<1x56x56x256xf32>
+      %349 = stablehlo.add %329, %348 : tensor<1x56x56x256xf32>
+      %350 = stablehlo.maximum %349, %347 : tensor<1x56x56x256xf32>
+      %351 = stablehlo.add %321, %350 : tensor<1x56x56x256xf32>
+      %352 = stablehlo.maximum %351, %347 : tensor<1x56x56x256xf32>
+      mhlo.return %352 : tensor<1x56x56x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x56x56x256xf32>, tensor<256xf32>) -> tensor<1x56x56x256xf32>
+    %99 = "mhlo.fusion"(%arg89) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,512]{1,0,2,3}"} : (tensor<512x256x1x1xf32>) -> tensor<1x1x256x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x512xf32>
+      mhlo.return %315 : tensor<1x1x256x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x256x1x1xf32>) -> tensor<1x1x256x512xf32>
+    %100 = stablehlo.convolution(%98, %99) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[0, 0], [0, 0]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x56x56x256xf32>, tensor<1x1x256x512xf32>) -> tensor<1x28x28x512xf32>
+    %101 = "mhlo.fusion"(%arg90) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %102 = "mhlo.fusion"(%arg91) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %103 = "mhlo.fusion"(%arg92) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<128xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<128xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<128xf32>
+      mhlo.return %316 : tensor<128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>) -> tensor<128xf32>
+    %104 = mhlo.bitcast %98 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x56x56x256xf32>) -> tensor<3136x256xf32>
+    %105 = "mhlo.fusion"(%arg93) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,128]{1,0,2,3}"} : (tensor<128x256x1x1xf32>) -> tensor<1x1x256x128xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x128xf32>
+      mhlo.return %315 : tensor<1x1x256x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x256x1x1xf32>) -> tensor<1x1x256x128xf32>
+    %106 = mhlo.bitcast %105 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x128xf32>) -> tensor<256x128xf32>
+    %107 = stablehlo.dot %104, %106, precision = [DEFAULT, DEFAULT] : (tensor<3136x256xf32>, tensor<256x128xf32>) -> tensor<3136x128xf32>
+    %108 = mhlo.bitcast %107 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<3136x128xf32>) -> tensor<1x56x56x128xf32>
+    %109 = "mhlo.fusion"(%arg94, %arg95, %103, %108, %arg96) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x56x56x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x56x56x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x56x56x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x56x56x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x56x56x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x56x56x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x56x56x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x56x56x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x56x56x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x56x56x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x56x56x128xf32>
+      mhlo.return %323 : tensor<1x56x56x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x56x56x128xf32>, tensor<128xf32>) -> tensor<1x56x56x128xf32>
+    %110 = "mhlo.fusion"(%arg97) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x128x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,128,128]{1,0,2,3}"} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x128x128xf32>
+      mhlo.return %315 : tensor<3x3x128x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+    %111 = stablehlo.convolution(%109, %110) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x56x56x128xf32>, tensor<3x3x128x128xf32>) -> tensor<1x28x28x128xf32>
+    %112 = "mhlo.fusion"(%arg98, %arg99, %102, %111, %arg100) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %113 = mhlo.bitcast %112 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x128xf32>) -> tensor<784x128xf32>
+    %114 = "mhlo.fusion"(%arg101) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x128x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,128,512]{1,0,2,3}"} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x128x512xf32>
+      mhlo.return %315 : tensor<1x1x128x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+    %115 = mhlo.bitcast %114 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x128x512xf32>) -> tensor<128x512xf32>
+    %116 = stablehlo.dot %113, %115, precision = [DEFAULT, DEFAULT] : (tensor<784x128xf32>, tensor<128x512xf32>) -> tensor<784x512xf32>
+    %117 = mhlo.bitcast %116 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x512xf32>) -> tensor<1x28x28x512xf32>
+    %118 = "mhlo.fusion"(%arg102, %arg103, %32, %100, %arg104, %arg105, %arg106, %101, %117, %arg107) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x28x28x512xf32>, %arg272: tensor<512xf32>, %arg273: tensor<512xf32>, %arg274: tensor<512xf32>, %arg275: tensor<512xf32>, %arg276: tensor<1x28x28x512xf32>, %arg277: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %315 = stablehlo.subtract %arg276, %314 : tensor<1x28x28x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x512xf32>
+      %322 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %323 = stablehlo.subtract %arg271, %322 : tensor<1x28x28x512xf32>
+      %324 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x28x28x512xf32>
+      %326 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x28x28x512xf32>
+      %328 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x28x28x512xf32>
+      %330 = stablehlo.add %321, %329 : tensor<1x28x28x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %331 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x512xf32>
+      %332 = stablehlo.maximum %330, %331 : tensor<1x28x28x512xf32>
+      mhlo.return %332 : tensor<1x28x28x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>) -> tensor<1x28x28x512xf32>
+    %119 = mhlo.bitcast %118 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x512xf32>) -> tensor<784x512xf32>
+    %120 = "mhlo.fusion"(%arg108) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,128]{1,0,2,3}"} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x128xf32>
+      mhlo.return %315 : tensor<1x1x512x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+    %121 = mhlo.bitcast %120 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x128xf32>) -> tensor<512x128xf32>
+    %122 = stablehlo.dot %119, %121, precision = [DEFAULT, DEFAULT] : (tensor<784x512xf32>, tensor<512x128xf32>) -> tensor<784x128xf32>
+    %123 = mhlo.bitcast %122 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x128xf32>) -> tensor<1x28x28x128xf32>
+    %124 = "mhlo.fusion"(%arg109, %arg110, %31, %123, %arg111) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %125 = "mhlo.fusion"(%arg112) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x128x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,128,128]{1,0,2,3}"} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x128x128xf32>
+      mhlo.return %315 : tensor<3x3x128x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+    %126 = stablehlo.convolution(%124, %125) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x28x28x128xf32>, tensor<3x3x128x128xf32>) -> tensor<1x28x28x128xf32>
+    %127 = "mhlo.fusion"(%arg113, %arg114, %30, %126, %arg115) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %128 = mhlo.bitcast %127 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x128xf32>) -> tensor<784x128xf32>
+    %129 = "mhlo.fusion"(%arg116) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x128x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,128,512]{1,0,2,3}"} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x128x512xf32>
+      mhlo.return %315 : tensor<1x1x128x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+    %130 = mhlo.bitcast %129 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x128x512xf32>) -> tensor<128x512xf32>
+    %131 = stablehlo.dot %128, %130, precision = [DEFAULT, DEFAULT] : (tensor<784x128xf32>, tensor<128x512xf32>) -> tensor<784x512xf32>
+    %132 = mhlo.bitcast %131 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x512xf32>) -> tensor<1x28x28x512xf32>
+    %133 = "mhlo.fusion"(%arg117, %arg118, %29, %132, %arg119, %arg102, %arg103, %32, %100, %arg104, %arg105, %arg106, %101, %117, %arg107) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x28x28x512xf32>, %arg272: tensor<512xf32>, %arg273: tensor<512xf32>, %arg274: tensor<512xf32>, %arg275: tensor<512xf32>, %arg276: tensor<1x28x28x512xf32>, %arg277: tensor<512xf32>, %arg278: tensor<512xf32>, %arg279: tensor<512xf32>, %arg280: tensor<512xf32>, %arg281: tensor<1x28x28x512xf32>, %arg282: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x512xf32>
+      %322 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %323 = stablehlo.subtract %arg281, %322 : tensor<1x28x28x512xf32>
+      %324 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x28x28x512xf32>
+      %326 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x28x28x512xf32>
+      %328 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x28x28x512xf32>
+      %330 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %331 = stablehlo.subtract %arg276, %330 : tensor<1x28x28x512xf32>
+      %332 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x28x28x512xf32>
+      %334 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x28x28x512xf32>
+      %336 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x28x28x512xf32>
+      %338 = stablehlo.add %329, %337 : tensor<1x28x28x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %339 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x512xf32>
+      %340 = stablehlo.maximum %338, %339 : tensor<1x28x28x512xf32>
+      %341 = stablehlo.add %321, %340 : tensor<1x28x28x512xf32>
+      %342 = stablehlo.maximum %341, %339 : tensor<1x28x28x512xf32>
+      mhlo.return %342 : tensor<1x28x28x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>) -> tensor<1x28x28x512xf32>
+    %134 = mhlo.bitcast %133 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x512xf32>) -> tensor<784x512xf32>
+    %135 = "mhlo.fusion"(%arg120) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,128]{1,0,2,3}"} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x128xf32>
+      mhlo.return %315 : tensor<1x1x512x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+    %136 = mhlo.bitcast %135 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x128xf32>) -> tensor<512x128xf32>
+    %137 = stablehlo.dot %134, %136, precision = [DEFAULT, DEFAULT] : (tensor<784x512xf32>, tensor<512x128xf32>) -> tensor<784x128xf32>
+    %138 = mhlo.bitcast %137 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x128xf32>) -> tensor<1x28x28x128xf32>
+    %139 = "mhlo.fusion"(%arg121, %arg122, %28, %138, %arg123) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %140 = "mhlo.fusion"(%arg124) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x128x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,128,128]{1,0,2,3}"} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x128x128xf32>
+      mhlo.return %315 : tensor<3x3x128x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+    %141 = stablehlo.convolution(%139, %140) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x28x28x128xf32>, tensor<3x3x128x128xf32>) -> tensor<1x28x28x128xf32>
+    %142 = "mhlo.fusion"(%arg125, %arg126, %27, %141, %arg127) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %143 = mhlo.bitcast %142 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x128xf32>) -> tensor<784x128xf32>
+    %144 = "mhlo.fusion"(%arg128) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x128x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,128,512]{1,0,2,3}"} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x128x512xf32>
+      mhlo.return %315 : tensor<1x1x128x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+    %145 = mhlo.bitcast %144 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x128x512xf32>) -> tensor<128x512xf32>
+    %146 = stablehlo.dot %143, %145, precision = [DEFAULT, DEFAULT] : (tensor<784x128xf32>, tensor<128x512xf32>) -> tensor<784x512xf32>
+    %147 = mhlo.bitcast %146 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x512xf32>) -> tensor<1x28x28x512xf32>
+    %148 = "mhlo.fusion"(%arg129, %arg130, %26, %147, %arg131, %arg117, %arg118, %29, %132, %arg119, %arg102, %arg103, %32, %100, %arg104, %arg105, %arg106, %101, %117, %arg107) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x28x28x512xf32>, %arg272: tensor<512xf32>, %arg273: tensor<512xf32>, %arg274: tensor<512xf32>, %arg275: tensor<512xf32>, %arg276: tensor<1x28x28x512xf32>, %arg277: tensor<512xf32>, %arg278: tensor<512xf32>, %arg279: tensor<512xf32>, %arg280: tensor<512xf32>, %arg281: tensor<1x28x28x512xf32>, %arg282: tensor<512xf32>, %arg283: tensor<512xf32>, %arg284: tensor<512xf32>, %arg285: tensor<512xf32>, %arg286: tensor<1x28x28x512xf32>, %arg287: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x512xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x28x28x512xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x28x28x512xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x28x28x512xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x28x28x512xf32>
+      %330 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %331 = stablehlo.subtract %arg286, %330 : tensor<1x28x28x512xf32>
+      %332 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x28x28x512xf32>
+      %334 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x28x28x512xf32>
+      %336 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x28x28x512xf32>
+      %338 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %339 = stablehlo.subtract %arg281, %338 : tensor<1x28x28x512xf32>
+      %340 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x28x28x512xf32>
+      %342 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x28x28x512xf32>
+      %344 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x28x28x512xf32>
+      %346 = stablehlo.add %337, %345 : tensor<1x28x28x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %347 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x512xf32>
+      %348 = stablehlo.maximum %346, %347 : tensor<1x28x28x512xf32>
+      %349 = stablehlo.add %329, %348 : tensor<1x28x28x512xf32>
+      %350 = stablehlo.maximum %349, %347 : tensor<1x28x28x512xf32>
+      %351 = stablehlo.add %321, %350 : tensor<1x28x28x512xf32>
+      %352 = stablehlo.maximum %351, %347 : tensor<1x28x28x512xf32>
+      mhlo.return %352 : tensor<1x28x28x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>) -> tensor<1x28x28x512xf32>
+    %149 = mhlo.bitcast %148 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x512xf32>) -> tensor<784x512xf32>
+    %150 = "mhlo.fusion"(%arg132) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,128]{1,0,2,3}"} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x128xf32>
+      mhlo.return %315 : tensor<1x1x512x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x512x1x1xf32>) -> tensor<1x1x512x128xf32>
+    %151 = mhlo.bitcast %150 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x128xf32>) -> tensor<512x128xf32>
+    %152 = stablehlo.dot %149, %151, precision = [DEFAULT, DEFAULT] : (tensor<784x512xf32>, tensor<512x128xf32>) -> tensor<784x128xf32>
+    %153 = mhlo.bitcast %152 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x128xf32>) -> tensor<1x28x28x128xf32>
+    %154 = "mhlo.fusion"(%arg133, %arg134, %25, %153, %arg135) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %155 = "mhlo.fusion"(%arg136) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128x128x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,128,128]{1,0,2,3}"} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x128x128xf32>
+      mhlo.return %315 : tensor<3x3x128x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128x128x3x3xf32>) -> tensor<3x3x128x128xf32>
+    %156 = stablehlo.convolution(%154, %155) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x28x28x128xf32>, tensor<3x3x128x128xf32>) -> tensor<1x28x28x128xf32>
+    %157 = "mhlo.fusion"(%arg137, %arg138, %24, %156, %arg139) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<128xf32>, %arg269: tensor<128xf32>, %arg270: tensor<128xf32>, %arg271: tensor<1x28x28x128xf32>, %arg272: tensor<128xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x128xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x128xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x128xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<128xf32>) -> tensor<1x28x28x128xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x128xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x128xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x128xf32>
+      mhlo.return %323 : tensor<1x28x28x128xf32>
+    }) {output_operand_aliasing = []} : (tensor<128xf32>, tensor<128xf32>, tensor<128xf32>, tensor<1x28x28x128xf32>, tensor<128xf32>) -> tensor<1x28x28x128xf32>
+    %158 = mhlo.bitcast %157 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x128xf32>) -> tensor<784x128xf32>
+    %159 = "mhlo.fusion"(%arg140) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x128x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,128,512]{1,0,2,3}"} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x128x512xf32>
+      mhlo.return %315 : tensor<1x1x128x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x128x1x1xf32>) -> tensor<1x1x128x512xf32>
+    %160 = mhlo.bitcast %159 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x128x512xf32>) -> tensor<128x512xf32>
+    %161 = stablehlo.dot %158, %160, precision = [DEFAULT, DEFAULT] : (tensor<784x128xf32>, tensor<128x512xf32>) -> tensor<784x512xf32>
+    %162 = mhlo.bitcast %161 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x512xf32>) -> tensor<1x28x28x512xf32>
+    %163 = "mhlo.fusion"(%arg141, %arg142, %23, %162, %arg143, %arg129, %arg130, %26, %147, %arg131, %arg117, %arg118, %29, %132, %arg119, %arg102, %arg103, %32, %100, %arg104, %arg105, %arg106, %101, %117, %arg107) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x28x28x512xf32>, %arg272: tensor<512xf32>, %arg273: tensor<512xf32>, %arg274: tensor<512xf32>, %arg275: tensor<512xf32>, %arg276: tensor<1x28x28x512xf32>, %arg277: tensor<512xf32>, %arg278: tensor<512xf32>, %arg279: tensor<512xf32>, %arg280: tensor<512xf32>, %arg281: tensor<1x28x28x512xf32>, %arg282: tensor<512xf32>, %arg283: tensor<512xf32>, %arg284: tensor<512xf32>, %arg285: tensor<512xf32>, %arg286: tensor<1x28x28x512xf32>, %arg287: tensor<512xf32>, %arg288: tensor<512xf32>, %arg289: tensor<512xf32>, %arg290: tensor<512xf32>, %arg291: tensor<1x28x28x512xf32>, %arg292: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x512xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x28x28x512xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x28x28x512xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x28x28x512xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x28x28x512xf32>
+      %330 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %331 = stablehlo.subtract %arg281, %330 : tensor<1x28x28x512xf32>
+      %332 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x28x28x512xf32>
+      %334 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x28x28x512xf32>
+      %336 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x28x28x512xf32>
+      %338 = stablehlo.broadcast_in_dim %arg292, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %339 = stablehlo.subtract %arg291, %338 : tensor<1x28x28x512xf32>
+      %340 = stablehlo.broadcast_in_dim %arg290, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x28x28x512xf32>
+      %342 = stablehlo.broadcast_in_dim %arg289, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x28x28x512xf32>
+      %344 = stablehlo.broadcast_in_dim %arg288, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x28x28x512xf32>
+      %346 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %347 = stablehlo.subtract %arg286, %346 : tensor<1x28x28x512xf32>
+      %348 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %349 = stablehlo.multiply %347, %348 : tensor<1x28x28x512xf32>
+      %350 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %351 = stablehlo.multiply %349, %350 : tensor<1x28x28x512xf32>
+      %352 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<512xf32>) -> tensor<1x28x28x512xf32>
+      %353 = stablehlo.add %351, %352 : tensor<1x28x28x512xf32>
+      %354 = stablehlo.add %345, %353 : tensor<1x28x28x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %355 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x512xf32>
+      %356 = stablehlo.maximum %354, %355 : tensor<1x28x28x512xf32>
+      %357 = stablehlo.add %337, %356 : tensor<1x28x28x512xf32>
+      %358 = stablehlo.maximum %357, %355 : tensor<1x28x28x512xf32>
+      %359 = stablehlo.add %329, %358 : tensor<1x28x28x512xf32>
+      %360 = stablehlo.maximum %359, %355 : tensor<1x28x28x512xf32>
+      %361 = stablehlo.add %321, %360 : tensor<1x28x28x512xf32>
+      %362 = stablehlo.maximum %361, %355 : tensor<1x28x28x512xf32>
+      mhlo.return %362 : tensor<1x28x28x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x28x28x512xf32>, tensor<512xf32>) -> tensor<1x28x28x512xf32>
+    %164 = "mhlo.fusion"(%arg144) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,1024]{1,0,2,3}"} : (tensor<1024x512x1x1xf32>) -> tensor<1x1x512x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x1024xf32>
+      mhlo.return %315 : tensor<1x1x512x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x512x1x1xf32>) -> tensor<1x1x512x1024xf32>
+    %165 = stablehlo.convolution(%163, %164) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[0, 0], [0, 0]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x28x28x512xf32>, tensor<1x1x512x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %166 = "mhlo.fusion"(%arg145) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1024xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1024xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<1024xf32>
+      mhlo.return %316 : tensor<1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>) -> tensor<1024xf32>
+    %167 = "mhlo.fusion"(%arg146) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %168 = "mhlo.fusion"(%arg147) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<256xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<256xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<256xf32>
+      mhlo.return %316 : tensor<256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>) -> tensor<256xf32>
+    %169 = mhlo.bitcast %163 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x28x28x512xf32>) -> tensor<784x512xf32>
+    %170 = "mhlo.fusion"(%arg148) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,256]{1,0,2,3}"} : (tensor<256x512x1x1xf32>) -> tensor<1x1x512x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x256xf32>
+      mhlo.return %315 : tensor<1x1x512x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x512x1x1xf32>) -> tensor<1x1x512x256xf32>
+    %171 = mhlo.bitcast %170 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x256xf32>) -> tensor<512x256xf32>
+    %172 = stablehlo.dot %169, %171, precision = [DEFAULT, DEFAULT] : (tensor<784x512xf32>, tensor<512x256xf32>) -> tensor<784x256xf32>
+    %173 = mhlo.bitcast %172 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<784x256xf32>) -> tensor<1x28x28x256xf32>
+    %174 = "mhlo.fusion"(%arg149, %arg150, %168, %173, %arg151) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x28x28x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x28x28x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x28x28x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x28x28x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x28x28x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x28x28x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x28x28x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x28x28x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x28x28x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x28x28x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x28x28x256xf32>
+      mhlo.return %323 : tensor<1x28x28x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x28x28x256xf32>, tensor<256xf32>) -> tensor<1x28x28x256xf32>
+    %175 = "mhlo.fusion"(%arg152) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %176 = stablehlo.convolution(%174, %175) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x28x28x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %177 = "mhlo.fusion"(%arg153, %arg154, %167, %176, %arg155) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %178 = mhlo.bitcast %177 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %179 = "mhlo.fusion"(%arg156) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %180 = mhlo.bitcast %179 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %181 = stablehlo.dot %178, %180, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %182 = mhlo.bitcast %181 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %183 = "mhlo.fusion"(%arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg276, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg271, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.add %321, %329 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %331 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %332 = stablehlo.maximum %330, %331 : tensor<1x14x14x1024xf32>
+      mhlo.return %332 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %184 = mhlo.bitcast %183 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %185 = "mhlo.fusion"(%arg163) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,256]{1,0,2,3}"} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x256xf32>
+      mhlo.return %315 : tensor<1x1x1024x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+    %186 = mhlo.bitcast %185 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x256xf32>) -> tensor<1024x256xf32>
+    %187 = stablehlo.dot %184, %186, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x256xf32>) -> tensor<196x256xf32>
+    %188 = mhlo.bitcast %187 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x256xf32>) -> tensor<1x14x14x256xf32>
+    %189 = "mhlo.fusion"(%arg164, %arg165, %21, %188, %arg166) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %190 = "mhlo.fusion"(%arg167) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %191 = stablehlo.convolution(%189, %190) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %192 = "mhlo.fusion"(%arg168, %arg169, %20, %191, %arg170) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %193 = mhlo.bitcast %192 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %194 = "mhlo.fusion"(%arg171) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %195 = mhlo.bitcast %194 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %196 = stablehlo.dot %193, %195, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %197 = mhlo.bitcast %196 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %198 = "mhlo.fusion"(%arg172, %arg173, %19, %197, %arg174, %arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>, %arg278: tensor<1024xf32>, %arg279: tensor<1024xf32>, %arg280: tensor<1024xf32>, %arg281: tensor<1x14x14x1024xf32>, %arg282: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg281, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %331 = stablehlo.subtract %arg276, %330 : tensor<1x14x14x1024xf32>
+      %332 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x14x14x1024xf32>
+      %334 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x14x14x1024xf32>
+      %336 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x14x14x1024xf32>
+      %338 = stablehlo.add %329, %337 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %339 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %340 = stablehlo.maximum %338, %339 : tensor<1x14x14x1024xf32>
+      %341 = stablehlo.add %321, %340 : tensor<1x14x14x1024xf32>
+      %342 = stablehlo.maximum %341, %339 : tensor<1x14x14x1024xf32>
+      mhlo.return %342 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %199 = mhlo.bitcast %198 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %200 = "mhlo.fusion"(%arg175) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,256]{1,0,2,3}"} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x256xf32>
+      mhlo.return %315 : tensor<1x1x1024x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+    %201 = mhlo.bitcast %200 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x256xf32>) -> tensor<1024x256xf32>
+    %202 = stablehlo.dot %199, %201, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x256xf32>) -> tensor<196x256xf32>
+    %203 = mhlo.bitcast %202 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x256xf32>) -> tensor<1x14x14x256xf32>
+    %204 = "mhlo.fusion"(%arg176, %arg177, %18, %203, %arg178) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %205 = "mhlo.fusion"(%arg179) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %206 = stablehlo.convolution(%204, %205) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %207 = "mhlo.fusion"(%arg180, %arg181, %17, %206, %arg182) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %208 = mhlo.bitcast %207 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %209 = "mhlo.fusion"(%arg183) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %210 = mhlo.bitcast %209 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %211 = stablehlo.dot %208, %210, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %212 = mhlo.bitcast %211 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %213 = "mhlo.fusion"(%arg184, %arg185, %16, %212, %arg186, %arg172, %arg173, %19, %197, %arg174, %arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>, %arg278: tensor<1024xf32>, %arg279: tensor<1024xf32>, %arg280: tensor<1024xf32>, %arg281: tensor<1x14x14x1024xf32>, %arg282: tensor<1024xf32>, %arg283: tensor<1024xf32>, %arg284: tensor<1024xf32>, %arg285: tensor<1024xf32>, %arg286: tensor<1x14x14x1024xf32>, %arg287: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %331 = stablehlo.subtract %arg286, %330 : tensor<1x14x14x1024xf32>
+      %332 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x14x14x1024xf32>
+      %334 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x14x14x1024xf32>
+      %336 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x14x14x1024xf32>
+      %338 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %339 = stablehlo.subtract %arg281, %338 : tensor<1x14x14x1024xf32>
+      %340 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x14x14x1024xf32>
+      %342 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x14x14x1024xf32>
+      %344 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x14x14x1024xf32>
+      %346 = stablehlo.add %337, %345 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %347 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %348 = stablehlo.maximum %346, %347 : tensor<1x14x14x1024xf32>
+      %349 = stablehlo.add %329, %348 : tensor<1x14x14x1024xf32>
+      %350 = stablehlo.maximum %349, %347 : tensor<1x14x14x1024xf32>
+      %351 = stablehlo.add %321, %350 : tensor<1x14x14x1024xf32>
+      %352 = stablehlo.maximum %351, %347 : tensor<1x14x14x1024xf32>
+      mhlo.return %352 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %214 = mhlo.bitcast %213 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %215 = "mhlo.fusion"(%arg187) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,256]{1,0,2,3}"} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x256xf32>
+      mhlo.return %315 : tensor<1x1x1024x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+    %216 = mhlo.bitcast %215 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x256xf32>) -> tensor<1024x256xf32>
+    %217 = stablehlo.dot %214, %216, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x256xf32>) -> tensor<196x256xf32>
+    %218 = mhlo.bitcast %217 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x256xf32>) -> tensor<1x14x14x256xf32>
+    %219 = "mhlo.fusion"(%arg188, %arg189, %15, %218, %arg190) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %220 = "mhlo.fusion"(%arg191) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %221 = stablehlo.convolution(%219, %220) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %222 = "mhlo.fusion"(%arg192, %arg193, %14, %221, %arg194) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %223 = mhlo.bitcast %222 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %224 = "mhlo.fusion"(%arg195) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %225 = mhlo.bitcast %224 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %226 = stablehlo.dot %223, %225, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %227 = mhlo.bitcast %226 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %228 = "mhlo.fusion"(%arg196, %arg197, %13, %227, %arg198, %arg184, %arg185, %16, %212, %arg186, %arg172, %arg173, %19, %197, %arg174, %arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>, %arg278: tensor<1024xf32>, %arg279: tensor<1024xf32>, %arg280: tensor<1024xf32>, %arg281: tensor<1x14x14x1024xf32>, %arg282: tensor<1024xf32>, %arg283: tensor<1024xf32>, %arg284: tensor<1024xf32>, %arg285: tensor<1024xf32>, %arg286: tensor<1x14x14x1024xf32>, %arg287: tensor<1024xf32>, %arg288: tensor<1024xf32>, %arg289: tensor<1024xf32>, %arg290: tensor<1024xf32>, %arg291: tensor<1x14x14x1024xf32>, %arg292: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %331 = stablehlo.subtract %arg281, %330 : tensor<1x14x14x1024xf32>
+      %332 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x14x14x1024xf32>
+      %334 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x14x14x1024xf32>
+      %336 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x14x14x1024xf32>
+      %338 = stablehlo.broadcast_in_dim %arg292, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %339 = stablehlo.subtract %arg291, %338 : tensor<1x14x14x1024xf32>
+      %340 = stablehlo.broadcast_in_dim %arg290, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x14x14x1024xf32>
+      %342 = stablehlo.broadcast_in_dim %arg289, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x14x14x1024xf32>
+      %344 = stablehlo.broadcast_in_dim %arg288, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x14x14x1024xf32>
+      %346 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %347 = stablehlo.subtract %arg286, %346 : tensor<1x14x14x1024xf32>
+      %348 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %349 = stablehlo.multiply %347, %348 : tensor<1x14x14x1024xf32>
+      %350 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %351 = stablehlo.multiply %349, %350 : tensor<1x14x14x1024xf32>
+      %352 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %353 = stablehlo.add %351, %352 : tensor<1x14x14x1024xf32>
+      %354 = stablehlo.add %345, %353 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %355 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %356 = stablehlo.maximum %354, %355 : tensor<1x14x14x1024xf32>
+      %357 = stablehlo.add %337, %356 : tensor<1x14x14x1024xf32>
+      %358 = stablehlo.maximum %357, %355 : tensor<1x14x14x1024xf32>
+      %359 = stablehlo.add %329, %358 : tensor<1x14x14x1024xf32>
+      %360 = stablehlo.maximum %359, %355 : tensor<1x14x14x1024xf32>
+      %361 = stablehlo.add %321, %360 : tensor<1x14x14x1024xf32>
+      %362 = stablehlo.maximum %361, %355 : tensor<1x14x14x1024xf32>
+      mhlo.return %362 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %229 = mhlo.bitcast %228 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %230 = "mhlo.fusion"(%arg199) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,256]{1,0,2,3}"} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x256xf32>
+      mhlo.return %315 : tensor<1x1x1024x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+    %231 = mhlo.bitcast %230 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x256xf32>) -> tensor<1024x256xf32>
+    %232 = stablehlo.dot %229, %231, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x256xf32>) -> tensor<196x256xf32>
+    %233 = mhlo.bitcast %232 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x256xf32>) -> tensor<1x14x14x256xf32>
+    %234 = "mhlo.fusion"(%arg200, %arg201, %12, %233, %arg202) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %235 = "mhlo.fusion"(%arg203) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %236 = stablehlo.convolution(%234, %235) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %237 = "mhlo.fusion"(%arg204, %arg205, %11, %236, %arg206) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %238 = mhlo.bitcast %237 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %239 = "mhlo.fusion"(%arg207) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %240 = mhlo.bitcast %239 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %241 = stablehlo.dot %238, %240, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %242 = mhlo.bitcast %241 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %243 = "mhlo.fusion"(%arg208, %arg209, %10, %242, %arg210, %arg196, %arg197, %13, %227, %arg198, %arg184, %arg185, %16, %212, %arg186, %arg172, %arg173, %19, %197, %arg174, %arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>, %arg278: tensor<1024xf32>, %arg279: tensor<1024xf32>, %arg280: tensor<1024xf32>, %arg281: tensor<1x14x14x1024xf32>, %arg282: tensor<1024xf32>, %arg283: tensor<1024xf32>, %arg284: tensor<1024xf32>, %arg285: tensor<1024xf32>, %arg286: tensor<1x14x14x1024xf32>, %arg287: tensor<1024xf32>, %arg288: tensor<1024xf32>, %arg289: tensor<1024xf32>, %arg290: tensor<1024xf32>, %arg291: tensor<1x14x14x1024xf32>, %arg292: tensor<1024xf32>, %arg293: tensor<1024xf32>, %arg294: tensor<1024xf32>, %arg295: tensor<1024xf32>, %arg296: tensor<1x14x14x1024xf32>, %arg297: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %331 = stablehlo.subtract %arg281, %330 : tensor<1x14x14x1024xf32>
+      %332 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x14x14x1024xf32>
+      %334 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x14x14x1024xf32>
+      %336 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x14x14x1024xf32>
+      %338 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %339 = stablehlo.subtract %arg286, %338 : tensor<1x14x14x1024xf32>
+      %340 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x14x14x1024xf32>
+      %342 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x14x14x1024xf32>
+      %344 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x14x14x1024xf32>
+      %346 = stablehlo.broadcast_in_dim %arg297, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %347 = stablehlo.subtract %arg296, %346 : tensor<1x14x14x1024xf32>
+      %348 = stablehlo.broadcast_in_dim %arg295, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %349 = stablehlo.multiply %347, %348 : tensor<1x14x14x1024xf32>
+      %350 = stablehlo.broadcast_in_dim %arg294, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %351 = stablehlo.multiply %349, %350 : tensor<1x14x14x1024xf32>
+      %352 = stablehlo.broadcast_in_dim %arg293, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %353 = stablehlo.add %351, %352 : tensor<1x14x14x1024xf32>
+      %354 = stablehlo.broadcast_in_dim %arg292, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %355 = stablehlo.subtract %arg291, %354 : tensor<1x14x14x1024xf32>
+      %356 = stablehlo.broadcast_in_dim %arg290, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %357 = stablehlo.multiply %355, %356 : tensor<1x14x14x1024xf32>
+      %358 = stablehlo.broadcast_in_dim %arg289, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %359 = stablehlo.multiply %357, %358 : tensor<1x14x14x1024xf32>
+      %360 = stablehlo.broadcast_in_dim %arg288, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %361 = stablehlo.add %359, %360 : tensor<1x14x14x1024xf32>
+      %362 = stablehlo.add %353, %361 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %363 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %364 = stablehlo.maximum %362, %363 : tensor<1x14x14x1024xf32>
+      %365 = stablehlo.add %345, %364 : tensor<1x14x14x1024xf32>
+      %366 = stablehlo.maximum %365, %363 : tensor<1x14x14x1024xf32>
+      %367 = stablehlo.add %337, %366 : tensor<1x14x14x1024xf32>
+      %368 = stablehlo.maximum %367, %363 : tensor<1x14x14x1024xf32>
+      %369 = stablehlo.add %329, %368 : tensor<1x14x14x1024xf32>
+      %370 = stablehlo.maximum %369, %363 : tensor<1x14x14x1024xf32>
+      %371 = stablehlo.add %321, %370 : tensor<1x14x14x1024xf32>
+      %372 = stablehlo.maximum %371, %363 : tensor<1x14x14x1024xf32>
+      mhlo.return %372 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %244 = mhlo.bitcast %243 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %245 = "mhlo.fusion"(%arg211) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,256]{1,0,2,3}"} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x256xf32>
+      mhlo.return %315 : tensor<1x1x1024x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x1024x1x1xf32>) -> tensor<1x1x1024x256xf32>
+    %246 = mhlo.bitcast %245 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x256xf32>) -> tensor<1024x256xf32>
+    %247 = stablehlo.dot %244, %246, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x256xf32>) -> tensor<196x256xf32>
+    %248 = mhlo.bitcast %247 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x256xf32>) -> tensor<1x14x14x256xf32>
+    %249 = "mhlo.fusion"(%arg212, %arg213, %9, %248, %arg214) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %250 = "mhlo.fusion"(%arg215) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256x256x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,256,256]{1,0,2,3}"} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x256x256xf32>
+      mhlo.return %315 : tensor<3x3x256x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256x256x3x3xf32>) -> tensor<3x3x256x256xf32>
+    %251 = stablehlo.convolution(%249, %250) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x256xf32>, tensor<3x3x256x256xf32>) -> tensor<1x14x14x256xf32>
+    %252 = "mhlo.fusion"(%arg216, %arg217, %8, %251, %arg218) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<256xf32>, %arg269: tensor<256xf32>, %arg270: tensor<256xf32>, %arg271: tensor<1x14x14x256xf32>, %arg272: tensor<256xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x256xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x256xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x256xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<256xf32>) -> tensor<1x14x14x256xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x256xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x256xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x256xf32>
+      mhlo.return %323 : tensor<1x14x14x256xf32>
+    }) {output_operand_aliasing = []} : (tensor<256xf32>, tensor<256xf32>, tensor<256xf32>, tensor<1x14x14x256xf32>, tensor<256xf32>) -> tensor<1x14x14x256xf32>
+    %253 = mhlo.bitcast %252 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x256xf32>) -> tensor<196x256xf32>
+    %254 = "mhlo.fusion"(%arg219) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024x256x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,256,1024]{1,0,2,3}"} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x256x1024xf32>
+      mhlo.return %315 : tensor<1x1x256x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024x256x1x1xf32>) -> tensor<1x1x256x1024xf32>
+    %255 = mhlo.bitcast %254 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x256x1024xf32>) -> tensor<256x1024xf32>
+    %256 = stablehlo.dot %253, %255, precision = [DEFAULT, DEFAULT] : (tensor<196x256xf32>, tensor<256x1024xf32>) -> tensor<196x1024xf32>
+    %257 = mhlo.bitcast %256 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x1024xf32>) -> tensor<1x14x14x1024xf32>
+    %258 = "mhlo.fusion"(%arg220, %arg221, %7, %257, %arg222, %arg208, %arg209, %10, %242, %arg210, %arg196, %arg197, %13, %227, %arg198, %arg184, %arg185, %16, %212, %arg186, %arg172, %arg173, %19, %197, %arg174, %arg157, %arg158, %22, %165, %arg159, %arg160, %arg161, %166, %182, %arg162) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1024xf32>, %arg269: tensor<1024xf32>, %arg270: tensor<1024xf32>, %arg271: tensor<1x14x14x1024xf32>, %arg272: tensor<1024xf32>, %arg273: tensor<1024xf32>, %arg274: tensor<1024xf32>, %arg275: tensor<1024xf32>, %arg276: tensor<1x14x14x1024xf32>, %arg277: tensor<1024xf32>, %arg278: tensor<1024xf32>, %arg279: tensor<1024xf32>, %arg280: tensor<1024xf32>, %arg281: tensor<1x14x14x1024xf32>, %arg282: tensor<1024xf32>, %arg283: tensor<1024xf32>, %arg284: tensor<1024xf32>, %arg285: tensor<1024xf32>, %arg286: tensor<1x14x14x1024xf32>, %arg287: tensor<1024xf32>, %arg288: tensor<1024xf32>, %arg289: tensor<1024xf32>, %arg290: tensor<1024xf32>, %arg291: tensor<1x14x14x1024xf32>, %arg292: tensor<1024xf32>, %arg293: tensor<1024xf32>, %arg294: tensor<1024xf32>, %arg295: tensor<1024xf32>, %arg296: tensor<1x14x14x1024xf32>, %arg297: tensor<1024xf32>, %arg298: tensor<1024xf32>, %arg299: tensor<1024xf32>, %arg300: tensor<1024xf32>, %arg301: tensor<1x14x14x1024xf32>, %arg302: tensor<1024xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x1024xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x1024xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x1024xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x1024xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x14x14x1024xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x14x14x1024xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x14x14x1024xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x14x14x1024xf32>
+      %330 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %331 = stablehlo.subtract %arg281, %330 : tensor<1x14x14x1024xf32>
+      %332 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x14x14x1024xf32>
+      %334 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x14x14x1024xf32>
+      %336 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x14x14x1024xf32>
+      %338 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %339 = stablehlo.subtract %arg286, %338 : tensor<1x14x14x1024xf32>
+      %340 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x14x14x1024xf32>
+      %342 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x14x14x1024xf32>
+      %344 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x14x14x1024xf32>
+      %346 = stablehlo.broadcast_in_dim %arg292, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %347 = stablehlo.subtract %arg291, %346 : tensor<1x14x14x1024xf32>
+      %348 = stablehlo.broadcast_in_dim %arg290, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %349 = stablehlo.multiply %347, %348 : tensor<1x14x14x1024xf32>
+      %350 = stablehlo.broadcast_in_dim %arg289, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %351 = stablehlo.multiply %349, %350 : tensor<1x14x14x1024xf32>
+      %352 = stablehlo.broadcast_in_dim %arg288, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %353 = stablehlo.add %351, %352 : tensor<1x14x14x1024xf32>
+      %354 = stablehlo.broadcast_in_dim %arg302, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %355 = stablehlo.subtract %arg301, %354 : tensor<1x14x14x1024xf32>
+      %356 = stablehlo.broadcast_in_dim %arg300, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %357 = stablehlo.multiply %355, %356 : tensor<1x14x14x1024xf32>
+      %358 = stablehlo.broadcast_in_dim %arg299, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %359 = stablehlo.multiply %357, %358 : tensor<1x14x14x1024xf32>
+      %360 = stablehlo.broadcast_in_dim %arg298, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %361 = stablehlo.add %359, %360 : tensor<1x14x14x1024xf32>
+      %362 = stablehlo.broadcast_in_dim %arg297, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %363 = stablehlo.subtract %arg296, %362 : tensor<1x14x14x1024xf32>
+      %364 = stablehlo.broadcast_in_dim %arg295, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %365 = stablehlo.multiply %363, %364 : tensor<1x14x14x1024xf32>
+      %366 = stablehlo.broadcast_in_dim %arg294, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %367 = stablehlo.multiply %365, %366 : tensor<1x14x14x1024xf32>
+      %368 = stablehlo.broadcast_in_dim %arg293, dims = [3] : (tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+      %369 = stablehlo.add %367, %368 : tensor<1x14x14x1024xf32>
+      %370 = stablehlo.add %361, %369 : tensor<1x14x14x1024xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %371 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x1024xf32>
+      %372 = stablehlo.maximum %370, %371 : tensor<1x14x14x1024xf32>
+      %373 = stablehlo.add %353, %372 : tensor<1x14x14x1024xf32>
+      %374 = stablehlo.maximum %373, %371 : tensor<1x14x14x1024xf32>
+      %375 = stablehlo.add %345, %374 : tensor<1x14x14x1024xf32>
+      %376 = stablehlo.maximum %375, %371 : tensor<1x14x14x1024xf32>
+      %377 = stablehlo.add %337, %376 : tensor<1x14x14x1024xf32>
+      %378 = stablehlo.maximum %377, %371 : tensor<1x14x14x1024xf32>
+      %379 = stablehlo.add %329, %378 : tensor<1x14x14x1024xf32>
+      %380 = stablehlo.maximum %379, %371 : tensor<1x14x14x1024xf32>
+      %381 = stablehlo.add %321, %380 : tensor<1x14x14x1024xf32>
+      %382 = stablehlo.maximum %381, %371 : tensor<1x14x14x1024xf32>
+      mhlo.return %382 : tensor<1x14x14x1024xf32>
+    }) {output_operand_aliasing = []} : (tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1024xf32>, tensor<1x14x14x1024xf32>, tensor<1024xf32>) -> tensor<1x14x14x1024xf32>
+    %259 = "mhlo.fusion"(%arg223) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,2048]{1,0,2,3}"} : (tensor<2048x1024x1x1xf32>) -> tensor<1x1x1024x2048xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x2048xf32>
+      mhlo.return %315 : tensor<1x1x1024x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048x1024x1x1xf32>) -> tensor<1x1x1024x2048xf32>
+    %260 = stablehlo.convolution(%258, %259) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[0, 0], [0, 0]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x1024xf32>, tensor<1x1x1024x2048xf32>) -> tensor<1x7x7x2048xf32>
+    %261 = "mhlo.fusion"(%arg224) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<2048xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<2048xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<2048xf32>
+      mhlo.return %316 : tensor<2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>) -> tensor<2048xf32>
+    %262 = "mhlo.fusion"(%arg225) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %263 = "mhlo.fusion"(%arg226) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>):
+      %cst_1 = stablehlo.constant dense<9.99999974E-6> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<512xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<512xf32>
+      %316 = stablehlo.rsqrt %315 : tensor<512xf32>
+      mhlo.return %316 : tensor<512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>) -> tensor<512xf32>
+    %264 = mhlo.bitcast %258 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x14x14x1024xf32>) -> tensor<196x1024xf32>
+    %265 = "mhlo.fusion"(%arg227) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x1024x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,1024,512]{1,0,2,3}"} : (tensor<512x1024x1x1xf32>) -> tensor<1x1x1024x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x1024x512xf32>
+      mhlo.return %315 : tensor<1x1x1024x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x1024x1x1xf32>) -> tensor<1x1x1024x512xf32>
+    %266 = mhlo.bitcast %265 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x1024x512xf32>) -> tensor<1024x512xf32>
+    %267 = stablehlo.dot %264, %266, precision = [DEFAULT, DEFAULT] : (tensor<196x1024xf32>, tensor<1024x512xf32>) -> tensor<196x512xf32>
+    %268 = mhlo.bitcast %267 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<196x512xf32>) -> tensor<1x14x14x512xf32>
+    %269 = "mhlo.fusion"(%arg228, %arg229, %263, %268, %arg230) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x14x14x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x14x14x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x14x14x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x14x14x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x14x14x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x14x14x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x14x14x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x14x14x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x14x14x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x14x14x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x14x14x512xf32>
+      mhlo.return %323 : tensor<1x14x14x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x14x14x512xf32>, tensor<512xf32>) -> tensor<1x14x14x512xf32>
+    %270 = "mhlo.fusion"(%arg231) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x512x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,512,512]{1,0,2,3}"} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x512x512xf32>
+      mhlo.return %315 : tensor<3x3x512x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+    %271 = stablehlo.convolution(%269, %270) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [2, 2], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x14x14x512xf32>, tensor<3x3x512x512xf32>) -> tensor<1x7x7x512xf32>
+    %272 = "mhlo.fusion"(%arg232, %arg233, %262, %271, %arg234) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x7x7x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x7x7x512xf32>
+      mhlo.return %323 : tensor<1x7x7x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x7x7x512xf32>, tensor<512xf32>) -> tensor<1x7x7x512xf32>
+    %273 = mhlo.bitcast %272 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x7x7x512xf32>) -> tensor<49x512xf32>
+    %274 = "mhlo.fusion"(%arg235) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,2048]{1,0,2,3}"} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x2048xf32>
+      mhlo.return %315 : tensor<1x1x512x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+    %275 = mhlo.bitcast %274 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x2048xf32>) -> tensor<512x2048xf32>
+    %276 = stablehlo.dot %273, %275, precision = [DEFAULT, DEFAULT] : (tensor<49x512xf32>, tensor<512x2048xf32>) -> tensor<49x2048xf32>
+    %277 = mhlo.bitcast %276 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<49x2048xf32>) -> tensor<1x7x7x2048xf32>
+    %278 = "mhlo.fusion"(%arg236, %arg237, %6, %260, %arg238, %arg239, %arg240, %261, %277, %arg241) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>, %arg269: tensor<2048xf32>, %arg270: tensor<2048xf32>, %arg271: tensor<1x7x7x2048xf32>, %arg272: tensor<2048xf32>, %arg273: tensor<2048xf32>, %arg274: tensor<2048xf32>, %arg275: tensor<2048xf32>, %arg276: tensor<1x7x7x2048xf32>, %arg277: tensor<2048xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %315 = stablehlo.subtract %arg276, %314 : tensor<1x7x7x2048xf32>
+      %316 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x2048xf32>
+      %318 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x2048xf32>
+      %320 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x2048xf32>
+      %322 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %323 = stablehlo.subtract %arg271, %322 : tensor<1x7x7x2048xf32>
+      %324 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x7x7x2048xf32>
+      %326 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x7x7x2048xf32>
+      %328 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x7x7x2048xf32>
+      %330 = stablehlo.add %321, %329 : tensor<1x7x7x2048xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %331 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x2048xf32>
+      %332 = stablehlo.maximum %330, %331 : tensor<1x7x7x2048xf32>
+      mhlo.return %332 : tensor<1x7x7x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+    %279 = mhlo.bitcast %278 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x7x7x2048xf32>) -> tensor<49x2048xf32>
+    %280 = "mhlo.fusion"(%arg242) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x2048x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,2048,512]{1,0,2,3}"} : (tensor<512x2048x1x1xf32>) -> tensor<1x1x2048x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x2048x512xf32>
+      mhlo.return %315 : tensor<1x1x2048x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x2048x1x1xf32>) -> tensor<1x1x2048x512xf32>
+    %281 = mhlo.bitcast %280 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x2048x512xf32>) -> tensor<2048x512xf32>
+    %282 = stablehlo.dot %279, %281, precision = [DEFAULT, DEFAULT] : (tensor<49x2048xf32>, tensor<2048x512xf32>) -> tensor<49x512xf32>
+    %283 = mhlo.bitcast %282 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<49x512xf32>) -> tensor<1x7x7x512xf32>
+    %284 = "mhlo.fusion"(%arg243, %arg244, %5, %283, %arg245) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x7x7x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x7x7x512xf32>
+      mhlo.return %323 : tensor<1x7x7x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x7x7x512xf32>, tensor<512xf32>) -> tensor<1x7x7x512xf32>
+    %285 = "mhlo.fusion"(%arg246) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x512x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,512,512]{1,0,2,3}"} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x512x512xf32>
+      mhlo.return %315 : tensor<3x3x512x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+    %286 = stablehlo.convolution(%284, %285) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x7x7x512xf32>, tensor<3x3x512x512xf32>) -> tensor<1x7x7x512xf32>
+    %287 = "mhlo.fusion"(%arg247, %arg248, %4, %286, %arg249) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x7x7x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x7x7x512xf32>
+      mhlo.return %323 : tensor<1x7x7x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x7x7x512xf32>, tensor<512xf32>) -> tensor<1x7x7x512xf32>
+    %288 = mhlo.bitcast %287 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x7x7x512xf32>) -> tensor<49x512xf32>
+    %289 = "mhlo.fusion"(%arg250) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,2048]{1,0,2,3}"} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x2048xf32>
+      mhlo.return %315 : tensor<1x1x512x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+    %290 = mhlo.bitcast %289 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x2048xf32>) -> tensor<512x2048xf32>
+    %291 = stablehlo.dot %288, %290, precision = [DEFAULT, DEFAULT] : (tensor<49x512xf32>, tensor<512x2048xf32>) -> tensor<49x2048xf32>
+    %292 = mhlo.bitcast %291 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<49x2048xf32>) -> tensor<1x7x7x2048xf32>
+    %293 = "mhlo.fusion"(%arg251, %arg252, %3, %292, %arg253, %arg236, %arg237, %6, %260, %arg238, %arg239, %arg240, %261, %277, %arg241) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>, %arg269: tensor<2048xf32>, %arg270: tensor<2048xf32>, %arg271: tensor<1x7x7x2048xf32>, %arg272: tensor<2048xf32>, %arg273: tensor<2048xf32>, %arg274: tensor<2048xf32>, %arg275: tensor<2048xf32>, %arg276: tensor<1x7x7x2048xf32>, %arg277: tensor<2048xf32>, %arg278: tensor<2048xf32>, %arg279: tensor<2048xf32>, %arg280: tensor<2048xf32>, %arg281: tensor<1x7x7x2048xf32>, %arg282: tensor<2048xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x2048xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x2048xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x2048xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x2048xf32>
+      %322 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %323 = stablehlo.subtract %arg281, %322 : tensor<1x7x7x2048xf32>
+      %324 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x7x7x2048xf32>
+      %326 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x7x7x2048xf32>
+      %328 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x7x7x2048xf32>
+      %330 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %331 = stablehlo.subtract %arg276, %330 : tensor<1x7x7x2048xf32>
+      %332 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x7x7x2048xf32>
+      %334 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x7x7x2048xf32>
+      %336 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x7x7x2048xf32>
+      %338 = stablehlo.add %329, %337 : tensor<1x7x7x2048xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %339 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x2048xf32>
+      %340 = stablehlo.maximum %338, %339 : tensor<1x7x7x2048xf32>
+      %341 = stablehlo.add %321, %340 : tensor<1x7x7x2048xf32>
+      %342 = stablehlo.maximum %341, %339 : tensor<1x7x7x2048xf32>
+      mhlo.return %342 : tensor<1x7x7x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+    %294 = mhlo.bitcast %293 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x7x7x2048xf32>) -> tensor<49x2048xf32>
+    %295 = "mhlo.fusion"(%arg254) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x2048x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,2048,512]{1,0,2,3}"} : (tensor<512x2048x1x1xf32>) -> tensor<1x1x2048x512xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x2048x512xf32>
+      mhlo.return %315 : tensor<1x1x2048x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x2048x1x1xf32>) -> tensor<1x1x2048x512xf32>
+    %296 = mhlo.bitcast %295 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x2048x512xf32>) -> tensor<2048x512xf32>
+    %297 = stablehlo.dot %294, %296, precision = [DEFAULT, DEFAULT] : (tensor<49x2048xf32>, tensor<2048x512xf32>) -> tensor<49x512xf32>
+    %298 = mhlo.bitcast %297 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<49x512xf32>) -> tensor<1x7x7x512xf32>
+    %299 = "mhlo.fusion"(%arg255, %arg256, %2, %298, %arg257) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x7x7x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x7x7x512xf32>
+      mhlo.return %323 : tensor<1x7x7x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x7x7x512xf32>, tensor<512xf32>) -> tensor<1x7x7x512xf32>
+    %300 = "mhlo.fusion"(%arg258) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512x512x3x3xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[3,3,512,512]{1,0,2,3}"} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+      %315 = mhlo.copy %314 : tensor<3x3x512x512xf32>
+      mhlo.return %315 : tensor<3x3x512x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512x512x3x3xf32>) -> tensor<3x3x512x512xf32>
+    %301 = stablehlo.convolution(%299, %300) dim_numbers = [b, 0, 1, f]x[0, 1, i, o]->[b, 0, 1, f], window = {stride = [1, 1], pad = [[1, 1], [1, 1]], lhs_dilate = [1, 1], rhs_dilate = [1, 1], reverse = [false, false]} {batch_group_count = 1 : i64, feature_group_count = 1 : i64, precision_config = [#stablehlo<precision DEFAULT>, #stablehlo<precision DEFAULT>]} : (tensor<1x7x7x512xf32>, tensor<3x3x512x512xf32>) -> tensor<1x7x7x512xf32>
+    %302 = "mhlo.fusion"(%arg259, %arg260, %1, %301, %arg261) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<512xf32>, %arg269: tensor<512xf32>, %arg270: tensor<512xf32>, %arg271: tensor<1x7x7x512xf32>, %arg272: tensor<512xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x512xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x512xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x512xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<512xf32>) -> tensor<1x7x7x512xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x512xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %322 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x512xf32>
+      %323 = stablehlo.maximum %321, %322 : tensor<1x7x7x512xf32>
+      mhlo.return %323 : tensor<1x7x7x512xf32>
+    }) {output_operand_aliasing = []} : (tensor<512xf32>, tensor<512xf32>, tensor<512xf32>, tensor<1x7x7x512xf32>, tensor<512xf32>) -> tensor<1x7x7x512xf32>
+    %303 = mhlo.bitcast %302 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x7x7x512xf32>) -> tensor<49x512xf32>
+    %304 = "mhlo.fusion"(%arg262) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048x512x1x1xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [2, 3, 1, 0] {result_layout = dense<[1, 0, 2, 3]> : tensor<4xindex>, xla_shape = "f32[1,1,512,2048]{1,0,2,3}"} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+      %315 = mhlo.copy %314 : tensor<1x1x512x2048xf32>
+      mhlo.return %315 : tensor<1x1x512x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048x512x1x1xf32>) -> tensor<1x1x512x2048xf32>
+    %305 = mhlo.bitcast %304 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>} : (tensor<1x1x512x2048xf32>) -> tensor<512x2048xf32>
+    %306 = stablehlo.dot %303, %305, precision = [DEFAULT, DEFAULT] : (tensor<49x512xf32>, tensor<512x2048xf32>) -> tensor<49x2048xf32>
+    %307 = mhlo.bitcast %306 {result_layout = dense<[3, 2, 1, 0]> : tensor<4xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<49x2048xf32>) -> tensor<1x7x7x2048xf32>
+    %308 = "mhlo.fusion"(%arg263, %arg264, %0, %307, %arg265, %arg251, %arg252, %3, %292, %arg253, %arg236, %arg237, %6, %260, %arg238, %arg239, %arg240, %261, %277, %arg241) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<2048xf32>, %arg269: tensor<2048xf32>, %arg270: tensor<2048xf32>, %arg271: tensor<1x7x7x2048xf32>, %arg272: tensor<2048xf32>, %arg273: tensor<2048xf32>, %arg274: tensor<2048xf32>, %arg275: tensor<2048xf32>, %arg276: tensor<1x7x7x2048xf32>, %arg277: tensor<2048xf32>, %arg278: tensor<2048xf32>, %arg279: tensor<2048xf32>, %arg280: tensor<2048xf32>, %arg281: tensor<1x7x7x2048xf32>, %arg282: tensor<2048xf32>, %arg283: tensor<2048xf32>, %arg284: tensor<2048xf32>, %arg285: tensor<2048xf32>, %arg286: tensor<1x7x7x2048xf32>, %arg287: tensor<2048xf32>):
+      %314 = stablehlo.broadcast_in_dim %arg272, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %315 = stablehlo.subtract %arg271, %314 : tensor<1x7x7x2048xf32>
+      %316 = stablehlo.broadcast_in_dim %arg270, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %317 = stablehlo.multiply %315, %316 : tensor<1x7x7x2048xf32>
+      %318 = stablehlo.broadcast_in_dim %arg269, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %319 = stablehlo.multiply %317, %318 : tensor<1x7x7x2048xf32>
+      %320 = stablehlo.broadcast_in_dim %arg268, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %321 = stablehlo.add %319, %320 : tensor<1x7x7x2048xf32>
+      %322 = stablehlo.broadcast_in_dim %arg277, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %323 = stablehlo.subtract %arg276, %322 : tensor<1x7x7x2048xf32>
+      %324 = stablehlo.broadcast_in_dim %arg275, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %325 = stablehlo.multiply %323, %324 : tensor<1x7x7x2048xf32>
+      %326 = stablehlo.broadcast_in_dim %arg274, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %327 = stablehlo.multiply %325, %326 : tensor<1x7x7x2048xf32>
+      %328 = stablehlo.broadcast_in_dim %arg273, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %329 = stablehlo.add %327, %328 : tensor<1x7x7x2048xf32>
+      %330 = stablehlo.broadcast_in_dim %arg287, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %331 = stablehlo.subtract %arg286, %330 : tensor<1x7x7x2048xf32>
+      %332 = stablehlo.broadcast_in_dim %arg285, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %333 = stablehlo.multiply %331, %332 : tensor<1x7x7x2048xf32>
+      %334 = stablehlo.broadcast_in_dim %arg284, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %335 = stablehlo.multiply %333, %334 : tensor<1x7x7x2048xf32>
+      %336 = stablehlo.broadcast_in_dim %arg283, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %337 = stablehlo.add %335, %336 : tensor<1x7x7x2048xf32>
+      %338 = stablehlo.broadcast_in_dim %arg282, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %339 = stablehlo.subtract %arg281, %338 : tensor<1x7x7x2048xf32>
+      %340 = stablehlo.broadcast_in_dim %arg280, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %341 = stablehlo.multiply %339, %340 : tensor<1x7x7x2048xf32>
+      %342 = stablehlo.broadcast_in_dim %arg279, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %343 = stablehlo.multiply %341, %342 : tensor<1x7x7x2048xf32>
+      %344 = stablehlo.broadcast_in_dim %arg278, dims = [3] : (tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+      %345 = stablehlo.add %343, %344 : tensor<1x7x7x2048xf32>
+      %346 = stablehlo.add %337, %345 : tensor<1x7x7x2048xf32>
+      %cst_1 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+      %347 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x7x7x2048xf32>
+      %348 = stablehlo.maximum %346, %347 : tensor<1x7x7x2048xf32>
+      %349 = stablehlo.add %329, %348 : tensor<1x7x7x2048xf32>
+      %350 = stablehlo.maximum %349, %347 : tensor<1x7x7x2048xf32>
+      %351 = stablehlo.add %321, %350 : tensor<1x7x7x2048xf32>
+      %352 = stablehlo.maximum %351, %347 : tensor<1x7x7x2048xf32>
+      mhlo.return %352 : tensor<1x7x7x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<2048xf32>, tensor<1x7x7x2048xf32>, tensor<2048xf32>) -> tensor<1x7x7x2048xf32>
+    %cst_0 = stablehlo.constant dense<0.000000e+00> : tensor<f32>
+    %309 = "mhlo.fusion"(%308, %cst_0) <{fusion_kind = #mhlo<fusion_kind kCustom>}> ({
+    ^bb0(%arg268: tensor<1x7x7x2048xf32>, %arg269: tensor<f32>):
+      %314 = stablehlo.reduce(%arg268 init: %arg269) applies stablehlo.add across dimensions = [2, 1] : (tensor<1x7x7x2048xf32>, tensor<f32>) -> tensor<1x2048xf32>
+      mhlo.return %314 : tensor<1x2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<1x7x7x2048xf32>, tensor<f32>) -> tensor<1x2048xf32>
+    %310 = "mhlo.fusion"(%309) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1x2048xf32>):
+      %cst_1 = stablehlo.constant dense<0.0204081628> : tensor<f32>
+      %314 = stablehlo.broadcast_in_dim %cst_1, dims = [] : (tensor<f32>) -> tensor<1x2048xf32>
+      %315 = stablehlo.multiply %arg268, %314 : tensor<1x2048xf32>
+      %316 = mhlo.bitcast %315 {result_layout = dense<0> : tensor<1xindex>, source_layout = dense<[1, 0]> : tensor<2xindex>} : (tensor<1x2048xf32>) -> tensor<2048xf32>
+      mhlo.return %316 : tensor<2048xf32>
+    }) {output_operand_aliasing = []} : (tensor<1x2048xf32>) -> tensor<2048xf32>
+    %311 = "mhlo.fusion"(%arg266) <{fusion_kind = #mhlo<fusion_kind kLoop>}> ({
+    ^bb0(%arg268: tensor<1000x2048xf32>):
+      %314 = stablehlo.transpose %arg268, dims = [1, 0] {result_layout = dense<[0, 1]> : tensor<2xindex>, xla_shape = "f32[2048,1000]{0,1}"} : (tensor<1000x2048xf32>) -> tensor<2048x1000xf32>
+      %315 = mhlo.copy %314 : tensor<2048x1000xf32>
+      mhlo.return %315 : tensor<2048x1000xf32>
+    }) {output_operand_aliasing = []} : (tensor<1000x2048xf32>) -> tensor<2048x1000xf32>
+    %312 = "mhlo.fusion"(%arg267, %310, %311) <{fusion_kind = #mhlo<fusion_kind kOutput>}> ({
+    ^bb0(%arg268: tensor<1000xf32>, %arg269: tensor<2048xf32>, %arg270: tensor<2048x1000xf32>):
+      %314 = stablehlo.dot %arg269, %arg270, precision = [DEFAULT, DEFAULT] : (tensor<2048xf32>, tensor<2048x1000xf32>) -> tensor<1000xf32>
+      %315 = stablehlo.add %arg268, %314 : tensor<1000xf32>
+      mhlo.return %315 : tensor<1000xf32>
+    }) {output_operand_aliasing = []} : (tensor<1000xf32>, tensor<2048xf32>, tensor<2048x1000xf32>) -> tensor<1000xf32>
+    %313 = mhlo.bitcast %312 {result_layout = dense<[1, 0]> : tensor<2xindex>, source_layout = dense<0> : tensor<1xindex>} : (tensor<1000xf32>) -> tensor<1x1000xf32>
+    return %313 : tensor<1x1000xf32>
+  }
+}
