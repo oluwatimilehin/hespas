@@ -363,6 +363,8 @@ class Estimator(metaclass=EstimatorMeta):
     in_memory_only_cache = ConfigOption(bool, description="Only use an in-memory cache, do not read or write cache files", default=False, top_level=True)
     num_npus = ConfigOption(bool, description="Number of NPUs to simulate", default=1, top_level=True)
     type = ConfigOption(str, description="Type of the estimator hardware", optional=True, top_level=True)
+    log_path = ConfigOption(str, optional=True, default=None, description="Output path for logging", top_level=True)
+    log_level = ConfigOption(str, optional=True, default='info', description="Set log level", top_level=True)
 
     def __init__(self, hw_config=None, **kwargs):
         """
@@ -1175,8 +1177,8 @@ class Estimator(metaclass=EstimatorMeta):
         parser = argparse.ArgumentParser(description=f'{cls.display_name} Performance Estimator', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
         parser.add_argument('--config-file', help='Configuration file path, optional and can be overriden by arguments')
         parser.add_argument('--mlir-file', help='MLIR file path (optional, will use the field in the config_file otherwise)')
-        parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
-        parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
+        # parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
+        # parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
         for config_argument_name in sorted(list(cls.config_arguments)):
             config_argument_obj = cls.config_arguments[config_argument_name]
             if isinstance(config_argument_obj, tuple):
@@ -1189,5 +1191,5 @@ class Estimator(metaclass=EstimatorMeta):
 
         result = cls.run(config.to_hw_config(), config.mlir_file)
 
-        log.result(f'Execution of module completed: {result.runtime_estimate}s')
+        log.info(f'Execution of module completed: {result.runtime_estimate * 1000} ms')
 
