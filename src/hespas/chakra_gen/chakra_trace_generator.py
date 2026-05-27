@@ -303,7 +303,8 @@ def setup_output_dir(output_dir, clean=True):
 
 def create_chakra_traces(config_path, output_dir=None, mlir_file=None, num_threads=-1,
                          clean=False, stats_print_filter=None, stats_out_filter=None, num_npus=None,
-                         split_fn=None, block_lim=None, merge=None, write_private_funcs=None, write_dot=None):
+                         split_fn=None, block_lim=None, merge=None, write_private_funcs=None, write_dot=None,
+                         disable_cache=None):
     # Clean output directory including caching
     split_kwargs = {}
     if block_lim is not None:
@@ -312,7 +313,8 @@ def create_chakra_traces(config_path, output_dir=None, mlir_file=None, num_threa
         split_kwargs["merge"] = merge
     config = ChakraGenConfig(config_path, output_dir=output_dir, mlir_file=mlir_file, clean=clean,
         num_threads=num_threads, num_npus=num_npus, split_choice=split_fn,
-        write_private_funcs=write_private_funcs, write_dot=write_dot, split_kwargs=split_kwargs)
+        write_private_funcs=write_private_funcs, write_dot=write_dot, split_kwargs=split_kwargs,
+        disable_cache=disable_cache)
     setup_output_dir(config.output_dir, clean=config.clean)
 
     # estimate perf and create the chakra traces
@@ -340,6 +342,7 @@ def get_arg_parser():
     parser.add_argument("--write_dot", action="store_true", help="Writeout a dot file describing module dependencies")
     parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
     parser.add_argument("--log-level", default='progress', type=str, choices=get_log_levels(), help="Set log level")
+    parser.add_argument("--disable-cache", action="store_const", const=True, help="Disable the mini_module cache") # store_const instead of store_true so if it is not specified you get None, which means we default the config
     return parser
 
 def main(args=None):
@@ -348,7 +351,8 @@ def main(args=None):
     indv_merge = None if not (args.merge or args.no_merge) else (True if args.merge and not args.no_merge else False)
     create_chakra_traces(args.config, output_dir=args.output, mlir_file=args.mlir_file, num_threads=args.threads,
                          clean=args.clean, num_npus=args.num_npus, split_fn=args.split_fn, block_lim=args.block_lim,
-                         merge=indv_merge, write_private_funcs=args.write_private_funcs, write_dot=args.write_dot)
+                         merge=indv_merge, write_private_funcs=args.write_private_funcs, write_dot=args.write_dot,
+                         disable_cache=args.disable_cache)
 
 if __name__ == '__main__':
     main()
