@@ -1,0 +1,32 @@
+gpu_device_info {
+  threads_per_block_limit: 1024
+  threads_per_warp: 32
+  shared_memory_per_block: 49152
+  shared_memory_per_core: 167936
+  threads_per_core_limit: 2048
+  # Scaled down from 108 to match ~197 TFLOPs BF16 ceiling
+  core_count: 68  
+  fpus_per_core: 64
+  block_dim_limit_x: 2147483647
+  block_dim_limit_y: 65535
+  block_dim_limit_z: 65535
+  memory_bandwidth: 819000000000    
+  l2_cache_size: 134217728
+  clock_rate_ghz: 1.5
+  # 16 GiB (in bytes)
+  device_memory_size: 17179869184  
+  shared_memory_per_block_optin: 166912
+  cuda_compute_capability {
+    major: 8
+    feature_extension: NONE
+  }
+  registers_per_core_limit: 65536
+  registers_per_block_limit: 65536
+}
+platform_name: "CUDA"
+dnn_version_info {
+  major: 8
+  minor: 9
+  patch: 4
+}
+device_description_str: "Mock TPU v5e Constraints (CUDA Target)"
