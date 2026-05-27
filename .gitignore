@@ -179,3 +179,5 @@ experiments/*/output
 slurm_logs/*
 
 uv.lock
+
+scratch*
