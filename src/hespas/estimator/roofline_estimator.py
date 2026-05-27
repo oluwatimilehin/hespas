@@ -300,7 +300,7 @@ class RooflineEstimator(Estimator):
 
     @register_op_handler(['stablehlo.constant', 'func.return', 'func.call', 'stablehlo.iota', 'stablehlo.partition_id',
             'stablehlo.replica_id', 'stablehlo.get_tuple_element', 'stablehlo.optimization_barrier', 'stablehlo.return', 'mhlo.return',
-            'stablehlo.real', 'stablehlo.imag', 'stablehlo.complex', 'mhlo.bitcast', 'stablehlo.reshape', 'stablehlo.transpose'])
+            'stablehlo.real', 'stablehlo.imag', 'stablehlo.complex', 'mhlo.bitcast', 'stablehlo.reshape', 'stablehlo.transpose', 'stablehlo.tuple'])
     def handle_free_ops(self, op_info):
         return self.compute_runtime(op_info, 0, 0)
 
