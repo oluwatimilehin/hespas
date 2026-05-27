@@ -41,6 +41,10 @@ for model_dir in "$WORKLOADS_DIR"/*/; do
 
         echo "    [2/4] Optimizing HLO via hlo-opt..."
         hlo-opt --platform=gpu \
+            --xla_gpu_target_config_filename="$V5E_PB_PATH" \
+            --xla_gpu_autotune_level=0 \
+            --xla_disable_hlo_passes=async-collective-conversion,gpu-reduce-scatter-combiner,spmd-partitioning,spmd-partitioner,spmd_partitioner \
+            --xla_gpu_enable_cublaslt=false  \
             --o="$opt_hlo" \
             "$unopt_hlo"
 
