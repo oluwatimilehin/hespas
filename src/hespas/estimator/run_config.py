@@ -61,8 +61,12 @@ class EstimatorSingleRunConfig(EstimatorRunConfig):
     :param kwargs: Additional override arguments to the estimator. Optional, will override anything else.
     """
     def __init__(self, *, config_dict: Optional[dict] = None, config_file: Optional[str | Path] = None, mlir_file: Optional[str | Path] = None,
-                          disable_cache: Optional[bool] = None, cache_dir: Optional[str | Path] = None, **kwargs):
+                          disable_cache: Optional[bool] = None, cache_dir: Optional[str | Path] = None, log_path: Optional[str | Path] = None, 
+                          log_level: Optional[Any] = None, **kwargs):
         super().__init__(config_dict=config_dict, config_file=config_file, disable_cache=disable_cache, cache_dir=cache_dir, **kwargs)
+        self.log_path = log_path
+        self.log_level = log_level
+        
         if mlir_file is not None:
             self.config['mlir_file'] = mlir_file
 

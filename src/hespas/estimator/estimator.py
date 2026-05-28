@@ -1177,6 +1177,7 @@ class Estimator(metaclass=EstimatorMeta):
         parser.add_argument('--mlir-file', help='MLIR file path (optional, will use the field in the config_file otherwise)')
         parser.add_argument("--log-path", default=None, type=str, help="Output path for logging")
         parser.add_argument("--log-level", default='info', type=str, choices=get_log_levels(), help="Set log level")
+
         for config_argument_name in sorted(list(cls.config_arguments)):
             config_argument_obj = cls.config_arguments[config_argument_name]
             if isinstance(config_argument_obj, tuple):
@@ -1184,10 +1185,10 @@ class Estimator(metaclass=EstimatorMeta):
             parser.add_argument("--{}".format(config_argument_name.replace("_", "-")), help=config_argument_obj.description, default=config_argument_obj.default, action=config_argument_obj.action)
 
         parsed_args = parser.parse_args(args)
-        logger_basic_config(filename=parsed_args.log_path, level=parsed_args.log_level)
         config = EstimatorSingleRunConfig(**vars(parsed_args))
+        logger_basic_config(filename=config.log_path, level=config.log_level)
 
         result = cls.run(config.to_hw_config(), config.mlir_file)
 
-        log.result(f'Execution of module completed: {result.runtime_estimate}s')
+        log.results(f'Execution of module completed: {result.runtime_estimate}s')
 
